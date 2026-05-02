@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ecom API Debug UI</title>
+    <style>
+        :root {
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0f19;
+            color: #e8eefc;
+        }
+
+        header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #1a2338;
+            position: sticky;
+            top: 0;
+            background: #0b0f19;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: .4px;
+        }
+
+        .wrap {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .card {
+            background: #0f1629;
+            border: 1px solid #1a2338;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #cfe0ff;
+        }
+
+        .grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            font-size: 12px;
+            color: #b8c7e6;
+        }
+
+        input,
+        select,
+        textarea {
+            background: #0b1020;
+            color: #e8eefc;
+            border: 1px solid #243050;
+            border-radius: 10px;
+            padding: 10px 10px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button.secondary {
+            background: #334155;
+        }
+
+        button.danger {
+            background: #ef4444;
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .btnrow {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .muted {
+            color: #9db0d6;
+            font-size: 12px;
+        }
+
+        pre {
+            margin: 0;
+            background: #060a14;
+            border: 1px solid #1a2338;
+            border-radius: 12px;
+            padding: 14px;
+            overflow: auto;
+            min-height: 75vh;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        code {
+            color: #9fe3ff;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid #243050;
+            background: #0b1020;
+            font-size: 12px;
+        }
+
+        .toprow {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .link {
+            color: #7dd3fc;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="toprow">
+            <h1>🧪 Ecom API Debug UI</h1>
+            <span class="pill">API: <code id="apiBaseLabel"></code></span>
+            <span class="pill">Token: <code id="tokenLabel">none</code></span>
+            <button class="secondary" id="clearTokenBtn">Clear Token</button>
+        </div>
+        <div class="muted" style="margin-top:8px;">
+            Tip: This page stores your JWT in <code>localStorage</code>. Use it to hit protected endpoints.
+        </div>
+    </header>
+
+    <div class="wrap">
+        <!-- LEFT: controls -->
+        <div class="grid">
+            <div class="card">
+                <h2>Settings</h2>
+                <div class="grid">
+                    <label>
+                        API Base URL
+                        <input id="apiBase" placeholder="http://localhost:3000" />
+                    </label>
+                    <div class="btnrow">
+                        <button class="secondary" id="saveBaseBtn">Save</button>
+                        <button class="secondary" id="pingHealthBtn">GET /health</button>
+                        <button class="secondary" id="meBtn">GET /auth/me</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Auth</h2>
+                <div class="grid">
+                    <div class="row">
+                        <label>
+                            Name (signup)
+                            <input id="signupName" placeholder="Ali" />
+                        </label>
+                        <label>
+                            Email
+                            <input id="authEmail" placeholder="ali@test.com" />
+                        </label>
+                    </div>
+                    <label>
+                        Password
+                        <input id="authPassword" type="password" placeholder="min 8 chars" />
+                    </label>
+                    <div class="btnrow">
+                        <button id="signupBtn">POST /auth/signup</button>
+                        <button id="loginBtn">POST /auth/login</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Categories</h2>
+                <div class="grid">
+                    <div class="btnrow">
+                        <button class="secondary" id="listCategoriesBtn">GET /categories</button>
+                    </div>
+                    <label>
+                        Create category (name)
+                        <input id="catName" placeholder="Electronics" />
+                    </label>
+                    <div class="btnrow">
+                        <button id="createCategoryBtn">POST /categories</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Products</h2>
+                <div class="grid">
+                    <div class="row">
+                        <label>
+                            Category filter (slug)
+                            <input id="prodCategorySlug" placeholder="electronics" />
+                        </label>
+                        <label>
+                            Search (q)
+                            <input id="prodQ" placeholder="iphone" />
+                        </label>
+                    </div>
+                    <div class="btnrow">
+                        <button class="secondary" id="listProductsBtn">GET /products</button>
+                    </div>
+
+                    <hr style="border:0;border-top:1px solid #1a2338;margin:6px 0;" />
+
+                    <div class="row">
+                        <label>
+                            Product ID
+                            <input id="prodId" placeholder="1" />
+                        </label>
+                        <label>
+                            CategoryId (optional)
+                            <input id="prodCategoryId" placeholder="2" />
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label>
+                            Image
+                            <input id="prodImage" placeholder="https://..." />
+                        </label>
+                        <label>
+                            Title
+                            <input id="prodTitle" placeholder="AirPods Pro" />
+                        </label>
+                    </div>
+
+                    <label>
+                        Description
+                        <textarea id="prodDescription" placeholder="Short description..."></textarea>
+                    </label>
+
+                    <label>
+                        Price
+                        <input id="prodPrice" placeholder="99.99" />
+                    </label>
+
+                    <div class="btnrow">
+                        <button class="secondary" id="getProductBtn">GET /products/:id</button>
+                        <button id="createProductBtn">POST /products</button>
+                        <button id="patchProductBtn">PATCH /products/:id</button>
+                        <button class="danger" id="deleteProductBtn">DELETE /products/:id</button>
+                    </div>
+                    <div class="muted">
+                        For PATCH: only filled fields are sent. For DELETE/GET, only ID is used.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Raw Request (advanced)</h2>
+                <div class="grid">
+                    <div class="row">
+                        <label>
+                            Method
+                            <select id="rawMethod">
+                                <option>GET</option>
+                                <option>POST</option>
+                                <option>PATCH</option>
+                                <option>DELETE</option>
+                            </select>
+                        </label>
+                        <label>
+                            Path (e.g. /products)
+                            <input id="rawPath" placeholder="/products" />
+                        </label>
+                    </div>
+                    <label>
+                        JSON Body (optional)
+                        <textarea id="rawBody" placeholder='{"hello":"world"}'></textarea>
+                    </label>
+                    <div class="btnrow">
+                        <button class="secondary" id="sendRawBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: output -->
+        <div class="card">
+            <h2>Response</h2>
+            <div class="muted" style="margin-bottom:10px;">
+                Response JSON will appear below. If you get a 401/403, check your token pill at the top.
+            </div>
+            <pre id="out">{}</pre>
+        </div>
+    </div>
+
+    <script>
+        // --- Storage keys
+        const K_BASE = "dbg_api_base";
+        const K_TOKEN = "dbg_jwt";
+
+        // --- Elements
+        const out = document.getElementById("out");
+        const apiBase = document.getElementById("apiBase");
+        const apiBaseLabel = document.getElementById("apiBaseLabel");
+        const tokenLabel = document.getElementById("tokenLabel");
+
+        const clearTokenBtn = document.getElementById("clearTokenBtn");
+        const saveBaseBtn = document.getElementById("saveBaseBtn");
+
+        // Auth inputs
+        const signupName = document.getElementById("signupName");
+        const authEmail = document.getElementById("authEmail");
+        const authPassword = document.getElementById("authPassword");
+
+        // Category inputs
+        const catName = document.getElementById("catName");
+
+        // Product inputs
+        const prodCategorySlug = document.getElementById("prodCategorySlug");
+        const prodQ = document.getElementById("prodQ");
+        const prodId = document.getElementById("prodId");
+        const prodImage = document.getElementById("prodImage");
+        const prodTitle = document.getElementById("prodTitle");
+        const prodDescription = document.getElementById("prodDescription");
+        const prodPrice = document.getElementById("prodPrice");
+        const prodCategoryId = document.getElementById("prodCategoryId");
+
+        // Raw
+        const rawMethod = document.getElementById("rawMethod");
+        const rawPath = document.getElementById("rawPath");
+        const rawBody = document.getElementById("rawBody");
+
+        // --- Helpers
+        const getBase = () => (localStorage.getItem(K_BASE) || "").trim() || location.origin;
+        const setBase = (v) => localStorage.setItem(K_BASE, (v || "").trim());
+        const getToken = () => localStorage.getItem(K_TOKEN) || "";
+        const setToken = (t) => localStorage.setItem(K_TOKEN, t || "");
+        const clearToken = () => localStorage.removeItem(K_TOKEN);
+
+        const pretty = (obj) => JSON.stringify(obj, null, 2);
+
+        const show = (obj) => {
+            out.textContent = typeof obj === "string" ? obj : pretty(obj);
+        };
+
+        const refreshLabels = () => {
+            const base = getBase();
+            apiBase.value = base;
+            apiBaseLabel.textContent = base;
+
+            const tok = getToken();
+            tokenLabel.textContent = tok ? tok.slice(0, 20) + "..." : "none";
+        };
+
+        const apiFetch = async (path, { method = "GET", body } = {}) => {
+            const base = getBase();
+            const url = base.replace(/\/$/, "") + path;
+
+            const headers = { "Content-Type": "application/json" };
+            const tok = getToken();
+            if (tok) headers["Authorization"] = "Bearer " + tok;
+
+            const opts = { method, headers };
+            if (body !== undefined) opts.body = JSON.stringify(body);
+
+            const res = await fetch(url, opts);
+            const contentType = res.headers.get("content-type") || "";
+
+            let data = null;
+            if (contentType.includes("application/json")) {
+                data = await res.json().catch(() => null);
+            } else {
+                data = await res.text().catch(() => "");
+            }
+
+            return { ok: res.ok, status: res.status, data, url, method, sentBody: body };
+        };
+
+        const run = async (path, opts) => {
+            try {
+                const result = await apiFetch(path, opts);
+                const payload = {
+                    request: { url: result.url, method: result.method, body: result.sentBody ?? null },
+                    response: { ok: result.ok, status: result.status, data: result.data },
+                };
+                show(payload);
+
+                // Auto-store token if response contains { token }
+                if (result?.data?.token) {
+                    setToken(result.data.token);
+                    refreshLabels();
+                }
+            } catch (e) {
+                show({ error: String(e) });
+            }
+        };
+
+        // --- Bindings
+        saveBaseBtn.addEventListener("click", () => {
+            setBase(apiBase.value);
+            refreshLabels();
+            show({ savedBase: getBase() });
+        });
+
+        clearTokenBtn.addEventListener("click", () => {
+            clearToken();
+            refreshLabels();
+            show({ token: null });
+        });
+
+        document.getElementById("pingHealthBtn").addEventListener("click", () => run("/health", { method: "GET" }));
+        document.getElementById("meBtn").addEventListener("click", () => run("/auth/me", { method: "GET" }));
+
+        document.getElementById("signupBtn").addEventListener("click", () => {
+            run("/auth/signup", {
+                method: "POST",
+                body: { name: signupName.value, email: authEmail.value, password: authPassword.value },
+            });
+        });
+
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            run("/auth/login", {
+                method: "POST",
+                body: { email: authEmail.value, password: authPassword.value },
+            });
+        });
+
+        document.getElementById("listCategoriesBtn").addEventListener("click", () => run("/categories", { method: "GET" }));
+
+        document.getElementById("createCategoryBtn").addEventListener("click", () => {
+            run("/categories", { method: "POST", body: { name: catName.value } });
+        });
+
+        document.getElementById("listProductsBtn").addEventListener("click", () => {
+            const params = new URLSearchParams();
+            if (prodCategorySlug.value.trim()) params.set("category", prodCategorySlug.value.trim());
+            if (prodQ.value.trim()) params.set("q", prodQ.value.trim());
+            const qs = params.toString() ? "?" + params.toString() : "";
+            run("/products" + qs, { method: "GET" });
+        });
+
+        document.getElementById("getProductBtn").addEventListener("click", () => {
+            const id = (prodId.value || "").trim();
+            if (!id) return show({ error: "Product ID required" });
+            run("/products/" + encodeURIComponent(id), { method: "GET" });
+        });
+
+        document.getElementById("createProductBtn").addEventListener("click", () => {
+            const body = {
+                image: prodImage.value,
+                title: prodTitle.value,
+                description: prodDescription.value,
+                price: prodPrice.value,
+            };
+            const cid = (prodCategoryId.value || "").trim();
+            if (cid) body.categoryId = cid;
+            run("/products", { method: "POST", body });
+        });
+
+        document.getElementById("patchProductBtn").addEventListener("click", () => {
+            const id = (prodId.value || "").trim();
+            if (!id) return show({ error: "Product ID required" });
+
+            const body = {};
+            if (prodImage.value.trim()) body.image = prodImage.value;
+            if (prodTitle.value.trim()) body.title = prodTitle.value;
+            if (prodDescription.value.trim()) body.description = prodDescription.value;
+            if (prodPrice.value.trim()) body.price = prodPrice.value;
+            const cid = (prodCategoryId.value || "").trim();
+            if (cid) body.categoryId = cid;
+
+            run("/products/" + encodeURIComponent(id), { method: "PATCH", body });
+        });
+
+        document.getElementById("deleteProductBtn").addEventListener("click", () => {
+            const id = (prodId.value || "").trim();
+            if (!id) return show({ error: "Product ID required" });
+            run("/products/" + encodeURIComponent(id), { method: "DELETE" });
+        });
+
+        document.getElementById("sendRawBtn").addEventListener("click", () => {
+            const method = rawMethod.value;
+            const path = rawPath.value.trim() || "/";
+            let body;
+            const raw = rawBody.value.trim();
+            if (raw) {
+                try { body = JSON.parse(raw); }
+                catch { return show({ error: "Raw JSON body is invalid" }); }
+            }
+            run(path.startsWith("/") ? path : "/" + path, { method, body });
+        });
+
+        // Init
+        refreshLabels();
+        show({
+            hello: "Ready",
+            tips: [
+                "Set API base (e.g. http://localhost:3000)",
+                "Signup or login to store token automatically",
+                "Use /products?q=...&category=slug filters",
+            ],
+        });
+    </script>
+</body>
+
+</html>

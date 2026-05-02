@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #1a1818;
+  --foreground: white;
+}
+
+.dark {
+  --foreground: #1a1818;
+  --background: white;
+}
+
+button:is(:not(:disabled)) {
+  cursor: pointer;
+}
+
+body {
+  font-family: 'Calibri', Helvetica, sans-serif;
+  font-size: 17px;
+}
+
+/* body > main {
+  background-image: url(https://vimana-clothing.com/upload/banner/1776335792-BANNER-SALE.png);
+} */
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .bg-dot-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.11) 1px,
+    transparent 1px
+  );
+}
