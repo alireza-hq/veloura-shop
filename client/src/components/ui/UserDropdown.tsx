@@ -18,7 +18,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/cn'
 import { routes } from '@/lib/routes'
 import { useAuthStore } from '@/features/auth/store/useAuthStore'
-import { useActive } from '@/hooks/useActive'
+import { useActive } from '@/components/layout/navbar/useActive'
 
 export const UserDropdown = () => {
   const { isAuthenticated, logout, user } = useAuthStore()

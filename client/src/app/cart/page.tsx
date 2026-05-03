@@ -6,7 +6,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { EmptyState } from '@/components/EmptyState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { CartFooter } from '@/features/cart/components/CartFooter'
-import { CartItems } from '@/features/cart/components/CartItems'
+import { CartItemList } from '@/features/cart/components/CartItemList'
 import { useCartStore } from '@/features/cart/store/useCartStore'
 import { routes } from '@/lib/routes'
 
@@ -29,7 +29,7 @@ export default function CartPage() {
   return (
     <ScreenLayout>
       <div className='mx-auto max-w-4xl px-4 py-12'>
-        <CartItems />
+        <CartItemList />
         <CartFooter />
       </div>
     </ScreenLayout>

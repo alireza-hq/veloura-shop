@@ -3,7 +3,7 @@
 import { useCartStore } from '../store/useCartStore'
 import { CartItemCard } from './CartItemCard'
 
-export const CartItems = () => {
+export const CartItemList = () => {
   const items = useCartStore((state) => state.items)
 
   return (

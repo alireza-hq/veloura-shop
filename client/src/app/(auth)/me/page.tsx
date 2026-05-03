@@ -1,8 +1,9 @@
 'use client'
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { Me } from '@/features/auth/components/Me'
-import { AuthGuard } from '@/middlewares/AuthGuard'
+import { Me } from '@/features/auth/components/UserProfile'
+
+import { AuthGuard } from '@/features/auth/components/AuthGuard'
 
 export default function MePage() {
   return (

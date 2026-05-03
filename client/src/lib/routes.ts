@@ -9,7 +9,7 @@ export const routes = {
 
   products: {
     root: '/products',
-    product: (id: number) => `/product/${id}`,
+    product: (id: number | string) => `/products/${id}`,
   },
 
   auth: {

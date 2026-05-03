@@ -6,12 +6,12 @@ import { FaShoppingCart } from 'react-icons/fa'
 
 import { useCartStore } from '@/features/cart/store/useCartStore'
 import { ThemeButton } from '@/features/theme/components/ThemeButton'
-import { useActive } from '@/hooks/useActive'
+import { useActive } from '@/components/layout/navbar/useActive'
 import { routes } from '@/lib/routes'
 import { cn } from '@/lib/utils/cn'
 
-import { UserDropdown } from '../ui/UserDropdown'
-import { NavbarSearch } from '../NavbarSearch'
+import { UserDropdown } from '../../ui/UserDropdown'
+import { NavbarSearch } from './NavbarSearch'
 
 export const Navbar = () => {
   const items = useCartStore((s) => s.items)

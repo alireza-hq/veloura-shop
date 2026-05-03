@@ -1,6 +1,6 @@
 'use client'
 
-import { Contact } from '@/components/Contact'
+import { Contact } from '@/features/contact/components/Contact'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 
 export default function ContactPage() {
