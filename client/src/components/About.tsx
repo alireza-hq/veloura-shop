@@ -7,7 +7,7 @@ export const About = () => {
     <div className='flex flex-col gap-20'>
       {/* Hero Section */}
       <section className='text-center'>
-        <h1 className='text-4xl font-bold tracking-tight text-zinc-900 sm:text-6xl dark:text-white'>
+        <h1 className='text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white'>
           Redefining Modern E-Commerce
         </h1>
         <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
@@ -62,7 +62,7 @@ export const About = () => {
       <section className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2'>
         <div className='relative aspect-square overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-800'>
           <img
-            src='https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000'
+            src='store.jpg'
             alt='Our Office'
             className='h-full w-full object-cover'
           />

@@ -1,46 +1,45 @@
 {
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Face",
       "image": "categories/face.jpg",
       "route": "/categories/makeup-face"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Eyes",
       "image": "categories/eye.jpg",
       "route": "/categories/makeup-eyes"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Lips",
       "image": "categories/lip.jpg",
       "route": "/categories/makeup-lips"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Brows",
       "image": "categories/brows.jpg",
       "route": "/categories/makeup-brows"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Cheeks",
       "image": "categories/cheeks.jpg",
       "route": "/categories/makeup-cheeks"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Tools & Accessories",
       "image": "categories/tools.jpg",
       "route": "/categories/makeup-tools"
     }
   ],
-
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Soft Matte Foundation (30ml)",
       "description": "Full‑coverage matte foundation.",
       "price": 329,
@@ -49,9 +48,8 @@
       "stock": 40,
       "rating": 4.7
     },
-
     {
-      "id": 2,
+      "id": "2",
       "name": "Hydrating Skin Tint (30ml)",
       "description": "Light coverage with a dewy finish.",
       "price": 199,
@@ -60,9 +58,8 @@
       "stock": 75,
       "rating": 4.4
     },
-
     {
-      "id": 3,
+      "id": "3",
       "name": "Cream Concealer (8g)",
       "description": "Smooth medium‑to‑full coverage concealer.",
       "price": 189,
@@ -71,9 +68,8 @@
       "stock": 92,
       "rating": 4.6
     },
-
     {
-      "id": 4,
+      "id": "4",
       "name": "Loose Setting Powder (10g)",
       "description": "Translucent powder that sets makeup.",
       "price": 149,
@@ -82,9 +78,8 @@
       "stock": 110,
       "rating": 4.5
     },
-
     {
-      "id": 5,
+      "id": "5",
       "name": "Full‑Coverage Compact Powder",
       "description": "Matte pressed powder for long wear.",
       "price": 159,
@@ -93,9 +88,8 @@
       "stock": 70,
       "rating": 4.3
     },
-
     {
-      "id": 6,
+      "id": "6",
       "name": "Liquid Highlighter (15ml)",
       "description": "Glow‑boosting liquid highlighter.",
       "price": 169,
@@ -104,20 +98,18 @@
       "stock": 50,
       "rating": 4.6
     },
-
     {
-      "id": 7,
-      "name": "12‑Shade Eyeshadow Palette",
+      "id": "7",
+      "name": "9‑Shade Eyeshadow Palette",
       "description": "Matte + shimmer palette for all looks.",
       "price": 259,
       "category": "Eyes",
-      "image": "https://nili.shop/wp-content/uploads/2026/02/Berry-Palette-1.webp",
+      "image": "https://arashbeauty.com/wp-content/uploads/2022/11/nouba-free-spirit-eyeshadow-palette-min.jpg",
       "stock": 45,
       "rating": 4.8
     },
-
     {
-      "id": 8,
+      "id": "8",
       "name": "Waterproof Mascara (8ml)",
       "description": "Long‑lasting volume & curl.",
       "price": 169,
@@ -126,9 +118,8 @@
       "stock": 95,
       "rating": 4.5
     },
-
     {
-      "id": 9,
+      "id": "9",
       "name": "Gel Eyeliner Pot",
       "description": "Smudge‑proof gel eyeliner.",
       "price": 139,
@@ -137,9 +128,8 @@
       "stock": 80,
       "rating": 4.4
     },
-
     {
-      "id": 10,
+      "id": "10",
       "name": "Liquid Eyeliner Pen",
       "description": "Ultra‑fine precision tip.",
       "price": 129,
@@ -148,9 +138,8 @@
       "stock": 120,
       "rating": 4.6
     },
-
     {
-      "id": 11,
+      "id": "11",
       "name": "Volumizing Lash Primer",
       "description": "Boosts mascara performance.",
       "price": 119,
@@ -159,9 +148,8 @@
       "stock": 60,
       "rating": 4.3
     },
-
     {
-      "id": 12,
+      "id": "12",
       "name": "Glitter Eyeshadow Single",
       "description": "High‑shine metallic shade.",
       "price": 99,
@@ -170,9 +158,8 @@
       "stock": 140,
       "rating": 4.2
     },
-
     {
-      "id": 13,
+      "id": "13",
       "name": "Matte Lipstick (4g)",
       "description": "Rich pigment with a matte finish.",
       "price": 199,
@@ -181,9 +168,8 @@
       "stock": 60,
       "rating": 4.6
     },
-
     {
-      "id": 14,
+      "id": "14",
       "name": "Moisturizing Lip Balm",
       "description": "Hydrating balm with tint.",
       "price": 89,
@@ -192,9 +178,8 @@
       "stock": 150,
       "rating": 4.5
     },
-
     {
-      "id": 15,
+      "id": "15",
       "name": "Liquid Lipstick (6ml)",
       "description": "Long‑lasting matte liquid color.",
       "price": 159,
@@ -203,9 +188,8 @@
       "stock": 90,
       "rating": 4.4
     },
-
     {
-      "id": 16,
+      "id": "16",
       "name": "Glossy Lip Tint",
       "description": "Natural glossy stain.",
       "price": 129,
@@ -214,9 +198,8 @@
       "stock": 80,
       "rating": 4.5
     },
-
     {
-      "id": 17,
+      "id": "17",
       "name": "Lip Liner Pencil",
       "description": "Precision shaping & contouring.",
       "price": 79,
@@ -225,9 +208,8 @@
       "stock": 200,
       "rating": 4.3
     },
-
     {
-      "id": 18,
+      "id": "18",
       "name": "Precision Brow Pencil",
       "description": "Natural hair‑like strokes.",
       "price": 129,
@@ -236,9 +218,8 @@
       "stock": 115,
       "rating": 4.5
     },
-
     {
-      "id": 19,
+      "id": "19",
       "name": "Brow Gel (Clear)",
       "description": "Sets brows in place all day.",
       "price": 99,
@@ -247,9 +228,8 @@
       "stock": 90,
       "rating": 4.4
     },
-
     {
-      "id": 20,
+      "id": "20",
       "name": "Brow Pomade",
       "description": "Creamy formula for bold brows.",
       "price": 149,
@@ -258,9 +238,8 @@
       "stock": 50,
       "rating": 4.6
     },
-
     {
-      "id": 21,
+      "id": "21",
       "name": "Cream Blush (10ml)",
       "description": "Natural flushed look.",
       "price": 149,
@@ -269,9 +248,8 @@
       "stock": 72,
       "rating": 4.4
     },
-
     {
-      "id": 22,
+      "id": "22",
       "name": "Powder Blush",
       "description": "Soft‑blend matte blush.",
       "price": 129,
@@ -280,9 +258,8 @@
       "stock": 65,
       "rating": 4.5
     },
-
     {
-      "id": 23,
+      "id": "23",
       "name": "Highlighter Stick",
       "description": "Easy‑glide glow stick.",
       "price": 139,
@@ -291,20 +268,33 @@
       "stock": 55,
       "rating": 4.3
     },
-
     {
-      "id": 24,
+      "id": "24",
       "name": "Beauty Blender Sponge",
       "description": "Soft blending sponge for smooth application.",
       "price": 99,
       "category": "Tools & Accessories",
-
       "image": "https://shikbag.com/wp-content/uploads/2023/04/1245356.jpg",
       "stock": 130,
       "rating": 4.7
     }
   ],
-  "comment": {
+  "subs": [
+    {
+      "id": "1",
+      "email": "alireza@example.com"
+    },
+    {
+      "email": "test@example.cm",
+      "id": "2"
+    },
+    {
+      "email": "alirezamine142@gmail.com",
+      "id": "3Ou2wLmj3mA"
+    }
+  ],
+  "comments": {
     "image": "https://oss.sazito.com/apiuploads/aslani65/uploads/image/rootimage/154/290c9e2769060ef3b4c0641f50842a8c.jpg"
-  }
+  },
+  "$schema": "./node_modules/json-server/schema.json"
 }

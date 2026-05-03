@@ -23,8 +23,8 @@ export const Contact = () => {
             {
               icon: Mail,
               label: 'Email Us',
-              value: 'support@modernshop.com',
-              href: 'mailto:support@modernshop.com',
+              value: 'support@shop.com',
+              href: 'mailto:support@shop.com',
             },
             {
               icon: Phone,
@@ -36,7 +36,7 @@ export const Contact = () => {
               icon: Clock,
               label: 'Hours',
               value: 'Mon-Fri: 9am - 6pm',
-              href: '#',
+              href: '',
             },
           ].map((item, i) => (
             <a

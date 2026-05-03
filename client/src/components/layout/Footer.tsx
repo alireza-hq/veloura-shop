@@ -29,7 +29,10 @@ export const Footer = () => {
             </h4>
             <ul className='space-y-2.5 text-sm text-white/50'>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a
+                  href={routes.products.root}
+                  className='transition hover:text-white'
+                >
                   All Products
                 </a>
               </li>
@@ -73,7 +76,10 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a
+                  href={routes.contact}
+                  className='transition hover:text-white'
+                >
                   Contact
                 </a>
               </li>
@@ -87,7 +93,10 @@ export const Footer = () => {
             </h4>
             <ul className='space-y-2.5 text-sm text-white/50'>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a
+                  href={routes.auth.me}
+                  className='transition hover:text-white'
+                >
                   My Account
                 </a>
               </li>
@@ -97,7 +106,10 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a
+                  href={routes.wishlist}
+                  className='transition hover:text-white'
+                >
                   Wishlist
                 </a>
               </li>

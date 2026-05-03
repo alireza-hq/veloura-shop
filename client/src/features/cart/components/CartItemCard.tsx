@@ -18,7 +18,11 @@ export const CartItemCard = ({ item }: Props) => {
         href={routes.products.product(item.productId)}
         className='mb-3 flex items-center gap-4 font-medium text-black sm:mb-0 dark:text-white'
       >
-        <img src={item.image} alt={item.name} className='aspect-square w-18' />
+        <img
+          src={item.image}
+          alt={item.name}
+          className='aspect-square w-18 rounded-xl'
+        />
         <p>{item.name}</p>
       </Link>
 

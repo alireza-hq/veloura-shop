@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { subscribeSchema } from '../schemas/subscribeSchema'
 import { cn } from '@/lib/utils/cn'
+import axios from 'axios'
 
 export const SubscribeForm = () => {
   const {
@@ -13,8 +14,8 @@ export const SubscribeForm = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm({ resolver: zodResolver(subscribeSchema) })
 
-  const onSubmit = ({ email }: { email: string }) => {
-    console.log(email, 'Added')
+  const onSubmit = async ({ email }: { email: string }) => {
+    const { data } = await axios.post('/api/subs', { email })
     reset()
   }
 

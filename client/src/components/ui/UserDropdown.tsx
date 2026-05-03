@@ -19,7 +19,6 @@ import { cn } from '@/lib/utils/cn'
 import { routes } from '@/lib/routes'
 import { useAuthStore } from '@/features/auth/store/useAuthStore'
 import { useActive } from '@/hooks/useActive'
-import { BiRegistered } from 'react-icons/bi'
 
 export const UserDropdown = () => {
   const { isAuthenticated, logout, user } = useAuthStore()
@@ -27,6 +26,7 @@ export const UserDropdown = () => {
 
   const handleLogout = () => {
     logout()
+    document.location.reload()
   }
 
   // Helper to get user initials
@@ -63,16 +63,16 @@ export const UserDropdown = () => {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute -right-full z-50 mt-2 w-56 origin-top-right rounded-xl border border-zinc-200 bg-white px-1 py-2 shadow-lg ring-1 ring-black/5 focus:outline-none dark:border-zinc-800 dark:bg-zinc-900 dark:ring-white/10'>
+          <Menu.Items className='absolute -right-full z-50 mt-2 w-56 origin-top-right rounded-xl border border-zinc-200 bg-zinc-50/85 px-1 py-2 shadow-lg ring-1 ring-black/5 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800/60 dark:ring-white/10'>
             {/* Header: User Info or Auth Options */}
             {!isAuthenticated ? (
-              <div className='border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>
+              <div className='mb-2 border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>
                 <p className='text-xs font-semibold tracking-wider text-zinc-500 uppercase dark:text-zinc-400'>
                   Account
                 </p>
               </div>
             ) : (
-              <div className='border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>
+              <div className='mb-2 border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>
                 <p className='text-sm font-medium text-zinc-900 dark:text-white'>
                   {user?.name}
                 </p>
@@ -90,9 +90,9 @@ export const UserDropdown = () => {
                     <Link
                       href={routes.auth.login}
                       className={cn(
-                        'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active
-                          ? 'bg-zinc-50 text-zinc-900 dark:bg-zinc-800 dark:text-white'
+                          ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
                           : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
                       )}
                     >
@@ -106,9 +106,9 @@ export const UserDropdown = () => {
                     <Link
                       href={routes.auth.signup}
                       className={cn(
-                        'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active
-                          ? 'bg-zinc-50 text-zinc-900 dark:bg-zinc-800 dark:text-white'
+                          ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
                           : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
                       )}
                     >
@@ -125,9 +125,9 @@ export const UserDropdown = () => {
                     <Link
                       href={routes.auth.me}
                       className={cn(
-                        'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active
-                          ? 'bg-zinc-50 text-zinc-900 dark:bg-zinc-800 dark:text-white'
+                          ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
                           : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
                       )}
                     >
@@ -141,9 +141,9 @@ export const UserDropdown = () => {
                     <Link
                       href={routes.cart}
                       className={cn(
-                        'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active
-                          ? 'bg-zinc-50 text-zinc-900 dark:bg-zinc-800 dark:text-white'
+                          ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
                           : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
                       )}
                     >
@@ -157,9 +157,9 @@ export const UserDropdown = () => {
                     <Link
                       href={routes.wishlist}
                       className={cn(
-                        'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active
-                          ? 'bg-zinc-50 text-zinc-900 dark:bg-zinc-800 dark:text-white'
+                          ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
                           : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
                       )}
                     >
@@ -177,8 +177,8 @@ export const UserDropdown = () => {
                     <button
                       onClick={handleLogout}
                       className={cn(
-                        'flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20',
-                        active && 'bg-red-50 dark:bg-red-900/20',
+                        'flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20',
+                        active && 'bg-red-200/30 dark:bg-red-900/20',
                       )}
                     >
                       <LogOut className='h-4 w-4' />

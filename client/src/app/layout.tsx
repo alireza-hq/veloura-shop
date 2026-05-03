@@ -35,13 +35,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className='flex min-h-full flex-col'>
-        <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
-          <BiSupport className='h-6 w-6' />
-        </button>
-        <Navbar />
-        <ThemeInitializer />
-        <QueryProvider>{children}</QueryProvider>
-        <Footer />
+        <QueryProvider>
+          <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
+            <BiSupport className='h-6 w-6' />
+          </button>
+          <Navbar />
+          <ThemeInitializer />
+          {children}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   )

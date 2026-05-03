@@ -12,7 +12,9 @@ export const Hero = () => {
     'banners/banner-1.jpg',
     'banners/banner-2.jpg',
     'banners/banner-3.jpg',
-    'banners/banner-4.jpg',
+    // 'banners/banner-4.jpg',
+    // 'banners/banner-5.jpg',
+    // 'banners/banner-6.jpg',
   ]
 
   return (

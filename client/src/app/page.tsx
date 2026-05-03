@@ -29,7 +29,7 @@ export default function Home() {
         <HomeCategories categories={bottomCats} />
       </HomeSection>
 
-      <HomeSection className='border-t border-black/3 backdrop-blur-[1px]'>
+      <HomeSection className='border-t border-black/3 backdrop-blur-xs'>
         <HomeSubscribe />
       </HomeSection>
     </main>
