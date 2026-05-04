@@ -1,15 +1,15 @@
 'use client'
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { Me } from '@/features/auth/components/UserProfile'
+import { UserProfile } from '@/features/auth/components/UserProfile'
 
 import { AuthGuard } from '@/features/auth/components/AuthGuard'
 
-export default function MePage() {
+export default function UserProfilePage() {
   return (
     <ScreenLayout>
       <AuthGuard>
-        <Me />
+        <UserProfile />
       </AuthGuard>
     </ScreenLayout>
   )

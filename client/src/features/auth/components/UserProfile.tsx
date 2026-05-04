@@ -6,7 +6,7 @@ import { LogOut, Mail, User } from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import { routes } from '@/lib/routes'
 
-export const Me = () => {
+export const UserProfile = () => {
   const { user, logout } = useAuthStore()
 
   const router = useRouter()

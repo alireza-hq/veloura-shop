@@ -96,7 +96,7 @@ export const Navbar = () => {
                 )}
               />
               {items.length > 0 && (
-                <span className='absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-xs text-white dark:bg-zinc-700'>
+                <span className='absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-xs text-white'>
                   {items.length}
                 </span>
               )}
