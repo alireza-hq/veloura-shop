@@ -1,4 +1,4 @@
-import { FitLayout } from './layout/FitLayout'
+import { FitLayout } from '../layout/FitLayout'
 
 export const LoadingState = () => {
   return (

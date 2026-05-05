@@ -10,7 +10,7 @@ import { useActive } from '@/components/layout/navbar/useActive'
 import { routes } from '@/lib/routes'
 import { cn } from '@/lib/utils/cn'
 
-import { UserDropdown } from '../../ui/UserDropdown'
+import { UserDropdown } from './UserDropdown'
 import { NavbarSearch } from './NavbarSearch'
 
 export const Navbar = () => {

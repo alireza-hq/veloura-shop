@@ -2,7 +2,7 @@
 
 import { MdShoppingCart } from 'react-icons/md'
 
-import { EmptyState } from '@/components/EmptyState'
+import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { useCartStore } from '@/features/cart/store/useCartStore'
 import { CheckoutForm } from '@/features/checkout/components/CheckoutForm'

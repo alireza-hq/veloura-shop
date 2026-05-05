@@ -1,7 +1,7 @@
 'use client'
 
-import { ErrorState } from '@/components/ErrorState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
+import { ErrorState } from '@/components/ui/ErrorState'
 import { ProductList } from '@/features/products/components/ProductList'
 import { useProducts } from '@/features/products/hooks/useProducts'
 

@@ -6,6 +6,7 @@ export const routes = {
   wishlist: '/wishlist',
   about: '/about',
   contact: '/contact',
+  orders: '/orders',
 
   products: {
     root: '/products',

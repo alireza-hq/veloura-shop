@@ -1,38 +1,40 @@
 'use client'
 
-import { FaShoppingCart } from 'react-icons/fa'
+import { BiShoppingBag } from 'react-icons/bi'
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
-import { CategoryList } from '@/features/categories/components/CategoryList'
-import { useCategories } from '@/features/categories/hooks/useCategories'
+import { OrderList } from '@/features/orders/components/OrderList'
+import { useOrders } from '@/features/orders/hooks/useOrders'
 import { routes } from '@/lib/routes'
 
-export default function CategoriesPage() {
-  const { data: categories, isLoading, error } = useCategories()
+export default function OrdersPage() {
+  const { data: orders, isLoading, error } = useOrders()
 
   if (isLoading) return <LoadingState />
   if (error) return <ErrorState error={error} />
 
-  if (!categories || categories.length === 0) {
+  if (!orders || orders.length === 0) {
     return (
       <EmptyState
-        icon={FaShoppingCart}
-        title='No categories yet'
+        icon={BiShoppingBag}
+        title='No orders yet'
         buttonText='Browse Products'
         route={routes.products.root}
       >
-        We don't have any categories right now. Check back later or browse all
-        products.
+        Looks like you haven't made any purchases.
       </EmptyState>
     )
   }
 
   return (
     <ScreenLayout>
-      <CategoryList categories={categories} />
+      <h1 className='mb-10 text-3xl font-bold text-black dark:text-white'>
+        Your Orders
+      </h1>
+      <OrderList orders={orders} />
     </ScreenLayout>
   )
 }

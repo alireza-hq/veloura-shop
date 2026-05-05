@@ -1,13 +1,14 @@
 'use client'
 
-import { useProducts } from '@/features/products/hooks/useProducts'
-import { Product } from '@/features/products/types'
-import { routes } from '@/lib/routes'
-import { cn } from '@/lib/utils/cn'
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { BsArrowRight } from 'react-icons/bs'
+
+import { useProducts } from '@/features/products/hooks/useProducts'
+import { Product } from '@/features/products/types'
+import { routes } from '@/lib/routes'
+import { cn } from '@/lib/utils/cn'
 
 export const NavbarSearch = () => {
   const [search, setSearch] = useState('')
@@ -65,7 +66,7 @@ export const NavbarSearch = () => {
               <div
                 onClick={() => itemClickHandler(product.id)}
                 key={product.id}
-                className='group flex cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                className='group flex cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50'
               >
                 <div className='flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800'>
                   <img
@@ -88,7 +89,7 @@ export const NavbarSearch = () => {
                   </div>
                 </div>
 
-                <BsArrowRight className='h-3 w-3 text-black/50 transition duration-300 group-hover:translate-x-1' />
+                <BsArrowRight className='h-3 w-3 text-zinc-900 transition duration-300 group-hover:translate-x-1 dark:text-white' />
               </div>
             ))}
           </div>

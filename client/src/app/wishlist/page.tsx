@@ -1,6 +1,6 @@
 'use client'
 
-import { EmptyState } from '@/components/EmptyState'
+import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { WishlistItems } from '@/features/wishlist/components/WishlistItems'
 import { useWishlistStore } from '@/features/wishlist/store/useWishlistStore'

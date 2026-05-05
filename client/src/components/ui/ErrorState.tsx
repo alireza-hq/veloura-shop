@@ -1,5 +1,4 @@
-import React from 'react'
-import { ScreenLayout } from './layout/ScreenLayout'
+import { ScreenLayout } from '../layout/ScreenLayout'
 
 type Props = {
   error: Error

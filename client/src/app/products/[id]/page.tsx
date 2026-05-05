@@ -2,9 +2,9 @@
 
 import { notFound, useParams } from 'next/navigation'
 
-import { ErrorState } from '@/components/ErrorState'
+import { ErrorState } from '@/components/ui/ErrorState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { LoadingState } from '@/components/LoadingState'
+import { LoadingState } from '@/components/ui/LoadingState'
 import { ProductDetails } from '@/features/products/components/ProductDetails'
 import { useProduct } from '@/features/products/hooks/useProduct'
 

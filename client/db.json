@@ -296,5 +296,78 @@
   "comments": {
     "image": "https://oss.sazito.com/apiuploads/aslani65/uploads/image/rootimage/154/290c9e2769060ef3b4c0641f50842a8c.jpg"
   },
-  "$schema": "./node_modules/json-server/schema.json"
+  "orders": [
+    {
+      "id": 1,
+      "status": "PAID",
+      "total": 477,
+      "createdAt": "2026-05-01T10:15:00.000Z",
+      "items": [
+        {
+          "id": 101,
+          "orderId": 1,
+          "productId": 13,
+          "quantity": 2,
+          "titleSnapshot": "Matte Lipstick (4g)",
+          "priceSnapshot": 199
+        },
+        {
+          "id": 102,
+          "orderId": 1,
+          "productId": 17,
+          "quantity": 1,
+          "titleSnapshot": "Lip Liner Pencil",
+          "priceSnapshot": 79
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "status": "PENDING",
+      "total": 477,
+      "createdAt": "2026-05-03T14:40:00.000Z",
+      "items": [
+        {
+          "id": 201,
+          "orderId": 2,
+          "productId": 14,
+          "quantity": 2,
+          "titleSnapshot": "Moisturizing Lip Balm",
+          "priceSnapshot": 89
+        },
+        {
+          "id": 202,
+          "orderId": 2,
+          "productId": 15,
+          "quantity": 2,
+          "titleSnapshot": "Liquid Lipstick (6ml)",
+          "priceSnapshot": 159
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "status": "CANCELLED",
+      "total": 466,
+      "createdAt": "2026-05-05T08:25:00.000Z",
+      "items": [
+        {
+          "id": 301,
+          "orderId": 3,
+          "productId": 16,
+          "quantity": 3,
+          "titleSnapshot": "Glossy Lip Tint",
+          "priceSnapshot": 129
+        },
+        {
+          "id": 302,
+          "orderId": 3,
+          "productId": 14,
+          "quantity": 1,
+          "titleSnapshot": "Moisturizing Lip Balm",
+          "priceSnapshot": 89
+        }
+      ]
+    }
+  ]
 }

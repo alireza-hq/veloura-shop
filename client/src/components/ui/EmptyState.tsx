@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { IconBaseProps } from 'react-icons/lib'
-import { ScreenLayout } from './layout/ScreenLayout'
-import { routes } from '@/lib/routes'
+import { ScreenLayout } from '../layout/ScreenLayout'
 
 type Props = {
   icon: React.ComponentType<IconBaseProps>

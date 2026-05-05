@@ -1,24 +1,25 @@
 'use client'
 
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
 import {
-  User,
+  ChevronDown,
+  Heart,
+  LogIn,
   LogOut,
   Settings,
   ShoppingBag,
-  Heart,
-  ChevronDown,
+  User,
   UserIcon,
-  LogIn,
   UserPlus,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils/cn'
-import { routes } from '@/lib/routes'
-import { useAuthStore } from '@/features/auth/store/useAuthStore'
+import { Fragment } from 'react'
+
 import { useActive } from '@/components/layout/navbar/useActive'
+import { useAuthStore } from '@/features/auth/store/useAuthStore'
+import { routes } from '@/lib/routes'
+import { cn } from '@/lib/utils/cn'
+import { Menu, Transition } from '@headlessui/react'
 
 export const UserDropdown = () => {
   const { isAuthenticated, logout, user } = useAuthStore()
@@ -29,17 +30,6 @@ export const UserDropdown = () => {
     document.location.reload()
   }
 
-  // Helper to get user initials
-  const getInitials = (name: string | undefined) => {
-    if (!name) return 'U'
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
-  }
-
   return (
     <div className='relative inline-block text-left opacity-99'>
       <Menu as='div' className='relative inline-block text-left'>
@@ -48,7 +38,8 @@ export const UserDropdown = () => {
           <UserIcon
             className={cn(
               'h-5 fill-transparent duration-300 hover:fill-white',
-              useActive([...Object.values(routes.auth)]) && 'fill-white',
+              useActive([...Object.values(routes.auth), routes.orders]) &&
+                'fill-white',
             )}
           />
         </Menu.Button>
@@ -139,7 +130,7 @@ export const UserDropdown = () => {
                 <Menu.Item>
                   {({ active }) => (
                     <Link
-                      href={routes.cart}
+                      href={routes.orders}
                       className={cn(
                         'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
                         active

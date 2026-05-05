@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { MdShoppingCart } from 'react-icons/md'
 
-import { EmptyState } from '@/components/EmptyState'
+import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { CartFooter } from '@/features/cart/components/CartFooter'
 import { CartItemList } from '@/features/cart/components/CartItemList'
