@@ -1,9 +1,8 @@
-import app from "./app";
-import { env } from "./config/env";
-import "./types/express";
+import app from './app'
+import { env } from './config/env'
 
-const PORT = env.PORT ?? 3000;
+const PORT = env.PORT ?? 3000
 
 app.listen(PORT, () => {
-    console.log(`API ON ${PORT}`);
-});
+  console.log(`API: http://localhost:${PORT}/`)
+})

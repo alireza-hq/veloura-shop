@@ -1,10 +1,12 @@
 'use client'
 
-import { Product } from '../types'
 import { Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react'
+
 import { useCartStore } from '@/features/cart/store/useCartStore'
-import { cn } from '@/lib/utils/cn'
 import { useWishlistStore } from '@/features/wishlist/store/useWishlistStore'
+import { cn } from '@/lib/utils/cn'
+
+import { Product } from '../types'
 
 type Props = {
   product: Product

@@ -1,6 +1,8 @@
-import { routes } from '@/lib/routes'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
+
+import { routes } from '@/lib/routes'
+
 import { BackgroundSlideshow } from './BackgroundSlideshow'
 
 export const Hero = () => {
@@ -23,7 +25,7 @@ export const Hero = () => {
         className={'bg-left bg-no-repeat'}
         // -rotate-y-180
         images={images}
-        duration={4000}
+        duration={7000}
         fadeDuration={1}
       ></BackgroundSlideshow>
 

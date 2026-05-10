@@ -1,6 +1,6 @@
 export type Category = {
-  id?: number
+  id: number
   title: string
   image: string
-  route: string
+  description?: string
 }

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { IconBaseProps } from 'react-icons/lib'
+
 import { ScreenLayout } from '../layout/ScreenLayout'
 
 type Props = {

@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import { verifyToken } from '../lib/jwt'
 
-export const authMiddleware = (
+export const optionalAuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -10,9 +10,7 @@ export const authMiddleware = (
     const authHeader = req.headers.authorization
 
     if (!authHeader?.startsWith('Bearer ')) {
-      return res.status(401).json({
-        message: 'Unauthorized',
-      })
+      return next()
     }
 
     const token = authHeader.split(' ')[1]
@@ -23,8 +21,6 @@ export const authMiddleware = (
 
     next()
   } catch {
-    return res.status(401).json({
-      message: 'Unauthorized',
-    })
+    next()
   }
 }
