@@ -118,3 +118,18 @@ export const updateCartItem = async (
 
   return getCart(userId)
 }
+
+export const removeCartItem = async (userId: number, productId: number) => {
+  const cart = await getOrCreateCart(userId)
+
+  await db.query(
+    `
+    DELETE FROM cart_items
+    WHERE cart_id = $1
+    AND product_id = $2
+    `,
+    [cart.id, productId],
+  )
+
+  return getCart(userId)
+}
