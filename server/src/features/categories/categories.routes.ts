@@ -1,8 +1,10 @@
-import { Router } from 'express'
-import * as controller from './categories.controller'
-import { authMiddleware } from '@/middlewares/auth.middleware'
-import { roleMiddleware } from '@/middlewares/role.middleware'
-import { asyncHandler } from '@/lib/asyncHandler'
+import { Router } from 'express';
+
+import { asyncHandler } from '@/lib/asyncHandler';
+import { authMiddleware } from '@/middlewares/auth.middleware';
+import { roleMiddleware } from '@/middlewares/role.middleware';
+
+import * as controller from './categories.controller';
 
 const router = Router()
 

@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express'
-import * as service from './auth.service'
-import { loginSchema, signupSchema } from './auth.schema'
-import { comparePassword, hashPassword } from '../../lib/hash'
-import { signToken } from '../../lib/jwt'
+import { comparePassword, hashPassword } from '../../lib/hash';
+import { signToken } from '../../lib/jwt';
+import { loginSchema, signupSchema } from './auth.schema';
+import * as service from './auth.service';
 
 export const signup = async (req: Request, res: Response) => {
   const data = signupSchema.parse(req.body)
@@ -25,7 +25,17 @@ export const signup = async (req: Request, res: Response) => {
 
   const token = signToken({ userId: user.id, role: user.role })
 
-  res.status(201).json({ user, token })
+  res
+    .status(201)
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+    .json({
+      user,
+    })
 }
 
 export const login = async (req: Request, res: Response) => {
@@ -49,12 +59,22 @@ export const login = async (req: Request, res: Response) => {
 
   const token = signToken({ userId: user.id, role: user.role })
 
+  res
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+    .json({
+      user,
+    })
+}
+
+export const logout = async (req: Request, res: Response) => {
+  res.clearCookie('token')
+
   res.json({
-    user: {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-    },
-    token,
+    message: 'Logged out',
   })
 }

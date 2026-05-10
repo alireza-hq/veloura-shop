@@ -1,10 +1,6 @@
 import type { Request, Response } from 'express'
-import * as service from './products.service'
-import {
-  createProductSchema,
-  productParamsSchema,
-  updateProductSchema,
-} from './products.schema'
+import { createProductSchema, productParamsSchema, updateProductSchema } from './products.schema';
+import * as service from './products.service';
 
 export const getProducts = async (_req: Request, res: Response) => {
   const products = await service.getProductList()

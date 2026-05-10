@@ -1,11 +1,9 @@
 import type { Request, Response } from 'express'
 
-import * as service from './categories.service'
 import {
-  CategoryParamsSchema,
-  createCategorySchema,
-  updateCategorySchema,
-} from './categories.schema'
+    CategoryParamsSchema, createCategorySchema, updateCategorySchema
+} from './categories.schema';
+import * as service from './categories.service';
 
 export const getCategories = async (_req: Request, res: Response) => {
   const categories = await service.getCategoryList()

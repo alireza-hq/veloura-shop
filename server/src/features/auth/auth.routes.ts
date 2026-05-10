@@ -1,6 +1,8 @@
-import { Router } from 'express'
-import * as controller from './auth.controller'
-import { asyncHandler } from '@/lib/asyncHandler'
+import { Router } from 'express';
+
+import { asyncHandler } from '@/lib/asyncHandler';
+
+import * as controller from './auth.controller';
 
 const router = Router()
 

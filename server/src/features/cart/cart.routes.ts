@@ -1,8 +1,9 @@
-import { asyncHandler } from '@/lib/asyncHandler'
-import { authMiddleware } from '@/middlewares/auth.middleware'
-import { Router } from 'express'
+import { Router } from 'express';
 
-import * as controller from './cart.controller'
+import { asyncHandler } from '@/lib/asyncHandler';
+import { authMiddleware } from '@/middlewares/auth.middleware';
+
+import * as controller from './cart.controller';
 
 const router = Router()
 

@@ -1,4 +1,4 @@
-import { db } from '../../config/db'
+import { db } from '../../config/db';
 
 export const getCategoryList = async () => {
   const { rows } = await db.query('SELECT * FROM categories ORDER BY id DESC')

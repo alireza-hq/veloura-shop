@@ -7,15 +7,13 @@ export const authMiddleware = (
   next: NextFunction,
 ) => {
   try {
-    const authHeader = req.headers.authorization
+    const token = req.cookies.token
 
-    if (!authHeader?.startsWith('Bearer ')) {
+    if (!token) {
       return res.status(401).json({
         message: 'Unauthorized',
       })
     }
-
-    const token = authHeader.split(' ')[1]
 
     const payload = verifyToken(token)
 

@@ -1,10 +1,6 @@
 import type { Request, Response } from 'express'
-import * as service from './cart.service'
-import {
-  addCartItemSchema,
-  cartItemParamsSchema,
-  updateCartItemSchema,
-} from './cart.schema'
+import { addCartItemSchema, cartItemParamsSchema, updateCartItemSchema } from './cart.schema';
+import * as service from './cart.service';
 
 export const getCart = async (req: Request, res: Response) => {
   const cart = await service.getCart(req.user!.userId)

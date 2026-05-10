@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 export const productBaseSchema = z.object({
   image: z.string().url(),

@@ -1,4 +1,4 @@
-import { db } from '@/config/db'
+import { db } from '@/config/db';
 
 export const getOrCreateCart = async (userId: number) => {
   const existingCart = await db.query(
