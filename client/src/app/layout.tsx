@@ -4,10 +4,11 @@ import '@/styles/globals.css'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { BiSupport } from 'react-icons/bi'
 
+import { QueryProvider } from '@/app/providers/QueryProvider'
 import { Footer } from '@/components/layout/Footer'
 import { Navbar } from '@/components/layout/navbar/Navbar'
 import { ThemeInitializer } from '@/features/theme/components/ThemeInitializer'
-import { QueryProvider } from '@/app/providers/QueryProvider'
+import { AuthProvider } from '@/features/auth/providers/AuthProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,13 +39,15 @@ export default function RootLayout({
     >
       <body className='flex min-h-full flex-col'>
         <QueryProvider>
-          <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
-            <BiSupport className='h-6 w-6' />
-          </button>
-          <Navbar />
-          <ThemeInitializer />
-          {children}
-          <Footer />
+          <AuthProvider>
+            <Navbar />
+            <ThemeInitializer />
+            {children}
+            <Footer />
+            <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
+              <BiSupport className='h-6 w-6' />
+            </button>
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

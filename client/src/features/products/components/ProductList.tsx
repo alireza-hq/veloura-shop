@@ -28,7 +28,8 @@ export const ProductList = ({
   const filtered = useMemo(() => {
     return products.filter((p) => {
       const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase())
-      const matchesCategory = category === 'All' || p.category === category
+      const matchesCategory =
+        category === 'All' || p.category.title === category
       return matchesSearch && matchesCategory
     })
   }, [products, search, category])
@@ -52,7 +53,7 @@ export const ProductList = ({
   )
 
   const categories = useMemo(() => {
-    const cats = new Set(products.map((p) => p.category))
+    const cats = new Set(products.map((p) => p.category.title))
     return ['All', ...Array.from(cats)]
   }, [products])
 

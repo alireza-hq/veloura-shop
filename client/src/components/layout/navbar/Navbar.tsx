@@ -1,17 +1,17 @@
 'use client'
 
-import { HeartIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react'
-import Link from 'next/link'
-import { FaShoppingCart } from 'react-icons/fa'
+import { HeartIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react';
+import Link from 'next/link';
+import { FaShoppingCart } from 'react-icons/fa';
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { ThemeButton } from '@/features/theme/components/ThemeButton'
-import { useActive } from '@/components/layout/navbar/useActive'
-import { routes } from '@/lib/routes'
-import { cn } from '@/lib/utils/cn'
+import { useActive } from '@/components/layout/navbar/useActive';
+import { useCartStore } from '@/features/cart/store/useCartStore';
+import { ThemeButton } from '@/features/theme/components/ThemeButton';
+import { routes } from '@/lib/routes';
+import { cn } from '@/lib/utils/cn';
 
-import { UserDropdown } from './UserDropdown'
-import { NavbarSearch } from './NavbarSearch'
+import { NavbarSearch } from './NavbarSearch';
+import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {
   const items = useCartStore((s) => s.items)

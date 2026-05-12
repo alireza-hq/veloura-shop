@@ -1,4 +1,4 @@
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation';
 
 export const useActive = (routeOrRoutes: string | string[]) => {
   const pathname = usePathname()

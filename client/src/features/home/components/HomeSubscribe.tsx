@@ -1,6 +1,6 @@
 'use client'
 
-import { SubscribeForm } from './SubscribeForm'
+import { SubscribeForm } from './SubscribeForm';
 
 export const HomeSubscribe = () => {
   return (

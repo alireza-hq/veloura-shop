@@ -1,20 +1,16 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { LogOut, Mail, User } from 'lucide-react'
 
-import { useAuthStore } from '../store/useAuthStore'
 import { routes } from '@/lib/routes'
 
+import { useAuthStore } from '../store/useAuthStore'
+import { useLogout } from '../hooks/useLogout'
+
 export const UserProfile = () => {
-  const { user, logout } = useAuthStore()
+  const { user } = useAuthStore()
 
-  const router = useRouter()
-
-  const handleLogout = () => {
-    logout()
-    router.push(routes.auth.login)
-  }
+  const { logout, isPending } = useLogout()
 
   return (
     <div className='flex flex-col gap-8'>
@@ -33,7 +29,7 @@ export const UserProfile = () => {
         <div className='flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8'>
           {/* Avatar Placeholder */}
           <div className='flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-2xl font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'>
-            {user?.name?.charAt(0).toUpperCase() || 'U'}
+            {user?.username.charAt(0).toUpperCase() || 'U'}
           </div>
 
           {/* User Info */}
@@ -41,7 +37,7 @@ export const UserProfile = () => {
             <div className='flex items-center gap-2'>
               <User className='h-4 w-4 text-zinc-400' />
               <span className='text-lg font-semibold text-zinc-900 dark:text-white'>
-                {user?.name}
+                {user?.username}
               </span>
             </div>
             <div className='flex items-center gap-2'>
@@ -68,7 +64,8 @@ export const UserProfile = () => {
           </div>
 
           <button
-            onClick={handleLogout}
+            onClick={() => logout()}
+            disabled={isPending}
             className='flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-100 dark:border-red-900/30 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/40'
           >
             <LogOut className='h-4 w-4' />

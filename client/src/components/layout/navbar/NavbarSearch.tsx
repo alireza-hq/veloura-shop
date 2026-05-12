@@ -81,7 +81,7 @@ export const NavbarSearch = () => {
                     {product.name}
                   </span>
                   <div className='mt-0.5 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400'>
-                    <span>{product.category}</span>
+                    <span>{product.category.title}</span>
                     <span className='h-1 w-1 rounded-full bg-zinc-300 dark:bg-zinc-600' />
                     <span className='font-medium text-zinc-900 dark:text-zinc-200'>
                       ${product.price.toFixed(2)}

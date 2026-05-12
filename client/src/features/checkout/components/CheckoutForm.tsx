@@ -1,14 +1,14 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
-import { BiCreditCard } from 'react-icons/bi'
+import { Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { BiCreditCard } from 'react-icons/bi';
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { cn } from '@/lib/utils/cn'
+import { useCartStore } from '@/features/cart/store/useCartStore';
+import { cn } from '@/lib/utils/cn';
 
-import { useCheckout } from '../hooks/useCheckout'
-import { CheckoutModal } from './CheckoutModal'
+import { useCheckout } from '../hooks/useCheckout';
+import { CheckoutModal } from './CheckoutModal';
 
 export const CheckoutForm = () => {
   const [checkoutMessage, setCheckoutMessage] = useState('')

@@ -1,7 +1,8 @@
-import { routes } from '@/lib/routes'
-import Link from 'next/link'
-import { FaShoppingCart } from 'react-icons/fa'
-import { SiInstagram, SiFacebook, SiX } from 'react-icons/si'
+import Link from 'next/link';
+import { FaShoppingCart } from 'react-icons/fa';
+import { SiFacebook, SiInstagram, SiX } from 'react-icons/si';
+
+import { routes } from '@/lib/routes';
 
 export const Footer = () => {
   return (

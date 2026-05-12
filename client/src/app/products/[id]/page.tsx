@@ -1,12 +1,12 @@
 'use client'
 
-import { notFound, useParams } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation';
 
-import { ErrorState } from '@/components/ui/ErrorState'
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { LoadingState } from '@/components/ui/LoadingState'
-import { ProductDetails } from '@/features/products/components/ProductDetails'
-import { useProduct } from '@/features/products/hooks/useProduct'
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { ErrorState } from '@/components/ui/ErrorState';
+import { LoadingState } from '@/components/ui/LoadingState';
+import { ProductDetails } from '@/features/products/components/ProductDetails';
+import { useProduct } from '@/features/products/hooks/useProduct';
 
 export default function ProductPage() {
   const { id } = useParams()

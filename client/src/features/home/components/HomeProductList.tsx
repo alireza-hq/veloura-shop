@@ -1,13 +1,13 @@
 'use client'
 
-import Link from 'next/link'
-import { type Dispatch, type SetStateAction, useState } from 'react'
-import { BsArrowRight } from 'react-icons/bs'
+import Link from 'next/link';
+import { Dispatch, SetStateAction, type, useState } from 'react';
+import { BsArrowRight } from 'react-icons/bs';
 
-import { ProductCard } from '@/features/products/components/ProductCard'
-import { useProducts } from '@/features/products/hooks/useProducts'
-import { routes } from '@/lib/routes'
-import { cn } from '@/lib/utils/cn'
+import { ProductCard } from '@/features/products/components/ProductCard';
+import { useProducts } from '@/features/products/hooks/useProducts';
+import { routes } from '@/lib/routes';
+import { cn } from '@/lib/utils/cn';
 
 type FilterButtonProps = {
   filterName: string

@@ -1,16 +1,18 @@
 'use client'
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { routes } from '@/lib/routes'
 import { Minus, Plus } from 'lucide-react'
 import Link from 'next/link'
 import { MdAddShoppingCart } from 'react-icons/md'
+
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { routes } from '@/lib/routes'
+import { Category } from '@/features/categories/types'
 
 type Props = {
   id: number
   image?: string
   name: string
-  category: string
+  category: Category
   price: number
 }
 
@@ -37,7 +39,7 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
 
       <div className='px-3 py-4 sm:px-4 sm:py-3'>
         <p className='text-[10px] tracking-widest text-black/40 uppercase sm:text-xs dark:text-white/40'>
-          {category}
+          {category.title}
         </p>
         <h3 className='mt-1 truncate text-sm font-medium text-black sm:text-base dark:text-white'>
           {name}

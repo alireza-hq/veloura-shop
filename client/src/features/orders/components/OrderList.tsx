@@ -1,7 +1,7 @@
 'use client'
 
-import { Order } from '../types'
-import { OrderItem } from './OrderItem'
+import { Order } from '../types';
+import { OrderItem } from './OrderItem';
 
 type Props = {
   orders: Order[]

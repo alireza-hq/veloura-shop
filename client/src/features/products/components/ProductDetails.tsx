@@ -59,7 +59,7 @@ export const ProductDetails = ({ product }: Props) => {
           {/* Header */}
           <div className='mb-4'>
             <h2 className='text-sm font-medium tracking-wider text-zinc-500 uppercase dark:text-zinc-400'>
-              {product.category}
+              {product.category.title}
             </h2>
             <h1 className='mt-2 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-white'>
               {product.name}

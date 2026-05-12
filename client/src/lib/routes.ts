@@ -16,6 +16,6 @@ export const routes = {
   auth: {
     login: '/login',
     signup: '/signup',
-    me: '/me',
+    me: '/profile',
   },
 } as const

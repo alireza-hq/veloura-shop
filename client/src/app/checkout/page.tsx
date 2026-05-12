@@ -1,13 +1,13 @@
 'use client'
 
-import { MdShoppingCart } from 'react-icons/md'
+import { MdShoppingCart } from 'react-icons/md';
 
-import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { CheckoutForm } from '@/features/checkout/components/CheckoutForm'
-import { routes } from '@/lib/routes'
-import { CheckoutSummary } from '@/features/checkout/components/CheckoutSummary'
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { useCartStore } from '@/features/cart/store/useCartStore';
+import { CheckoutForm } from '@/features/checkout/components/CheckoutForm';
+import { CheckoutSummary } from '@/features/checkout/components/CheckoutSummary';
+import { routes } from '@/lib/routes';
 
 export default function CheckoutPage() {
   const items = useCartStore((state) => state.items)

@@ -1,10 +1,12 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { subscribeSchema } from '../schemas/subscribeSchema'
-import { cn } from '@/lib/utils/cn'
-import axios from 'axios'
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+
+import { cn } from '@/lib/utils/cn';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { subscribeSchema } from '../schemas/subscribeSchema';
 
 export const SubscribeForm = () => {
   const {

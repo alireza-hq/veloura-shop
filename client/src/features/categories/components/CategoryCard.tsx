@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import { Category } from '../types'
+import Link from 'next/link';
+
+import { Category } from '../types';
 
 type Props = Partial<Category>
 

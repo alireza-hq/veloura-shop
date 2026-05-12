@@ -1,30 +1,58 @@
-'use client'
-
-import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-
-import { LoginFormValues, loginSchema } from '../schemas/loginSchema'
 import { useAuthStore } from '../store/useAuthStore'
+import { useForm } from 'react-hook-form'
+import { LoginFormValues, loginSchema } from '../schemas/loginSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { loginService } from '../services/authApi'
 import { routes } from '@/lib/routes'
+
+type LoginResponse = {
+  user: {
+    id: number
+    username: string
+    email: string
+    role: 'user' | 'admin'
+  }
+}
 
 export const useLogin = () => {
   const router = useRouter()
-  const { login } = useAuthStore()
+
+  const { setUser } = useAuthStore()
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema) })
 
-  const onSubmit = async (data: LoginFormValues) => {
-    const { data: res } = await axios.post('api2/auth/login', data)
-    login(res.user)
-    router.push(routes.auth.me)
+  const loginMutation = useMutation({
+    mutationFn: loginService,
+
+    onSuccess: (data: LoginResponse) => {
+      setUser(data.user)
+
+      router.push(routes.auth.me)
+    },
+
+    onError: (error) => {
+      console.error(error)
+    },
+  })
+
+  const onSubmit = (data: LoginFormValues) => {
+    loginMutation.mutate(data)
   }
 
-  return { register, onSubmit, handleSubmit, isSubmitting, errors } as const
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+
+    errors,
+
+    isPending: loginMutation.isPending,
+    error: loginMutation.error,
+  } as const
 }

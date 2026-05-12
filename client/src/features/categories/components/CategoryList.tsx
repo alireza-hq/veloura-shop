@@ -1,8 +1,8 @@
 'use client'
 
-import { CategoryCard } from '@/features/categories/components/CategoryCard'
+import { CategoryCard } from '@/features/categories/components/CategoryCard';
 
-import { Category } from '../types'
+import { Category } from '../types';
 
 type Props = {
   categories: Category[]

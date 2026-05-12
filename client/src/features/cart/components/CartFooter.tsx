@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { routes } from '@/lib/routes'
+import { routes } from '@/lib/routes';
 
-import { useCartStore } from '../store/useCartStore'
+import { useCartStore } from '../store/useCartStore';
 
 export const CartFooter = () => {
   const items = useCartStore((state) => state.items)

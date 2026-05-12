@@ -1,16 +1,17 @@
 'use client'
 
-import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { WishlistItems } from '@/features/wishlist/components/WishlistItems'
-import { useWishlistStore } from '@/features/wishlist/store/useWishlistStore'
-import { routes } from '@/lib/routes'
 import { Heart, ShoppingCart } from 'lucide-react'
 
-export default function Wishlist() {
-  const { products } = useWishlistStore()
+import { ScreenLayout } from '@/components/layout/ScreenLayout'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { WishlistItems } from '@/features/wishlist/components/WishlistItems'
+import { routes } from '@/lib/routes'
+import { useWishlist } from '@/features/wishlist/hooks/useWishlist'
 
-  if (products.length === 0) {
+export default function Wishlist() {
+  const { data: wishlistProducts, isLoading, error } = useWishlist()
+
+  if (!wishlistProducts || wishlistProducts.length === 0) {
     return (
       <EmptyState
         icon={Heart}
@@ -27,7 +28,7 @@ export default function Wishlist() {
 
   return (
     <ScreenLayout>
-      <WishlistItems products={products} />
+      <WishlistItems products={wishlistProducts} />
     </ScreenLayout>
   )
 }

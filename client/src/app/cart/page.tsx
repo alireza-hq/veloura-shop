@@ -1,14 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
-import { MdShoppingCart } from 'react-icons/md'
+import { useMemo } from 'react';
+import { MdShoppingCart } from 'react-icons/md';
 
-import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { CartFooter } from '@/features/cart/components/CartFooter'
-import { CartItemList } from '@/features/cart/components/CartItemList'
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { routes } from '@/lib/routes'
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { CartFooter } from '@/features/cart/components/CartFooter';
+import { CartItemList } from '@/features/cart/components/CartItemList';
+import { useCartStore } from '@/features/cart/store/useCartStore';
+import { routes } from '@/lib/routes';
 
 export default function CartPage() {
   const cart = useCartStore()

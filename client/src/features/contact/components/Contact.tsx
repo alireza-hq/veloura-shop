@@ -1,6 +1,6 @@
 'use client'
 
-import { MapPin, Mail, Phone, Clock } from 'lucide-react'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 
 export const Contact = () => {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
-import { ProductCard } from '@/features/products/components/ProductCard'
-import { Product } from '@/features/products/types'
+import { ProductCard } from '@/features/products/components/ProductCard';
+import { Product } from '@/features/products/types';
 
 type Props = {
   products: Product[]

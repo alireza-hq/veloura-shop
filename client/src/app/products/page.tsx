@@ -1,9 +1,9 @@
 'use client'
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { ErrorState } from '@/components/ui/ErrorState'
-import { ProductList } from '@/features/products/components/ProductList'
-import { useProducts } from '@/features/products/hooks/useProducts'
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { ErrorState } from '@/components/ui/ErrorState';
+import { ProductList } from '@/features/products/components/ProductList';
+import { useProducts } from '@/features/products/hooks/useProducts';
 
 export default function Products() {
   const { data: products, isLoading, error } = useProducts()

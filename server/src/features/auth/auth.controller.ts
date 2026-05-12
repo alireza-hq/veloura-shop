@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express'
-import { comparePassword, hashPassword } from '../../lib/hash';
-import { signToken } from '../../lib/jwt';
-import { loginSchema, signupSchema } from './auth.schema';
-import * as service from './auth.service';
+import { comparePassword, hashPassword } from '../../lib/hash'
+import { signToken } from '../../lib/jwt'
+import { loginSchema, signupSchema } from './auth.schema'
+import * as service from './auth.service'
 
 export const signup = async (req: Request, res: Response) => {
   const data = signupSchema.parse(req.body)
@@ -71,7 +71,7 @@ export const login = async (req: Request, res: Response) => {
     })
 }
 
-export const logout = async (req: Request, res: Response) => {
+export const logout = async (_req: Request, res: Response) => {
   res.clearCookie('token')
 
   res.json({

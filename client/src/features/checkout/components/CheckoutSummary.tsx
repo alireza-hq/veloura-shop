@@ -1,6 +1,6 @@
 'use client'
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
+import { useCartStore } from '@/features/cart/store/useCartStore';
 
 export const CheckoutSummary = () => {
   const items = useCartStore((state) => state.items)

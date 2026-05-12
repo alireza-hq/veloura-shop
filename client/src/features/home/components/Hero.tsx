@@ -1,9 +1,9 @@
-import { ArrowRightIcon } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowRightIcon } from 'lucide-react';
+import Link from 'next/link';
 
-import { routes } from '@/lib/routes'
+import { routes } from '@/lib/routes';
 
-import { BackgroundSlideshow } from './BackgroundSlideshow'
+import { BackgroundSlideshow } from './BackgroundSlideshow';
 
 export const Hero = () => {
   const images = [

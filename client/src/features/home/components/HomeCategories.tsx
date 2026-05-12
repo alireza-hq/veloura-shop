@@ -1,5 +1,5 @@
-import { CategoryCard } from '@/features/categories/components/CategoryCard'
-import { Category } from '@/features/categories/types'
+import { CategoryCard } from '@/features/categories/components/CategoryCard';
+import { Category } from '@/features/categories/types';
 
 type Props = {
   categories: Category[] | undefined

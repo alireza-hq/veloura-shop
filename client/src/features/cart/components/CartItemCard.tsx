@@ -1,9 +1,11 @@
-import Link from 'next/link'
-import { CartItem } from '../types'
-import { routes } from '@/lib/routes'
-import { useCartStore } from '../store/useCartStore'
-import { Minus, Plus, Trash2 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { Minus, Plus, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+
+import { routes } from '@/lib/routes';
+
+import { useCartStore } from '../store/useCartStore';
+import { CartItem } from '../types';
 
 type Props = { item: CartItem }
 

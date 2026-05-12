@@ -1,6 +1,6 @@
 'use client'
 
-import { Shield, Truck, Heart, Users } from 'lucide-react'
+import { Heart, Shield, Truck, Users } from 'lucide-react';
 
 export const About = () => {
   return (

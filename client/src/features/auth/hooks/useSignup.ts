@@ -1,26 +1,60 @@
-import { routes } from '@/lib/routes'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { LoginFormValues } from '../schemas/loginSchema'
+
+import { routes } from '@/lib/routes'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+
 import { SignupFormValues, signupSchema } from '../schemas/signupSchema'
+import { signupService } from '../services/authApi'
 import { useAuthStore } from '../store/useAuthStore'
+
+type SignupResponse = {
+  user: {
+    id: number
+    username: string
+    email: string
+    role: 'user' | 'admin'
+  }
+}
 
 export const useSignup = () => {
   const router = useRouter()
-  const { login } = useAuthStore()
+
+  const { setUser } = useAuthStore()
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<SignupFormValues>({ resolver: zodResolver(signupSchema) })
 
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log(data)
-    await login(data.email, data.password)
-    router.push(routes.auth.me)
+  const signupMutation = useMutation({
+    mutationFn: signupService,
+
+    onSuccess: (data: SignupResponse) => {
+      setUser(data.user)
+
+      router.push(routes.auth.me)
+    },
+
+    onError: (error) => {
+      console.error(error)
+    },
+  })
+
+  const onSubmit = async (data: SignupFormValues) => {
+    signupMutation.mutate(data)
   }
 
-  return { register, onSubmit, handleSubmit, isSubmitting, errors } as const
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+
+    errors,
+
+    isPending: signupMutation.isPending,
+    error: signupMutation.error,
+  } as const
 }

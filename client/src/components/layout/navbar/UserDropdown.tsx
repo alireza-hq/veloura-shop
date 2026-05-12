@@ -22,11 +22,10 @@ import { cn } from '@/lib/utils/cn'
 import { Menu, Transition } from '@headlessui/react'
 
 export const UserDropdown = () => {
-  const { isAuthenticated, logout, user } = useAuthStore()
+  const { isAuthenticated, user } = useAuthStore()
   const pathname = usePathname()
 
   const handleLogout = () => {
-    logout()
     document.location.reload()
   }
 
@@ -65,7 +64,7 @@ export const UserDropdown = () => {
             ) : (
               <div className='mb-2 border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>
                 <p className='text-sm font-medium text-zinc-900 dark:text-white'>
-                  {user?.name}
+                  {user?.username}
                 </p>
                 <p className='text-xs text-zinc-500 dark:text-zinc-400'>
                   {user?.email}

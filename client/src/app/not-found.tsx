@@ -1,10 +1,10 @@
 'use client'
 
-import { ArrowLeft, Home } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowLeft, Home } from 'lucide-react';
+import Link from 'next/link';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
-import { routes } from '@/lib/routes'
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { routes } from '@/lib/routes';
 
 export default function NotFound() {
   return (

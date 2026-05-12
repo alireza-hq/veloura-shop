@@ -1,11 +1,11 @@
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { routes } from '@/lib/routes'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useCartStore } from '@/features/cart/store/useCartStore';
+import { routes } from '@/lib/routes';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { CheckoutFormValues, checkoutSchema } from '../schema'
+import { CheckoutFormValues, checkoutSchema } from '../schema';
 
 import type { Dispatch, SetStateAction } from 'react'
 

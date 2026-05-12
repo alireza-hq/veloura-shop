@@ -1,11 +1,11 @@
 'use client'
 
-import { useCategories } from '@/features/categories/hooks/useCategories'
-import { Hero } from '@/features/home/components/Hero'
-import { HomeCategories } from '@/features/home/components/HomeCategories'
-import { HomeProductList } from '@/features/home/components/HomeProductList'
-import { HomeSection } from '@/features/home/components/HomeSection'
-import { HomeSubscribe } from '@/features/home/components/HomeSubscribe'
+import { useCategories } from '@/features/categories/hooks/useCategories';
+import { Hero } from '@/features/home/components/Hero';
+import { HomeCategories } from '@/features/home/components/HomeCategories';
+import { HomeProductList } from '@/features/home/components/HomeProductList';
+import { HomeSection } from '@/features/home/components/HomeSection';
+import { HomeSubscribe } from '@/features/home/components/HomeSubscribe';
 
 export default function Home() {
   const { data: categories } = useCategories()

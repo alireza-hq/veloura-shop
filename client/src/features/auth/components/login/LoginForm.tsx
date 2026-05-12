@@ -1,15 +1,13 @@
 'use client'
 
 import { Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react'
-import Link from 'next/link'
 import { useState } from 'react'
-
 import { useLogin } from '../../hooks/useLogin'
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
 
-  const { onSubmit, register, handleSubmit, isSubmitting, errors } = useLogin()
+  const { onSubmit, register, handleSubmit, errors, isPending } = useLogin()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className='space-y-6'>
@@ -70,10 +68,10 @@ export const LoginForm = () => {
 
       <button
         type='submit'
-        disabled={isSubmitting}
+        disabled={isPending}
         className='w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition-all hover:opacity-85 active:opacity-80 disabled:opacity-70 dark:bg-white dark:text-black'
       >
-        {isSubmitting ? (
+        {isPending ? (
           <span className='flex items-center justify-center gap-2'>
             <Loader2 className='h-4 w-4 animate-spin' />
             Logging in...

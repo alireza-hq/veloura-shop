@@ -9,7 +9,7 @@ export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-  const { register, onSubmit, handleSubmit, isSubmitting, errors } = useSignup()
+  const { register, onSubmit, handleSubmit, isPending, errors } = useSignup()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className='space-y-6'>
@@ -27,11 +27,11 @@ export const SignupForm = () => {
             id='name'
             placeholder='John Doe'
             className='w-full rounded-xl border border-black/10 bg-zinc-50 py-3 pr-4 pl-10 text-sm text-black placeholder:text-black/30 focus:border-black focus:ring-1 focus:ring-black focus:outline-none dark:border-white/10 dark:bg-black dark:text-white dark:placeholder:text-white/30 dark:focus:border-white dark:focus:ring-white'
-            {...register('name')}
+            {...register('username')}
           />
         </div>
-        {errors.name && (
-          <p className='text-xs text-red-500'>{errors.name.message}</p>
+        {errors.username && (
+          <p className='text-xs text-red-500'>{errors.username.message}</p>
         )}
       </div>
 
@@ -130,10 +130,10 @@ export const SignupForm = () => {
       {/* Submit Button */}
       <button
         type='submit'
-        disabled={isSubmitting}
+        disabled={isPending}
         className='w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition-all hover:bg-white hover:text-black disabled:opacity-70 dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'
       >
-        {isSubmitting ? (
+        {isPending ? (
           <span className='flex items-center justify-center gap-2'>
             <Loader2 className='h-4 w-4 animate-spin' />
             Signing up...

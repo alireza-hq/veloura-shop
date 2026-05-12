@@ -1,8 +1,8 @@
 'use client'
 
-import { MoonIcon, SunMediumIcon } from 'lucide-react'
+import { MoonIcon, SunMediumIcon } from 'lucide-react';
 
-import { useThemeStore } from '../store/useTheme'
+import { useThemeStore } from '../store/useTheme';
 
 export const ThemeButton = () => {
   const theme = useThemeStore((state) => state.theme)

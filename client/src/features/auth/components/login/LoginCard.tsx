@@ -1,7 +1,8 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { LoginForm } from './LoginForm'
-import { routes } from '@/lib/routes'
+import { routes } from '@/lib/routes';
+
+import { LoginForm } from './LoginForm';
 
 export const LoginCard = () => {
   return (

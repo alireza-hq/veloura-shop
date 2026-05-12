@@ -1,11 +1,11 @@
 'use client'
 
-import { format } from 'date-fns'
-import { CheckCircle, Clock, ShoppingBag, XCircle } from 'lucide-react'
+import { format } from 'date-fns';
+import { CheckCircle, Clock, ShoppingBag, XCircle } from 'lucide-react';
 
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils/cn';
 
-import { Order } from '../types'
+import { Order } from '../types';
 
 type Props = Order
 

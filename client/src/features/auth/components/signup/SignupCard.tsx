@@ -1,6 +1,8 @@
-import { routes } from '@/lib/routes'
-import Link from 'next/link'
-import { SignupForm } from './SignupForm'
+import Link from 'next/link';
+
+import { routes } from '@/lib/routes';
+
+import { SignupForm } from './SignupForm';
 
 export const SignupCard = () => {
   return (
