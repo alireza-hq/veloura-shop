@@ -1,4 +1,4 @@
-import { db } from '@/config/db';
+import { db } from '@/config/db'
 
 export const getOrCreateCart = async (userId: number) => {
   const existingCart = await db.query(
@@ -31,13 +31,13 @@ export const getCart = async (userId: number) => {
   const { rows } = await db.query(
     `
         SELECT
-            ci.quantity
+            ci.quantity,
 
             json_build_object(
                 'id', p.id,
                 'name', p.name,
                 'image', p.image,
-                'price', p.price,
+                'price', p.price
             ) AS product
 
         FROM cart_items ci
@@ -85,13 +85,13 @@ export const addCartItem = async (
   } else {
     await db.query(
       `
-        INSERT INTO cart_items (
-            cart_id
-            product_id
-            quantity
-        )
-        VALUES ($1, $2, $3)
-        `,
+  INSERT INTO cart_items (
+    cart_id,
+    product_id,
+    quantity
+  )
+  VALUES ($1, $2, $3)
+  `,
       [cart.id, productId, quantity],
     )
   }

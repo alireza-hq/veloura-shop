@@ -17,13 +17,13 @@ export const signupService = async (data: SignupFormValues) => {
 }
 
 export const logoutService = async () => {
-  const res = await api.post(endpoints.auth.logout)
+  const { data } = await api.post(endpoints.auth.logout)
 
-  return res.data
+  return data
 }
 
 export const getCurrentUserService = async () => {
-  const res = await api.get(endpoints.auth.me)
+  const { data } = await api.get(endpoints.auth.me)
 
-  return res.data
+  return data
 }

@@ -1,12 +1,11 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'
 
-import { getOrders } from '../services/orderApi';
-import { Order } from '../types';
+import { getOrdersService } from '../services/orderApi'
 
 export const useOrders = () =>
-  useQuery<Order[]>({
+  useQuery({
     queryKey: ['orders'],
-    queryFn: getOrders,
+    queryFn: getOrdersService,
   })

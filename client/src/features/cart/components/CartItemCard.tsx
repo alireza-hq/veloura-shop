@@ -1,18 +1,16 @@
-import { motion } from 'framer-motion';
-import { Minus, Plus, Trash2 } from 'lucide-react';
-import Link from 'next/link';
+import { motion } from 'framer-motion'
+import { Minus, Plus, Trash2 } from 'lucide-react'
+import Link from 'next/link'
 
-import { routes } from '@/lib/routes';
+import { routes } from '@/lib/routes'
 
-import { useCartStore } from '../store/useCartStore';
-import { CartItem } from '../types';
+import { useCart } from '../hooks/useCart'
+import { CartItem } from '../types'
 
 type Props = { item: CartItem }
 
 export const CartItemCard = ({ item }: Props) => {
-  const addItem = useCartStore((state) => state.addItem)
-  const removeItem = useCartStore((state) => state.removeItem)
-  const clearItem = useCartStore((state) => state.clearItem)
+  const { addItem, removeItem, clearItem } = useCart()
 
   return (
     <div className='group rounded-xl border border-black/5 bg-white p-2 transition-colors hover:border-black/10 sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr] sm:items-center sm:gap-4 lg:gap-8 dark:border-white/5 dark:bg-zinc-900 dark:hover:border-white/10'>

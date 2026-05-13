@@ -1,24 +1,13 @@
 import type { Metadata } from 'next'
 import '@/styles/globals.css'
 
-import { Geist, Geist_Mono } from 'next/font/google'
 import { BiSupport } from 'react-icons/bi'
 
 import { QueryProvider } from '@/app/providers/QueryProvider'
 import { Footer } from '@/components/layout/Footer'
 import { Navbar } from '@/components/layout/navbar/Navbar'
-import { ThemeInitializer } from '@/features/theme/components/ThemeInitializer'
 import { AuthProvider } from '@/features/auth/providers/AuthProvider'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { ThemeProvider } from '@/features/theme/providers/ThemeProvider'
 
 export const metadata: Metadata = {
   icons:
@@ -33,22 +22,23 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang='en'
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang='en' className={`h-full antialiased`} suppressHydrationWarning>
       <body className='flex min-h-full flex-col'>
-        <QueryProvider>
-          <AuthProvider>
-            <Navbar />
-            <ThemeInitializer />
-            {children}
-            <Footer />
-            <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
-              <BiSupport className='h-6 w-6' />
-            </button>
-          </AuthProvider>
-        </QueryProvider>
+        <ThemeProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <Navbar />
+
+              {children}
+
+              <Footer />
+
+              <button className='fixed right-0 bottom-0 z-50 m-5 rounded-full bg-white p-2 text-black opacity-95 shadow-md transition duration-200 hover:opacity-85 hover:shadow-lg active:opacity-75 dark:border dark:border-white/20 dark:bg-black dark:text-white'>
+                <BiSupport className='h-6 w-6' />
+              </button>
+            </AuthProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

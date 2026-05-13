@@ -4,25 +4,27 @@ import { Minus, Plus } from 'lucide-react'
 import Link from 'next/link'
 import { MdAddShoppingCart } from 'react-icons/md'
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { routes } from '@/lib/routes'
+import { useCart } from '@/features/cart/hooks/useCart'
 import { Category } from '@/features/categories/types'
+import { routes } from '@/lib/routes'
 
 type Props = {
   id: number
-  image?: string
+  image: string
   name: string
   category: Category
   price: number
 }
 
 export const ProductCard = ({ id, image, name, category, price }: Props) => {
-  const cartItem = useCartStore((state) =>
-    state.items.find((i) => i.productId === id),
-  )
+  const { items, addItem, removeItem } = useCart()
 
-  const addItem = useCartStore((s) => s.addItem)
-  const removeItem = useCartStore((s) => s.removeItem)
+  const cartItem = items.find((i) => i.productId === id)
+
+  const handleCartClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
 
   return (
     <Link
@@ -41,6 +43,7 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
         <p className='text-[10px] tracking-widest text-black/40 uppercase sm:text-xs dark:text-white/40'>
           {category.title}
         </p>
+
         <h3 className='mt-1 truncate text-sm font-medium text-black sm:text-base dark:text-white'>
           {name}
         </h3>
@@ -52,10 +55,11 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
 
           {cartItem ? (
             <div
-              onClick={(e) => e.preventDefault()}
+              onClick={handleCartClick}
               className='flex cursor-default items-center gap-3 rounded-full border border-black/10 bg-white px-2 py-1 dark:border-white/10 dark:bg-zinc-900'
             >
               <button
+                type='button'
                 onClick={() => removeItem(id)}
                 className='flex h-6 w-6 items-center justify-center rounded-full text-black transition hover:bg-black hover:text-white dark:text-white dark:hover:bg-white dark:hover:text-black'
               >
@@ -67,8 +71,15 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
               </span>
 
               <button
+                type='button'
                 onClick={() =>
-                  addItem({ productId: id, name, price, quantity: 1, image })
+                  addItem({
+                    productId: id,
+                    name,
+                    price,
+                    quantity: 1,
+                    image,
+                  })
                 }
                 className='flex h-6 w-6 items-center justify-center rounded-full text-black transition hover:bg-black hover:text-white dark:text-white dark:hover:bg-white dark:hover:text-black'
               >
@@ -77,9 +88,10 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
             </div>
           ) : (
             <button
+              type='button'
               className='rounded-full border border-black/20 p-2 transition-all duration-300 hover:border-black hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-black'
               onClick={(e) => {
-                e.preventDefault()
+                handleCartClick(e)
 
                 addItem({
                   productId: id,

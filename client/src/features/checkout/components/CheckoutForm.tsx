@@ -1,20 +1,23 @@
 'use client'
 
-import { Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import { BiCreditCard } from 'react-icons/bi';
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { BiCreditCard } from 'react-icons/bi'
 
-import { useCartStore } from '@/features/cart/store/useCartStore';
-import { cn } from '@/lib/utils/cn';
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { cn } from '@/lib/utils/cn'
 
-import { useCheckout } from '../hooks/useCheckout';
-import { CheckoutModal } from './CheckoutModal';
+import { useCheckout } from '../hooks/useCheckout'
+import { CheckoutModal } from './CheckoutModal'
+import { useCheckoutPreview } from '../hooks/useCheckoutPreview'
 
 export const CheckoutForm = () => {
   const [checkoutMessage, setCheckoutMessage] = useState('')
 
   const items = useCartStore((state) => state.items)
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+  const { data } = useCheckoutPreview()
+  const total = Number(data?.total ?? 0)
 
   const { register, onSubmit, handleSubmit, errors, isSubmitting } =
     useCheckout(setCheckoutMessage)

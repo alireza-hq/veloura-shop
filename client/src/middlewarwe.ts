@@ -1,15 +1,15 @@
-// import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
-// export function middleware(req: NextRequest) {
-//   const token = req.cookies.get('token')
+export function middleware(req: NextRequest) {
+  const token = req.cookies.get('token')
 
-//   if (!token) {
-//     return NextResponse.redirect(new URL('/login', req.url))
-//   }
+  if (!token) {
+    return NextResponse.redirect(new URL('/login', req.url))
+  }
 
-//   return NextResponse.next()
-// }
+  return NextResponse.next()
+}
 
-// export const config = {
-//   matcher: ['/profile/:path*', '/cart/:path*'],
-// }
+export const config = {
+  matcher: ['/profile/:path*', '/cart/:path*'],
+}

@@ -1,22 +1,20 @@
 'use client'
 
-import { HeartIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react';
-import Link from 'next/link';
-import { FaShoppingCart } from 'react-icons/fa';
+import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
+import Link from 'next/link'
+import { FaShoppingCart } from 'react-icons/fa'
 
-import { useActive } from '@/components/layout/navbar/useActive';
-import { useCartStore } from '@/features/cart/store/useCartStore';
-import { ThemeButton } from '@/features/theme/components/ThemeButton';
-import { routes } from '@/lib/routes';
-import { cn } from '@/lib/utils/cn';
+import { useActive } from '@/components/layout/navbar/useActive'
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { ThemeButton } from '@/features/theme/components/ThemeButton'
+import { routes } from '@/lib/routes'
+import { cn } from '@/lib/utils/cn'
 
-import { NavbarSearch } from './NavbarSearch';
-import { UserDropdown } from './UserDropdown';
+import { NavbarSearch } from './NavbarSearch'
+import { UserDropdown } from './UserDropdown'
 
 export const Navbar = () => {
   const items = useCartStore((s) => s.items)
-
-  // const { isAuthenticated } = useAuthStore()
 
   return (
     <header className='absolute z-50 w-full'>
@@ -45,10 +43,10 @@ export const Navbar = () => {
             <Link
               className={cn(
                 'text-sm hover:opacity-85 md:text-[17px]',
-                useActive(routes.categories) &&
+                useActive(routes.categories.root) &&
                   'font-semibold hover:opacity-100',
               )}
-              href={routes.categories}
+              href={routes.categories.root}
             >
               Categories
             </Link>

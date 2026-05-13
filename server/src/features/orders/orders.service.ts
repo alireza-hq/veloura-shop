@@ -1,4 +1,4 @@
-import { db } from '@/config/db';
+import { db } from '@/config/db'
 
 export const createOrder = async (userId: number) => {
   const client = await db.connect()
@@ -20,7 +20,7 @@ export const createOrder = async (userId: number) => {
         FROM carts c
 
         JOIN cart_items ci
-            ON ci.cart_item = c.id
+            ON ci.cart_id = c.id
 
         JOIN products p
             ON p.id = ci.product_id
@@ -124,7 +124,14 @@ export const createOrder = async (userId: number) => {
 export const getOrderList = async (userId: number) => {
   const { rows } = await db.query(
     `
-        SELECT *
+        SELECT 
+          id,
+          subtotal,
+          shipping,
+          tax,
+          total,
+          status,
+          created_at AS "createdAt"
         FROM orders
         WHERE user_id = $1
         ORDER BY created_at DESC

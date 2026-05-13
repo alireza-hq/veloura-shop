@@ -1,14 +1,16 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-import { CartItem } from '../types';
+import { CartItem } from '../types'
 
 type CartStore = {
   items: CartItem[]
 
-  addItem: (item: CartItem) => void
-  removeItem: (productId: number) => void
-  clearItem: (productId: number) => void
+  setItems: (items: CartItem[]) => void
+
+  addGuestItem: (item: CartItem) => void
+  removeGuestItem: (productId: number) => void
+  clearGuestItem: (productId: number) => void
   clearCart: () => void
 }
 
@@ -17,7 +19,9 @@ export const useCartStore = create(
     (set) => ({
       items: [],
 
-      addItem: (item) =>
+      setItems: (items) => set({ items }),
+
+      addGuestItem: (item) =>
         set((state) => {
           const existing = state.items.find(
             (i) => i.productId === item.productId,
@@ -36,7 +40,8 @@ export const useCartStore = create(
             items: [...state.items, item],
           }
         }),
-      removeItem: (productId) =>
+
+      removeGuestItem: (productId) =>
         set((state) => ({
           items: state.items
             .map((i) =>
@@ -47,7 +52,7 @@ export const useCartStore = create(
             .filter((i) => i.quantity > 0),
         })),
 
-      clearItem: (productId) =>
+      clearGuestItem: (productId) =>
         set((state) => ({
           items: state.items
             .map((i) => (i.productId === productId ? { ...i, quantity: 0 } : i))

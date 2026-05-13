@@ -2,7 +2,10 @@ export const routes = {
   home: '/',
   cart: '/cart',
   checkout: '/checkout',
-  categories: '/categories',
+  categories: {
+    root: '/categories',
+    category: (id: number) => `/categories/${id}`,
+  },
   wishlist: '/wishlist',
   about: '/about',
   contact: '/contact',
@@ -10,7 +13,7 @@ export const routes = {
 
   products: {
     root: '/products',
-    product: (id: number | string) => `/products/${id}`,
+    product: (id: number) => `/products/${id}`,
   },
 
   auth: {

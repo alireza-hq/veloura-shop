@@ -1,18 +1,22 @@
-type Status = 'PENDING' | 'PAID' | 'CANCELLED'
+export type OrderStatus = 'pending' | 'paid' | 'cancelled'
 
 export type OrderItem = {
-  id?: number
-  orderId?: number
-  productId?: number
-  quantity?: number
-  titleSnapshot?: string
-  priceSnapshot?: number
+  quantity: number
+  price: number
+  product: {
+    id: number | null
+    name: string
+    image: string
+  }
 }
 
 export type Order = {
-  id?: number
+  id: number
+  subtotal: number
+  shipping: number
+  tax: number
   total: number
-  status: Status
-  items: OrderItem[]
-  createdAt?: string
+  status: OrderStatus
+  items?: OrderItem[]
+  createdAt: string
 }

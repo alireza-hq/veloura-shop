@@ -1,13 +1,14 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Category } from '../types';
+import { Category } from '../types'
+import { routes } from '@/lib/routes'
 
-type Props = Partial<Category>
+type Props = Category
 
-export const CategoryCard = ({ image, route, title }: Props) => {
+export const CategoryCard = ({ id, image, title }: Props) => {
   return (
     <Link
-      href={route ?? '#'}
+      href={routes.categories.category(id)}
       className='group relative block w-full overflow-hidden'
     >
       <img

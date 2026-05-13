@@ -8,6 +8,8 @@ import { useMutation } from '@tanstack/react-query'
 import { SignupFormValues, signupSchema } from '../schemas/signupSchema'
 import { signupService } from '../services/authApi'
 import { useAuthStore } from '../store/useAuthStore'
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { addCartItemService } from '@/features/cart/services/cartApi'
 
 type SignupResponse = {
   user: {
@@ -32,8 +34,19 @@ export const useSignup = () => {
   const signupMutation = useMutation({
     mutationFn: signupService,
 
-    onSuccess: (data: SignupResponse) => {
+    onSuccess: async (data: SignupResponse) => {
       setUser(data.user)
+
+      const guestItems = useCartStore.getState().items
+
+      for (const item of guestItems) {
+        await addCartItemService({
+          productId: item.productId,
+          quantity: item.quantity,
+        })
+      }
+
+      useCartStore.getState().clearCart()
 
       router.push(routes.auth.me)
     },

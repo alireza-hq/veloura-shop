@@ -6,6 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { loginService } from '../services/authApi'
 import { routes } from '@/lib/routes'
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { addCartItemService } from '@/features/cart/services/cartApi'
 
 type LoginResponse = {
   user: {
@@ -30,8 +32,19 @@ export const useLogin = () => {
   const loginMutation = useMutation({
     mutationFn: loginService,
 
-    onSuccess: (data: LoginResponse) => {
+    onSuccess: async (data: LoginResponse) => {
       setUser(data.user)
+
+      const guestItems = useCartStore.getState().items
+
+      for (const item of guestItems) {
+        await addCartItemService({
+          productId: item.productId,
+          quantity: item.quantity,
+        })
+      }
+
+      useCartStore.getState().clearCart()
 
       router.push(routes.auth.me)
     },

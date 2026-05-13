@@ -1,37 +1,68 @@
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { useCartStore } from '@/features/cart/store/useCartStore';
-import { routes } from '@/lib/routes';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useCartStore } from '@/features/cart/store/useCartStore'
+import { routes } from '@/lib/routes'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { CheckoutFormValues, checkoutSchema } from '../schema';
+import { CheckoutFormValues, checkoutSchema } from '../schema'
 
 import type { Dispatch, SetStateAction } from 'react'
+import { createOrderService } from '@/features/orders/services/orderApi'
 
 export const useCheckout = (
   setCheckoutMessage: Dispatch<SetStateAction<string>>,
 ) => {
   const router = useRouter()
+  const queryClient = useQueryClient()
+
   const clearCart = useCartStore((state) => state.clearCart)
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
-  } = useForm<CheckoutFormValues>({ resolver: zodResolver(checkoutSchema) })
+  } = useForm<CheckoutFormValues>({
+    resolver: zodResolver(checkoutSchema),
+  })
 
-  const onSubmit = async (data: CheckoutFormValues) => {
-    await new Promise((res) => setTimeout(res, 1500))
-    setCheckoutMessage('Order placed successfully!')
-    console.log(data)
-    reset()
-    clearCart()
-    setTimeout(() => {
-      router.push(routes.products.root)
-    }, 2500)
+  const createOrderMutation = useMutation({
+    mutationFn: createOrderService,
+
+    onSuccess: () => {
+      setCheckoutMessage('Order placed successfully!')
+
+      reset()
+      clearCart()
+
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      queryClient.invalidateQueries({ queryKey: ['checkout'] })
+      queryClient.invalidateQueries({ queryKey: ['orders'] })
+
+      setTimeout(() => {
+        router.push(routes.products.root)
+      }, 2500)
+    },
+
+    onError: (error) => {
+      console.error(error)
+    },
+  })
+
+  const onSubmit = (data: CheckoutFormValues) => {
+    console.log('shipping info', data)
+
+    createOrderMutation.mutate()
   }
 
-  return { register, onSubmit, handleSubmit, errors, isSubmitting } as const
+  return {
+    register,
+    onSubmit,
+    handleSubmit,
+    errors,
+    isSubmitting: createOrderMutation.isPending,
+    error: createOrderMutation.error,
+  } as const
 }

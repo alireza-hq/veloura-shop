@@ -2,23 +2,21 @@
 
 import { Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react'
 
-import { useCartStore } from '@/features/cart/store/useCartStore'
-import { useWishlistStore } from '@/features/wishlist/store/useWishlistStore'
+import { useCart } from '@/features/cart/hooks/useCart'
 import { cn } from '@/lib/utils/cn'
 
 import { Product } from '../types'
+import { useWishlist } from '@/features/wishlist/hooks/useWishlist'
+import { useWishlistActions } from '@/features/wishlist/hooks/useWishlistActions'
 
 type Props = {
   product: Product
 }
 
 export const ProductDetails = ({ product }: Props) => {
-  const cartItem = useCartStore((state) =>
-    state.items.find((i) => i.productId === product.id),
-  )
+  const { items, addItem, removeItem } = useCart()
 
-  const addItem = useCartStore((s) => s.addItem)
-  const removeItem = useCartStore((s) => s.removeItem)
+  const cartItem = items.find((i) => i.productId === product.id)
 
   const handleAddToCart = () => {
     if (product.stock === 0) return
@@ -36,8 +34,14 @@ export const ProductDetails = ({ product }: Props) => {
     removeItem(product.id)
   }
 
-  const { products, addProduct, removeProduct } = useWishlistStore()
-  const isInWishlist = products.some((p) => p.id === product.id)
+  const { data: wishlist = [] } = useWishlist()
+  const {
+    addToWishlist,
+    removeFromWishlist,
+    isPending: wishlistPending,
+  } = useWishlistActions()
+
+  const isInWishlist = wishlist.some((p) => p.id === product.id)
 
   const isInCart = !!cartItem
   const isOutOfStock = product.stock === 0
@@ -145,9 +149,9 @@ export const ProductDetails = ({ product }: Props) => {
               aria-label='Add to wishlist'
               onClick={() => {
                 if (isInWishlist) {
-                  removeProduct(product.id)
+                  removeFromWishlist(product.id)
                 } else {
-                  addProduct(product)
+                  addToWishlist(product.id)
                 }
               }}
             >

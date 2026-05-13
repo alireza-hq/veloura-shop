@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { routes } from '@/lib/routes';
+import { routes } from '@/lib/routes'
 
-import { useCartStore } from '../store/useCartStore';
+import { useCartStore } from '../store/useCartStore'
+import { useCart } from '../hooks/useCart'
 
 export const CartFooter = () => {
-  const items = useCartStore((state) => state.items)
-  const clearCart = useCartStore((state) => state.clearCart)
+  const { items, clearCart } = useCart()
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
 

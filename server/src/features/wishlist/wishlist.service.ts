@@ -6,14 +6,30 @@ export const getWishlist = async (userId: number) => {
         SELECT
             p.id,
             p.name,
+            p.description,
             p.image,
             p.price,
-            p.rating
-        FROM wishlist_items w
+            p.stock,
+            p.rating,
+
+            json_build_object(
+            'id', c.id,
+            'title', c.title,
+            'image', c.image,
+            'description', c.description
+            ) AS category
+
+        FROM wishlist_items wi
+
         JOIN products p
-            ON p.id = w.product_id
-        WHERE w.user_id = $1
-        ORDER BY w.created_at DESC
+          ON wi.product_id = p.id
+
+        JOIN categories c
+          ON p.category_id = c.id
+
+        WHERE wi.user_id = $1
+
+        ORDER BY wi.id DESC
         `,
     [userId],
   )

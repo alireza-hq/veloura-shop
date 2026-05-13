@@ -1,14 +1,14 @@
 'use client'
 
-import { BiShoppingBag } from 'react-icons/bi';
+import { BiShoppingBag } from 'react-icons/bi'
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
-import { EmptyState } from '@/components/ui/EmptyState';
-import { ErrorState } from '@/components/ui/ErrorState';
-import { LoadingState } from '@/components/ui/LoadingState';
-import { OrderList } from '@/features/orders/components/OrderList';
-import { useOrders } from '@/features/orders/hooks/useOrders';
-import { routes } from '@/lib/routes';
+import { ScreenLayout } from '@/components/layout/ScreenLayout'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { ErrorState } from '@/components/ui/ErrorState'
+import { LoadingState } from '@/components/ui/LoadingState'
+import { OrderList } from '@/features/orders/components/OrderList'
+import { useOrders } from '@/features/orders/hooks/useOrders'
+import { routes } from '@/lib/routes'
 
 export default function OrdersPage() {
   const { data: orders, isLoading, error } = useOrders()
