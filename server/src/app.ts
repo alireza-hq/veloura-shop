@@ -10,6 +10,7 @@ import ordersRouter from './features/orders/orders.routes'
 import productRouter from './features/products/products.routes'
 import userRouter from './features/users/users.routes'
 import wishlistRouter from './features/wishlist/wishlist.routes'
+import adminRouter from './features/admin/admin.routes'
 
 import { errorHandler } from './middlewares/error.middleware'
 import { notFound } from './middlewares/notFound.middleware'
@@ -33,6 +34,8 @@ app.use('/cart', cartRouter)
 app.use('/checkout', checkoutRouter)
 app.use('/orders', ordersRouter)
 app.use('/wishlist', wishlistRouter)
+
+app.use('/admin', adminRouter)
 
 // Error Handlers
 app.use(notFound)

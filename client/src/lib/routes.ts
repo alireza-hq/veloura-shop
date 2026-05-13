@@ -29,5 +29,10 @@ export const routes = {
       create: '/admin/products/create',
       edit: (id: number) => `/admin/products/${id}/edit`,
     },
+    categories: {
+      root: '/admin/categories',
+      create: '/admin/categories/create',
+      edit: (id: number) => `/admin/categories/${id}/edit`,
+    },
   },
 } as const
