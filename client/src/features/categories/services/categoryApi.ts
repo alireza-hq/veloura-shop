@@ -31,7 +31,7 @@ export const createCategory = async (data: CreateCategoryData) => {
 }
 
 export const updateCategory = async (id: number, data: UpdateCategoryData) => {
-  const res = await api.patch<Category>(
+  const res = await api.put<Category>(
     endpoints.categories.updateCategory(id),
     data,
   )

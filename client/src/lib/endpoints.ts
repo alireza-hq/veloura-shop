@@ -69,5 +69,10 @@ export const endpoints = {
       getOrders: '/admin/orders',
       updateStatus: (id: number) => `/admin/orders/${id}/status`,
     },
+
+    users: {
+      root: '/admin/users',
+      updateRole: (id: number) => `/admin/users/${id}/role`,
+    },
   },
 } as const

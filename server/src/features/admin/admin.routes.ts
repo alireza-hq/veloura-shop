@@ -28,4 +28,18 @@ router.patch(
   asyncHandler(adminController.updateOrderStatus),
 )
 
+router.get(
+  '/users',
+  authMiddleware,
+  roleMiddleware('admin'),
+  asyncHandler(adminController.getAdminUsers),
+)
+
+router.patch(
+  '/users/:id/role',
+  authMiddleware,
+  roleMiddleware('admin'),
+  asyncHandler(adminController.updateUserRole),
+)
+
 export default router

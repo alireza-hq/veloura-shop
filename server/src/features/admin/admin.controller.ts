@@ -28,3 +28,30 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
 
   res.json(order)
 }
+
+export const getAdminUsers = async (req: Request, res: Response) => {
+  const users = await adminService.getAdminUsers()
+
+  res.json(users)
+}
+
+export const updateUserRole = async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  const { role } = req.body
+
+  if (!['user', 'admin'].includes(role)) {
+    return res.status(400).json({
+      message: 'Invalid role',
+    })
+  }
+
+  const user = await adminService.updateUserRole(id, role)
+
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found',
+    })
+  }
+
+  res.json(user)
+}

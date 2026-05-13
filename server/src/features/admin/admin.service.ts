@@ -98,3 +98,37 @@ export const updateOrderStatus = async (id: number, status: string) => {
 
   return rows[0]
 }
+
+export const getAdminUsers = async () => {
+  const { rows } = await db.query(`
+    SELECT
+      id,
+      username,
+      email,
+      role,
+      created_at AS "createdAt"
+    FROM users
+    ORDER BY created_at DESC
+  `)
+
+  return rows
+}
+
+export const updateUserRole = async (id: number, role: 'user' | 'admin') => {
+  const { rows } = await db.query(
+    `
+    UPDATE users
+    SET role = $1
+    WHERE id = $2
+    RETURNING
+      id,
+      username,
+      email,
+      role,
+      created_at AS "createdAt"
+    `,
+    [role, id],
+  )
+
+  return rows[0]
+}
