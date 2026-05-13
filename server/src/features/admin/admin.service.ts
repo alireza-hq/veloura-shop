@@ -56,3 +56,45 @@ export const getAdminStats = async () => {
     recentOrders: recentOrdersResult.rows,
   }
 }
+
+export const getAdminOrders = async () => {
+  const { rows } = await db.query(`
+    SELECT
+      o.id,
+      o.subtotal,
+      o.shipping,
+      o.tax,
+      o.total,
+      o.status,
+      o.created_at AS "createdAt",
+
+      json_build_object(
+        'id', u.id,
+        'username', u.username,
+        'email', u.email
+      ) AS user
+
+    FROM orders o
+
+    JOIN users u
+      ON o.user_id = u.id
+
+    ORDER BY o.created_at DESC
+  `)
+
+  return rows
+}
+
+export const updateOrderStatus = async (id: number, status: string) => {
+  const { rows } = await db.query(
+    `
+    UPDATE orders
+    SET status = $1
+    WHERE id = $2
+    RETURNING *
+    `,
+    [status, id],
+  )
+
+  return rows[0]
+}

@@ -12,7 +12,7 @@ export const CategoryCard = ({ id, image, title }: Props) => {
       className='group relative block w-full overflow-hidden'
     >
       <img
-        src={image ?? '/lol.jpg'}
+        src={image}
         alt={title}
         className='aspect-4/5 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105'
       />

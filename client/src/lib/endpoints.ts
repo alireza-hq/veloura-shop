@@ -37,11 +37,37 @@ export const endpoints = {
     createOrder: '/orders',
     getOrders: '/orders',
     getOrder: (id: number) => `orders/${id}`,
+
+    getAdminOrders: '/admin/orders',
+    getAdminOrder: (id: number) => `/admin/orders/${id}`,
+    updateOrderStatus: (id: number) => `/admin/orders/${id}/status`,
   },
 
   wishlist: {
     getWishlist: '/wishlist',
     addToWishlist: '/wishlist',
     removeFromWishlist: (productId: number) => `/wishlist/${productId}`,
+  },
+
+  admin: {
+    root: '/admin',
+
+    products: {
+      root: '/admin/products',
+      create: '/admin/products/create',
+      edit: (id: number) => `/admin/products/${id}/edit`,
+    },
+
+    categories: {
+      root: '/admin/categories',
+      create: '/admin/categories/create',
+      edit: (id: number) => `/admin/categories/${id}/edit`,
+    },
+
+    orders: {
+      root: '/admin/orders',
+      getOrders: '/admin/orders',
+      updateStatus: (id: number) => `/admin/orders/${id}/status`,
+    },
   },
 } as const
