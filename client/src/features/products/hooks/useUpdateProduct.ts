@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateProductService } from '../services/productApi'
 
-export const useCreateProduct = () => {
+export const useUpdateProduct = () => {
   const queryClient = useQueryClient()
 
   return useMutation({

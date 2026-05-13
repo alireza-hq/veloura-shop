@@ -1,4 +1,4 @@
-import { db } from '../../config/db';
+import { db } from '../../config/db'
 
 export const getProductList = async () => {
   const { rows } = await db.query(`
@@ -60,31 +60,46 @@ export const getProductById = async (id: number) => {
 }
 
 export const createProduct = async (data: any) => {
-  const { image, name, description, price, category, stock, rating } = data
+  const { image, name, description, price, categoryId, stock, rating } = data
 
   const { rows } = await db.query(
-    `INSERT INTO products (image, name, description, price, category, stock, rating)
+    `INSERT INTO products (image, name, description, price, category_id, stock, rating)
      VALUES ($1,$2,$3,$4,$5,$6,$7)
      RETURNING *`,
-    [image, name, description, price, category, stock, rating],
+    [image, name, description, price, categoryId, stock, rating],
   )
 
   return rows[0]
 }
 
+const columnMap: Record<string, string> = {
+  image: 'image',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  categoryId: 'category_id',
+  stock: 'stock',
+  rating: 'rating',
+}
+
 export const updateProduct = async (id: number, data: any) => {
-  const fields = Object.keys(data)
-  const values = Object.values(data)
+  const fields = Object.keys(data).filter((key) => data[key] !== undefined)
 
   if (fields.length === 0) return null
 
-  const setQuery = fields.map((field, i) => `${field} = $${i + 1}`).join(', ')
+  const setQuery = fields
+    .map((field, index) => `${columnMap[field]} = $${index + 1}`)
+    .join(', ')
+
+  const values = fields.map((field) => data[field])
 
   const { rows } = await db.query(
-    `UPDATE products
-     SET ${setQuery}
-     WHERE id = $${fields.length + 1}
-     RETURNING *`,
+    `
+    UPDATE products
+    SET ${setQuery}
+    WHERE id = $${fields.length + 1}
+    RETURNING *
+    `,
     [...values, id],
   )
 

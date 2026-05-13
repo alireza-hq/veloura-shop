@@ -1,11 +1,10 @@
 'use client'
 
 import {
-  ChevronDown,
   Heart,
   LogIn,
   LogOut,
-  Settings,
+  ShieldCheck,
   ShoppingBag,
   User,
   UserIcon,
@@ -20,13 +19,15 @@ import { useAuthStore } from '@/features/auth/store/useAuthStore'
 import { routes } from '@/lib/routes'
 import { cn } from '@/lib/utils/cn'
 import { Menu, Transition } from '@headlessui/react'
+import { useLogout } from '@/features/auth/hooks/useLogout'
 
 export const UserDropdown = () => {
   const { isAuthenticated, user } = useAuthStore()
+  const { logout } = useLogout()
   const pathname = usePathname()
 
   const handleLogout = () => {
-    document.location.reload()
+    logout()
   }
 
   return (
@@ -110,6 +111,24 @@ export const UserDropdown = () => {
               </>
             ) : (
               <>
+                {user?.role === 'admin' && isAuthenticated && (
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href={routes.admin.root}
+                        className={cn(
+                          'flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-colors',
+                          active
+                            ? 'bg-zinc-50/75 text-zinc-900 dark:bg-zinc-800/75 dark:text-white'
+                            : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800',
+                        )}
+                      >
+                        <ShieldCheck className='h-4 w-4' />
+                        Admin Dashboard
+                      </Link>
+                    )}
+                  </Menu.Item>
+                )}
                 <Menu.Item>
                   {({ active }) => (
                     <Link

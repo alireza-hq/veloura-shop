@@ -21,4 +21,13 @@ export const routes = {
     signup: '/signup',
     me: '/profile',
   },
+
+  admin: {
+    root: '/admin',
+    products: {
+      root: '/admin/products',
+      create: '/admin/products/create',
+      edit: (id: number) => `/admin/products/${id}/edit`,
+    },
+  },
 } as const
