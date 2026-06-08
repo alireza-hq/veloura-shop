@@ -21,11 +21,10 @@ export default function CategoriesPage() {
       <EmptyState
         icon={FaShoppingCart}
         title='No categories yet'
-        buttonText='Browse Products'
+        buttonText='Browse Makeup'
         route={routes.products.root}
       >
-        We don't have any categories right now. Check back later or browse all
-        products.
+        No collections are available right now. Browse all makeup instead.
       </EmptyState>
     )
   }

@@ -9,7 +9,7 @@ import { useAdminStats } from '@/features/admin/hooks/useAdminStats'
 export default function AdminPage() {
   const { data, isLoading } = useAdminStats()
 
-  if (isLoading) return <LoadingState />
+  if (isLoading || !data) return <LoadingState />
 
   return (
     <div>
@@ -47,7 +47,7 @@ export default function AdminPage() {
         </div>
 
         <div className='divide-y divide-black/5 dark:divide-white/5'>
-          {data.recentOrders.map((order: any) => (
+          {data.recentOrders.map((order) => (
             <div
               key={order.id}
               className='flex items-center justify-between p-6'

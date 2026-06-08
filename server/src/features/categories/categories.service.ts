@@ -1,5 +1,11 @@
 import { db } from '../../config/db';
 
+type CategoryInput = {
+  title: string
+  image: string
+  description?: string
+}
+
 export const getCategoryList = async () => {
   const { rows } = await db.query('SELECT * FROM categories ORDER BY id DESC')
 
@@ -14,7 +20,7 @@ export const getCategoryById = async (id: number) => {
   return rows[0]
 }
 
-export const createCategory = async (data: any) => {
+export const createCategory = async (data: CategoryInput) => {
   const { title, image, description } = data
 
   const { rows } = await db.query(
@@ -27,9 +33,12 @@ export const createCategory = async (data: any) => {
   return rows[0]
 }
 
-export const updateCategory = async (id: number, data: any) => {
-  const fields = Object.keys(data)
-  const values = Object.values(data)
+export const updateCategory = async (
+  id: number,
+  data: Partial<CategoryInput>,
+) => {
+  const fields = Object.keys(data) as Array<keyof CategoryInput>
+  const values = fields.map((field) => data[field])
 
   if (fields.length === 0) return null
 

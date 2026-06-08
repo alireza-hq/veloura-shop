@@ -17,10 +17,10 @@ export default function CheckoutPage() {
       <EmptyState
         icon={MdShoppingCart}
         title='Your cart is empty'
-        buttonText='Start Shopping'
+        buttonText='Explore Makeup'
         route={routes.products.root}
       >
-        Looks like you haven't added anything yet.
+        Add a few beauty essentials before heading to checkout.
       </EmptyState>
     )
   }

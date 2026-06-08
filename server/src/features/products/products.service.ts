@@ -59,7 +59,17 @@ export const getProductById = async (id: number) => {
   return rows[0]
 }
 
-export const createProduct = async (data: any) => {
+type ProductInput = {
+  image: string
+  name: string
+  description?: string
+  price: number
+  categoryId: number
+  stock: number
+  rating: number
+}
+
+export const createProduct = async (data: ProductInput) => {
   const { image, name, description, price, categoryId, stock, rating } = data
 
   const { rows } = await db.query(
@@ -82,8 +92,10 @@ const columnMap: Record<string, string> = {
   rating: 'rating',
 }
 
-export const updateProduct = async (id: number, data: any) => {
-  const fields = Object.keys(data).filter((key) => data[key] !== undefined)
+export const updateProduct = async (id: number, data: Partial<ProductInput>) => {
+  const fields = (Object.keys(data) as Array<keyof ProductInput>).filter(
+    (key) => data[key] !== undefined,
+  )
 
   if (fields.length === 0) return null
 
@@ -103,7 +115,9 @@ export const updateProduct = async (id: number, data: any) => {
     [...values, id],
   )
 
-  return rows[0]
+  if (!rows[0]) return null
+
+  return getProductById(id)
 }
 
 export const deleteProduct = async (id: number) => {

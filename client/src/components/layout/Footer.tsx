@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaShoppingCart } from 'react-icons/fa';
+import { Sparkles } from 'lucide-react';
 import { SiFacebook, SiInstagram, SiX } from 'react-icons/si';
 
 import { routes } from '@/lib/routes';
@@ -15,18 +15,18 @@ export const Footer = () => {
               href={routes.home}
               className='mb-4 flex items-center gap-2 text-base font-bold text-white'
             >
-              <FaShoppingCart className='h-5 w-5' strokeWidth={1.5} />
-              <span>Cartify</span>
+              <Sparkles className='h-5 w-5' strokeWidth={1.5} />
+              <span>Veloura Beauty</span>
             </Link>
             <p className='max-w-xs text-sm text-white/50'>
-              Your one-stop shop for all your needs.
+              Modern makeup for expressive, everyday beauty.
             </p>
           </div>
 
           {/* Shop */}
           <div>
             <h4 className='mb-4 text-xs font-semibold tracking-widest text-white uppercase'>
-              Shop
+              Beauty
             </h4>
             <ul className='space-y-2.5 text-sm text-white/50'>
               <li>
@@ -34,22 +34,22 @@ export const Footer = () => {
                   href={routes.products.root}
                   className='transition hover:text-white'
                 >
-                  All Products
+                  All Makeup
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  New Arrivals
+                <a href={routes.products.root} className='transition hover:text-white'>
+                  New Shades
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  Best Sellers
+                <a href={routes.products.root} className='transition hover:text-white'>
+                  Veloura Favorites
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  Sale
+                <a href={routes.products.root} className='transition hover:text-white'>
+                  Beauty Sets
                 </a>
               </li>
             </ul>
@@ -62,18 +62,18 @@ export const Footer = () => {
             </h4>
             <ul className='space-y-2.5 text-sm text-white/50'>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  Help Center
+                <a href={routes.contact} className='transition hover:text-white'>
+                  Beauty Help
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  Shipping
+                <a href={routes.contact} className='transition hover:text-white'>
+                  Delivery
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
-                  Returns
+                <a href={routes.contact} className='transition hover:text-white'>
+                  Returns & Exchanges
                 </a>
               </li>
               <li>
@@ -102,7 +102,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a href={routes.orders} className='transition hover:text-white'>
                   Orders
                 </a>
               </li>
@@ -115,7 +115,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href='#' className='transition hover:text-white'>
+                <a href='#newsletter' className='transition hover:text-white'>
                   Newsletter
                 </a>
               </li>
@@ -125,16 +125,28 @@ export const Footer = () => {
 
         {/* Bottom */}
         <div className='mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 pb-8 text-xs text-white/40 md:flex-row'>
-          <p>© {new Date().getFullYear()} Cartify. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Veloura Beauty. All rights reserved.</p>
 
           <div className='flex items-center gap-5'>
-            <a href='#' className='transition hover:text-white'>
+            <a
+              href='https://instagram.com'
+              aria-label='Veloura Beauty on Instagram'
+              className='transition hover:text-white'
+            >
               <SiInstagram className='h-4 w-4' />
             </a>
-            <a href='#' className='transition hover:text-white'>
+            <a
+              href='https://x.com'
+              aria-label='Veloura Beauty on X'
+              className='transition hover:text-white'
+            >
               <SiX className='h-4 w-4' />
             </a>
-            <a href='#' className='transition hover:text-white'>
+            <a
+              href='https://facebook.com'
+              aria-label='Veloura Beauty on Facebook'
+              className='transition hover:text-white'
+            >
               <SiFacebook className='h-4 w-4' />
             </a>
           </div>

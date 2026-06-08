@@ -21,10 +21,10 @@ export default function OrdersPage() {
       <EmptyState
         icon={BiShoppingBag}
         title='No orders yet'
-        buttonText='Browse Products'
+        buttonText='Browse Makeup'
         route={routes.products.root}
       >
-        Looks like you haven't made any purchases.
+        Your first Veloura order will appear here.
       </EmptyState>
     )
   }

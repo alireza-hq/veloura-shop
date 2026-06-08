@@ -11,18 +11,18 @@ type ProductListProps = {
   emptyMessage?: string
 }
 
+type SortOption = 'price-asc' | 'price-desc' | 'name'
+
 const ITEMS_PER_PAGE = 8
 
 export const ProductList = ({
   products,
   isLoading = false,
-  emptyMessage = 'No products found',
+  emptyMessage = 'No makeup found',
 }: ProductListProps) => {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
-  const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'name'>(
-    'name',
-  )
+  const [sortBy, setSortBy] = useState<SortOption>('name')
   const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
@@ -89,7 +89,7 @@ export const ProductList = ({
         {/* Search */}
         <input
           type='text'
-          placeholder='Search products...'
+          placeholder='Search makeup...'
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
@@ -117,7 +117,7 @@ export const ProductList = ({
 
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as SortOption)}
             className='rounded-full border border-black/10 bg-white px-3 py-2 text-sm text-black focus:border-black focus:outline-none dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:focus:border-white'
           >
             <option value='name'>Sort by Name</option>
@@ -130,7 +130,7 @@ export const ProductList = ({
       {/* Product Grid */}
       {paginated.length === 0 ? (
         <div className='py-20 text-center text-sm text-black/40 dark:text-white/40'>
-          No products found
+          No makeup found
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4'>

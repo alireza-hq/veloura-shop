@@ -1,4 +1,3 @@
-import { useActive } from '@/components/layout/navbar/useActive'
 import { cn } from '@/lib/utils/cn'
 import {
   LayoutDashboard,
@@ -9,6 +8,7 @@ import {
   Users,
 } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
 type Link = {
@@ -48,6 +48,8 @@ const links: Link[] = [
 ]
 
 export const AdminSidebar = () => {
+  const pathname = usePathname()
+
   return (
     <aside className='border-r border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-950'>
       <h2 className='mb-8 text-xl font-bold text-black dark:text-white'>
@@ -64,7 +66,7 @@ export const AdminSidebar = () => {
               href={link.href}
               className={cn(
                 'flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-black/60 transition hover:bg-black/5 hover:text-black dark:text-white/60 dark:hover:bg-white/10 dark:hover:text-white',
-                useActive(link.href) &&
+                pathname === link.href &&
                   'bg-black/5 text-black dark:bg-white/10 dark:text-white',
               )}
             >

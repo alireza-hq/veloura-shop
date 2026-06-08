@@ -20,8 +20,8 @@ export default function NotFound() {
           </h2>
 
           <p className='text-zinc-600 dark:text-zinc-400'>
-            Sorry, we couldn't find the page you're looking for. It might have
-            been moved or doesn't exist.
+            This page is no longer in the collection. It may have moved or
+            become unavailable.
           </p>
 
           <div className='flex flex-col items-center gap-4 pt-4 sm:flex-row sm:justify-center'>

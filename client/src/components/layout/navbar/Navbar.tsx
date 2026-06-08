@@ -1,8 +1,7 @@
 'use client'
 
-import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
+import { HeartIcon, ShoppingCartIcon, Sparkles } from 'lucide-react'
 import Link from 'next/link'
-import { FaShoppingCart } from 'react-icons/fa'
 
 import { useActive } from '@/components/layout/navbar/useActive'
 import { useCartStore } from '@/features/cart/store/useCartStore'
@@ -25,9 +24,9 @@ export const Navbar = () => {
             className='flex items-center gap-1 rounded-full bg-zinc-50/15 px-8 py-2 dark:bg-zinc-800/50'
           >
             <span>
-              <FaShoppingCart strokeWidth='1.5px' className='h-5 w-5 md:h-6' />
+              <Sparkles strokeWidth='1.5px' className='h-5 w-5 md:h-6' />
             </span>
-            <span className='hidden text-xl font-bold sm:block'>Cartify</span>
+            <span className='hidden text-xl font-bold sm:block'>Veloura</span>
           </Link>
 
           <div className='hidden items-center gap-4 rounded-full bg-zinc-50/15 px-4 py-2 md:flex md:gap-7 md:px-6 lg:px-10 dark:bg-zinc-800/50'>
@@ -38,7 +37,7 @@ export const Navbar = () => {
               )}
               href={routes.products.root}
             >
-              Shop
+              Makeup
             </Link>
             <Link
               className={cn(
@@ -48,7 +47,7 @@ export const Navbar = () => {
               )}
               href={routes.categories.root}
             >
-              Categories
+              Collections
             </Link>
             <Link
               className={cn(

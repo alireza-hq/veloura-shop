@@ -1,7 +1,7 @@
-import { CartItem } from '../types'
+import { ApiCart, CartItem } from '../types'
 
-export const mapApiCartToStore = (cart: any): CartItem[] => {
-  return cart.items.map((item: any) => ({
+export const mapApiCartToStore = (cart: ApiCart): CartItem[] => {
+  return cart.items.map((item) => ({
     productId: item.product.id,
     name: item.product.name,
     image: item.product.image,

@@ -8,12 +8,11 @@ export const About = () => {
       {/* Hero Section */}
       <section className='text-center'>
         <h1 className='text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white'>
-          Redefining Modern E-Commerce
+          Beauty, made more personal
         </h1>
         <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
-          We believe in quality, sustainability, and the joy of discovery. Our
-          curated collection brings you the finest products with a seamless
-          shopping experience.
+          Veloura creates modern makeup essentials that invite experimentation
+          while staying effortless enough for every day.
         </p>
       </section>
 
@@ -22,23 +21,23 @@ export const About = () => {
         {[
           {
             icon: Shield,
-            title: 'Quality First',
-            desc: 'Every product is vetted for durability and style.',
+            title: 'Performance First',
+            desc: 'Comfortable formulas, lasting color, and thoughtful finishes.',
           },
           {
             icon: Truck,
-            title: 'Fast Shipping',
-            desc: 'Free express delivery on all orders over $50.',
+            title: 'Easy Delivery',
+            desc: 'Free express delivery on beauty orders over $50.',
           },
           {
             icon: Heart,
-            title: 'Ethical Sourcing',
-            desc: 'We partner with suppliers who respect people and planet.',
+            title: 'Mindful Choices',
+            desc: 'We choose partners who respect people and the planet.',
           },
           {
             icon: Users,
             title: 'Community',
-            desc: 'Join a community of style-conscious shoppers.',
+            desc: 'A welcoming space for beauty lovers and creative routines.',
           },
         ].map((item, index) => (
           <div
@@ -72,14 +71,13 @@ export const About = () => {
             Our Story
           </h2>
           <p className='mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
-            Founded in 2024, we started with a simple idea: online shopping
-            shouldn't be overwhelming. We strip away the clutter and focus on
-            what matters—great products, fair prices, and exceptional service.
+            Founded in 2024, Veloura began with a simple idea: makeup should
+            feel expressive, approachable, and never overwhelming. We focus on
+            versatile color, reliable formulas, and clear guidance.
           </p>
           <p className='mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-400'>
-            Today, we serve thousands of customers worldwide, but our mission
-            remains the same: to make your life easier and more stylish, one
-            package at a time.
+            Our mission remains simple: help every beauty routine feel more
+            intentional, playful, and completely personal.
           </p>
         </div>
       </section>

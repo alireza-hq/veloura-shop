@@ -1,8 +1,17 @@
 'use client'
 
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { FormEvent, useState } from 'react';
 
 export const Contact = () => {
+  const [sent, setSent] = useState(false)
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.currentTarget.reset()
+    setSent(true)
+  }
+
   return (
     <div className='flex flex-col gap-20'>
       {/* Header */}
@@ -11,7 +20,7 @@ export const Contact = () => {
           Get in Touch
         </h1>
         <p className='mx-auto mt-4 max-w-xl text-lg text-zinc-600 dark:text-zinc-400'>
-          Have a question about your order or our products? We're here to help.
+          Need shade guidance or help with an order? Veloura care is here.
         </p>
       </section>
 
@@ -23,8 +32,8 @@ export const Contact = () => {
             {
               icon: Mail,
               label: 'Email Us',
-              value: 'support@shop.com',
-              href: 'mailto:support@shop.com',
+              value: 'care@velourabeauty.com',
+              href: 'mailto:care@velourabeauty.com',
             },
             {
               icon: Phone,
@@ -67,9 +76,9 @@ export const Contact = () => {
                   Visit Our HQ
                 </h3>
                 <p className='mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400'>
-                  123 Commerce Street,
+                  18 Rosewood Avenue,
                   <br />
-                  Tech District,
+                  Beauty District,
                   <br />
                   San Francisco, CA 94105
                 </p>
@@ -80,7 +89,10 @@ export const Contact = () => {
 
         {/* Contact Form */}
         <div className='lg:col-span-2'>
-          <form className='space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm sm:p-10 dark:border-zinc-800 dark:bg-zinc-900'>
+          <form
+            onSubmit={handleSubmit}
+            className='space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm sm:p-10 dark:border-zinc-800 dark:bg-zinc-900'
+          >
             <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
               <div>
                 <label
@@ -92,7 +104,8 @@ export const Contact = () => {
                 <input
                   type='text'
                   id='name'
-                  placeholder='John Doe'
+                  placeholder='Your name'
+                  required
                   className='w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 transition focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500 dark:focus:border-zinc-400'
                 />
               </div>
@@ -106,7 +119,8 @@ export const Contact = () => {
                 <input
                   type='email'
                   id='email'
-                  placeholder='john@example.com'
+                  placeholder='you@example.com'
+                  required
                   className='w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 transition focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500 dark:focus:border-zinc-400'
                 />
               </div>
@@ -124,7 +138,7 @@ export const Contact = () => {
                 className='w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 transition focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:focus:border-zinc-400'
               >
                 <option>Order Inquiry</option>
-                <option>Product Support</option>
+                <option>Shade Guidance</option>
                 <option>Partnership</option>
                 <option>Other</option>
               </select>
@@ -141,6 +155,7 @@ export const Contact = () => {
                 id='message'
                 rows={5}
                 placeholder='How can we help you?'
+                required
                 className='w-full resize-none rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 transition focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500 dark:focus:border-zinc-400'
               ></textarea>
             </div>
@@ -151,6 +166,11 @@ export const Contact = () => {
             >
               Send Message
             </button>
+            {sent && (
+              <p className='text-center text-sm text-emerald-600 dark:text-emerald-400'>
+                Message received. Veloura care will be in touch soon.
+              </p>
+            )}
           </form>
         </div>
       </div>

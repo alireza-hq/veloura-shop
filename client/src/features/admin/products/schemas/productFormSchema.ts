@@ -6,7 +6,7 @@ export const productFormSchema = z.object({
   description: z
     .string()
     .min(8, { message: 'Description is too short' })
-    .optional(),
+    .or(z.literal('')),
 
   price: z.coerce.number().positive({ message: 'Price must be positive' }),
   categoryId: z.coerce.number().int().positive({

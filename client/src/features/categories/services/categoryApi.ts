@@ -9,7 +9,7 @@ type CreateCategoryData = {
   description?: string
 }
 
-type UpdateCategoryData = Partial<CreateCategoryData>
+export type UpdateCategoryData = Partial<CreateCategoryData>
 
 export const getCategories = async () => {
   const { data } = await api.get<Category[]>(endpoints.categories.getCategories)

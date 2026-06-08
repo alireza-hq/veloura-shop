@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAuthStore } from '@/features/auth/store/useAuthStore'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 import {
   addCartItemService,
@@ -10,12 +10,10 @@ import {
   updateCartItemService,
 } from '../services/cartApi'
 import { useCartStore } from '../store/useCartStore'
-import { CartItem } from '../types'
+import { ApiCart, CartItem } from '../types'
 import { mapApiCartToStore } from '../utils/mapApiCartToStore'
 
 export const useCart = () => {
-  const queryClient = useQueryClient()
-
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
   const items = useCartStore((state) => state.items)
@@ -31,7 +29,7 @@ export const useCart = () => {
     enabled: isAuthenticated,
   })
 
-  const syncCart = (cart: any) => {
+  const syncCart = (cart: ApiCart) => {
     setItems(mapApiCartToStore(cart))
   }
 

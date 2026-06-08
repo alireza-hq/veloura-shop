@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { updateCategory } from '../services/categoryApi'
+import { UpdateCategoryData, updateCategory } from '../services/categoryApi'
 
 export const useUpdateCategory = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ id, data }: any) => updateCategory(id, data),
+    mutationFn: ({ id, data }: { id: number; data: UpdateCategoryData }) =>
+      updateCategory(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] })
     },

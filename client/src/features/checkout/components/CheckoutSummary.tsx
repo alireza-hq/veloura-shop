@@ -31,13 +31,13 @@ export const CheckoutSummary = () => {
         </h3>
 
         <div className='space-y-3 border-b border-black/5 pb-4 dark:border-white/5'>
-          {items.map((item: any) => (
+          {items.map((item) => (
             <div
               key={item.product.id}
               className='flex justify-between gap-4 text-sm'
             >
               <span className='text-black/70 dark:text-white/70'>
-                {item.product.name} × {item.quantity}
+                {item.product.name} x {item.quantity}
               </span>
               <span className='font-medium text-black dark:text-white'>
                 ${(Number(item.product.price) * item.quantity).toFixed(2)}

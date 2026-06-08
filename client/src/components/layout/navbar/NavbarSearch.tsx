@@ -48,7 +48,7 @@ export const NavbarSearch = () => {
         value={search}
         onChange={inputChangeHandler}
         type='text'
-        placeholder='Search products...'
+        placeholder='Search makeup...'
         className='w-full rounded-full bg-zinc-50/15 px-6 py-2 placeholder:text-gray-50/90 focus:outline-none dark:bg-zinc-800/50 dark:placeholder:text-white/90'
       />
       <button className='absolute top-1/2 right-3 -translate-y-1/2 text-gray-200 hover:opacity-85 active:opacity-75 dark:text-gray-400/90'>
@@ -99,7 +99,7 @@ export const NavbarSearch = () => {
               <SearchIcon className='h-5 w-5 text-zinc-400 dark:text-zinc-500' />
             </div>
             <p className='text-sm text-zinc-500 dark:text-zinc-400'>
-              No products found for &quot;{search}&quot;
+              No makeup found for &quot;{search}&quot;
             </p>
           </div>
         )}

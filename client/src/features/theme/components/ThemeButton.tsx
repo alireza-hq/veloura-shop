@@ -2,21 +2,19 @@
 
 import { MoonIcon, SunMediumIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
+
+const subscribe = () => () => {}
 
 export const ThemeButton = () => {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const { resolvedTheme, setTheme } = useTheme()
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false)
 
   if (!mounted) {
     return <div className='h-5 w-5' />
   }
 
-  const isDark = theme === 'dark'
+  const isDark = resolvedTheme === 'dark'
 
   return (
     <button
@@ -25,10 +23,10 @@ export const ThemeButton = () => {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className='transition duration-100 hover:scale-[107.5%] hover:opacity-95'
     >
-      {theme === 'dark' ? (
+      {isDark ? (
         <MoonIcon className='h-5 w-5' />
       ) : (
-        <SunMediumIcon className='h-5 w-5 fill-white text-white' />
+        <SunMediumIcon className='h-5 w-5 fill-current' />
       )}
     </button>
   )

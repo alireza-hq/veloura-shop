@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { routes } from '@/lib/routes'
 
-import { useCartStore } from '../store/useCartStore'
 import { useCart } from '../hooks/useCart'
 
 export const CartFooter = () => {

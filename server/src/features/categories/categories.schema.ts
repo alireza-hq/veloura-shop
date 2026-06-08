@@ -8,7 +8,7 @@ export const categoryBaseSchema = z.object({
 
 export const createCategorySchema = categoryBaseSchema
 
-export const updateCategorySchema = categoryBaseSchema.optional()
+export const updateCategorySchema = categoryBaseSchema.partial()
 
 export const CategoryParamsSchema = z.object({
   id: z.string().regex(/^\d+$/).transform(Number),

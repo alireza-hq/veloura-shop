@@ -3,7 +3,7 @@ import { endpoints } from '@/lib/endpoints'
 
 import { Product } from '../types'
 
-type CreateProductData = {
+export type CreateProductData = {
   image: string
   name: string
   description: string
@@ -13,7 +13,7 @@ type CreateProductData = {
   rating: number
 }
 
-type UpdateProductData = Partial<CreateProductData>
+export type UpdateProductData = Partial<CreateProductData>
 
 export const getProductsService = async () => {
   const { data } = await api.get<Product[]>(endpoints.products.getProducts)

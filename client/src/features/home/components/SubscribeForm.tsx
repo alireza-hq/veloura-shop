@@ -1,6 +1,5 @@
 'use client'
 
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { cn } from '@/lib/utils/cn';
@@ -17,7 +16,8 @@ export const SubscribeForm = () => {
   } = useForm({ resolver: zodResolver(subscribeSchema) })
 
   const onSubmit = async ({ email }: { email: string }) => {
-    const { data } = await axios.post('/api/subs', { email })
+    await new Promise((resolve) => setTimeout(resolve, 350))
+    void email
     reset()
   }
 
@@ -45,7 +45,7 @@ export const SubscribeForm = () => {
           )}
           {isSubmitSuccessful && (
             <span className='absolute top-full left-5 mt-1.5 text-xs text-green-600'>
-              Email added successfully
+              Welcome to the Veloura edit
             </span>
           )}
         </div>

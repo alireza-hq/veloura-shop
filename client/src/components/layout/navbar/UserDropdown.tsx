@@ -11,7 +11,6 @@ import {
   UserPlus,
 } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Fragment } from 'react'
 
 import { useActive } from '@/components/layout/navbar/useActive'
@@ -24,8 +23,6 @@ import { useLogout } from '@/features/auth/hooks/useLogout'
 export const UserDropdown = () => {
   const { isAuthenticated, user } = useAuthStore()
   const { logout } = useLogout()
-  const pathname = usePathname()
-
   const handleLogout = () => {
     logout()
   }

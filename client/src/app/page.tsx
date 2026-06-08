@@ -21,11 +21,11 @@ export default function Home() {
         <HomeCategories categories={topCats} />
       </HomeSection>
 
-      <HomeSection title='Best-selling products'>
+      <HomeSection title='Veloura favorites'>
         <HomeProductList />
       </HomeSection>
 
-      <HomeSection title='Categories'>
+      <HomeSection title='Complete your ritual'>
         <HomeCategories categories={bottomCats} />
       </HomeSection>
 

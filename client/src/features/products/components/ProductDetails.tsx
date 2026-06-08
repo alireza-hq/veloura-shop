@@ -143,6 +143,7 @@ export const ProductDetails = ({ product }: Props) => {
 
             {/* Wishlist Button */}
             <button
+              disabled={wishlistPending}
               className={cn(
                 'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-500 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-white',
               )}
