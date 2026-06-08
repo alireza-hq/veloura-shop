@@ -1,6 +1,7 @@
 'use client'
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { ProductList } from '@/features/products/components/ProductList';
 import { useProducts } from '@/features/products/hooks/useProducts';
@@ -20,10 +21,11 @@ export default function Products() {
 
   return (
     <ScreenLayout>
-      {/* <h1 className='mb-10 border-y-2 border-black px-4 py-4 text-center text-3xl font-bold text-black dark:text-white'> */}
-      <h1 className='mb-10 text-3xl font-bold text-black dark:text-white'>
-        Explore Products
-      </h1>
+      <PageHeader
+        eyebrow='The makeup edit'
+        title='Explore Veloura'
+        description='Discover expressive color, reliable formulas, and effortless essentials for every routine.'
+      />
       <ProductList products={products ?? []} />
     </ScreenLayout>
   )

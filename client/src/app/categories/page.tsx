@@ -6,6 +6,7 @@ import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { LoadingState } from '@/components/ui/LoadingState';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { CategoryList } from '@/features/categories/components/CategoryList';
 import { useCategories } from '@/features/categories/hooks/useCategories';
 import { routes } from '@/lib/routes';
@@ -31,6 +32,11 @@ export default function CategoriesPage() {
 
   return (
     <ScreenLayout>
+      <PageHeader
+        eyebrow='Shop your ritual'
+        title='Beauty collections'
+        description='Start with the feature, finish, or tool that inspires your next look.'
+      />
       <CategoryList categories={categories} />
     </ScreenLayout>
   )

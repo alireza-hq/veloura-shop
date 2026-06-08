@@ -6,6 +6,7 @@ import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { OrderList } from '@/features/orders/components/OrderList'
 import { useOrders } from '@/features/orders/hooks/useOrders'
 import { routes } from '@/lib/routes'
@@ -31,9 +32,11 @@ export default function OrdersPage() {
 
   return (
     <ScreenLayout>
-      <h1 className='mb-10 text-3xl font-bold text-black dark:text-white'>
-        Your Orders
-      </h1>
+      <PageHeader
+        eyebrow='Account'
+        title='Your orders'
+        description='Track every Veloura delivery and revisit your past beauty picks.'
+      />
       <OrderList orders={orders} />
     </ScreenLayout>
   )

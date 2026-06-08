@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { Crown, Loader2, ShieldCheck, UserIcon } from 'lucide-react'
 
 import { useAuthStore } from '@/features/auth/store/useAuthStore'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import { cn } from '@/lib/utils/cn'
 
 import { useUpdateUserRole } from '../hooks/useUpdateUserRole'
@@ -78,15 +79,15 @@ export const AdminUserRow = ({ user }: Props) => {
 
       <td className='p-4'>
         <div className='flex items-center justify-end gap-2'>
-          <select
+          <CustomSelect
             value={user.role}
             disabled={updateRole.isPending || isSelf}
-            onChange={(e) => handleRoleChange(e.target.value as AdminUserRole)}
-            className='rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-black outline-none disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-black dark:text-white'
-          >
-            <option value='user'>User</option>
-            <option value='admin'>Admin</option>
-          </select>
+            onChange={handleRoleChange}
+            options={[
+              { value: 'user', label: 'User' },
+              { value: 'admin', label: 'Admin' },
+            ]}
+          />
 
           {updateRole.isPending ? (
             <Loader2 className='h-4 w-4 animate-spin text-black/40 dark:text-white/40' />

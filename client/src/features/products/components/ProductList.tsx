@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import { Product } from '../types'
 import { ProductCard } from './ProductCard'
 
@@ -100,30 +101,24 @@ export const ProductList = ({
 
         {/* Category & Sort */}
         <div className='flex flex-wrap gap-2'>
-          <select
+          <CustomSelect
             value={category}
-            onChange={(e) => {
-              setCategory(e.target.value)
+            onChange={(value) => {
+              setCategory(value)
               setPage(1)
             }}
-            className='rounded-full border border-black/10 bg-white px-3 py-2 text-sm text-black focus:border-black focus:outline-none dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:focus:border-white'
-          >
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+            options={categories.map((item) => ({ value: item, label: item }))}
+          />
 
-          <select
+          <CustomSelect
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className='rounded-full border border-black/10 bg-white px-3 py-2 text-sm text-black focus:border-black focus:outline-none dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:focus:border-white'
-          >
-            <option value='name'>Sort by Name</option>
-            <option value='price-asc'>Price: Low to High</option>
-            <option value='price-desc'>Price: High to Low</option>
-          </select>
+            onChange={setSortBy}
+            options={[
+              { value: 'name', label: 'Sort by name' },
+              { value: 'price-asc', label: 'Price: low to high' },
+              { value: 'price-desc', label: 'Price: high to low' },
+            ]}
+          />
         </div>
       </div>
 

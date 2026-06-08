@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { Loader2 } from 'lucide-react'
 
 import { cn } from '@/lib/utils/cn'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 
 import { useUpdateOrderStatus } from '../hooks/useUpdateOrderStatus'
 import { AdminOrder, AdminOrderStatus } from '../types'
@@ -70,20 +71,15 @@ export const AdminOrderRow = ({ order }: Props) => {
 
       <td className='p-4'>
         <div className='flex items-center justify-end gap-2'>
-          <select
+          <CustomSelect
             value={order.status}
             disabled={isUpdating}
-            onChange={(e) =>
-              handleStatusChange(e.target.value as AdminOrderStatus)
-            }
-            className='rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-black outline-none disabled:opacity-60 dark:border-white/10 dark:bg-black dark:text-white'
-          >
-            {statuses.map((status) => (
-              <option key={status} value={status}>
-                {status.toUpperCase()}
-              </option>
-            ))}
-          </select>
+            onChange={handleStatusChange}
+            options={statuses.map((status) => ({
+              value: status,
+              label: status.toUpperCase(),
+            }))}
+          />
 
           {isUpdating && (
             <Loader2 className='h-4 w-4 animate-spin text-black/40 dark:text-white/40' />

@@ -4,6 +4,7 @@ import { MdShoppingCart } from 'react-icons/md';
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useCartStore } from '@/features/cart/store/useCartStore';
 import { CheckoutForm } from '@/features/checkout/components/CheckoutForm';
 import { CheckoutSummary } from '@/features/checkout/components/CheckoutSummary';
@@ -28,9 +29,11 @@ export default function CheckoutPage() {
   return (
     <ScreenLayout>
       <div className='mx-auto max-w-6xl px-4 py-10 sm:px-6'>
-        <h1 className='mb-8 px-4 text-3xl font-bold text-black dark:text-white'>
-          Checkout
-        </h1>
+        <PageHeader
+          eyebrow='Almost yours'
+          title='Checkout'
+          description='Review your beauty bag and choose where we should send it.'
+        />
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
           <CheckoutForm />
           <CheckoutSummary />

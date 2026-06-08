@@ -2,9 +2,11 @@
 
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { FormEvent, useState } from 'react';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 export const Contact = () => {
   const [sent, setSent] = useState(false)
+  const [subject, setSubject] = useState('order')
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -133,15 +135,17 @@ export const Contact = () => {
               >
                 Subject
               </label>
-              <select
-                id='subject'
-                className='w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 transition focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:focus:border-zinc-400'
-              >
-                <option>Order Inquiry</option>
-                <option>Shade Guidance</option>
-                <option>Partnership</option>
-                <option>Other</option>
-              </select>
+              <CustomSelect
+                value={subject}
+                onChange={setSubject}
+                className='w-full'
+                options={[
+                  { value: 'order', label: 'Order inquiry' },
+                  { value: 'shade', label: 'Shade guidance' },
+                  { value: 'partnership', label: 'Partnership' },
+                  { value: 'other', label: 'Other' },
+                ]}
+              />
             </div>
 
             <div>

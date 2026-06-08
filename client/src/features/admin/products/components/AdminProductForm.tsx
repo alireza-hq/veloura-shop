@@ -1,8 +1,9 @@
 'use client'
 
 import { Loader2, PackagePlus, Save } from 'lucide-react'
-import { UseFormReturn } from 'react-hook-form'
+import { Controller, UseFormReturn } from 'react-hook-form'
 
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import { Category } from '@/features/categories/types'
 import { cn } from '@/lib/utils/cn'
 
@@ -28,6 +29,7 @@ export const AdminProductForm = ({
 }: Props) => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = form
@@ -73,17 +75,22 @@ export const AdminProductForm = ({
           <label className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'>
             Category
           </label>
-          <select
-            className={cn(inputClass, errors.categoryId && 'border-red-600')}
-            {...register('categoryId')}
-          >
-            <option value=''>Select category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            ))}
-          </select>
+          <Controller
+            name='categoryId'
+            control={control}
+            render={({ field }) => (
+              <CustomSelect
+                value={field.value ? String(field.value) : ''}
+                onChange={(value) => field.onChange(Number(value))}
+                placeholder='Select category'
+                options={categories.map((category) => ({
+                  value: String(category.id),
+                  label: category.title,
+                }))}
+                className='w-full'
+              />
+            )}
+          />
           {errors.categoryId && (
             <ErrorMessage message={errors.categoryId.message} />
           )}
