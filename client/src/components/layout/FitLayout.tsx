@@ -4,9 +4,9 @@ type Props = { children: React.ReactNode }
 
 export const FitLayout = ({ children }: Props) => {
   return (
-    <main className='bg-dot-pattern min-h-fit bg-zinc-50 dark:bg-black'>
-      <div className='bg-black/90 py-12 dark:bg-transparent'></div>
-      <div className='mx-auto max-w-7xl px-6 py-10 sm:py-36 md:py-48'>
+    <main className='bg-dot-pattern min-h-screen'>
+      <div className='bg-zinc-950 py-12'></div>
+      <div className='mx-auto flex min-h-[calc(100vh-6rem)] max-w-7xl items-center justify-center px-4 py-12 sm:px-6 sm:py-20'>
         {children}
       </div>
     </main>

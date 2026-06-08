@@ -6,6 +6,7 @@ import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { WishlistItems } from '@/features/wishlist/components/WishlistItems'
 import { routes } from '@/lib/routes'
 import { useWishlist } from '@/features/wishlist/hooks/useWishlist'
@@ -33,6 +34,11 @@ export default function Wishlist() {
 
   return (
     <ScreenLayout>
+      <PageHeader
+        eyebrow='Saved for later'
+        title='Your wishlist'
+        description='A personal edit of shades and essentials worth another look.'
+      />
       <WishlistItems products={wishlistProducts} />
     </ScreenLayout>
   )

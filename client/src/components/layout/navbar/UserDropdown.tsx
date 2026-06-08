@@ -31,10 +31,13 @@ export const UserDropdown = () => {
     <div className='relative inline-block text-left opacity-99'>
       <Menu as='div' className='relative inline-block text-left'>
         {/* Trigger Button */}
-        <Menu.Button className='h-5 fill-transparent duration-300 hover:fill-white hover:opacity-90'>
+        <Menu.Button
+          aria-label='Open account menu'
+          className='h-5 fill-transparent transition duration-100 hover:fill-white hover:opacity-90'
+        >
           <UserIcon
             className={cn(
-              'h-5 fill-transparent duration-300 hover:fill-white',
+              'h-5 fill-transparent transition duration-100 hover:fill-white',
               useActive([...Object.values(routes.auth), routes.orders]) &&
                 'fill-white',
             )}
@@ -51,7 +54,7 @@ export const UserDropdown = () => {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute -right-full z-50 mt-2 w-56 origin-top-right rounded-xl border border-zinc-200 bg-zinc-50/85 px-1 py-2 shadow-lg ring-1 ring-black/5 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800/60 dark:ring-white/10'>
+          <Menu.Items className='absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-xl border border-zinc-200 bg-zinc-50/95 px-1 py-2 text-black shadow-lg ring-1 ring-black/5 backdrop-blur-xl focus:outline-none dark:border-zinc-800 dark:bg-zinc-900/95 dark:text-white dark:ring-white/10'>
             {/* Header: User Info or Auth Options */}
             {!isAuthenticated ? (
               <div className='mb-2 border-b border-zinc-100 px-4 py-3 dark:border-zinc-800'>

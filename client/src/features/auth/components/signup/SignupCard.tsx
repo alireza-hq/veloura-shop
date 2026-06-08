@@ -6,7 +6,7 @@ import { SignupForm } from './SignupForm';
 
 export const SignupCard = () => {
   return (
-    <div className='mx-auto max-w-md rounded-2xl border border-black/5 bg-white p-8 shadow-sm sm:p-10 dark:border-white/5 dark:bg-zinc-900'>
+    <div className='mx-auto w-full max-w-md rounded-3xl border border-black/8 bg-white/75 p-6 shadow-xl shadow-black/5 backdrop-blur-sm sm:p-10 dark:border-white/10 dark:bg-white/5'>
       <div className='mb-8 text-center'>
         <h1 className='text-2xl font-bold text-black dark:text-white'>
           Create Account

@@ -38,10 +38,10 @@ export const AdminLayout = ({ children }: Props) => {
   return (
     <div className='bg-dot-pattern min-h-screen dark:bg-black'>
       <div className='bg-black/90 py-12' />
-      <div className='grid min-h-screen grid-cols-[260px_1fr]'>
+      <div className='min-h-screen lg:grid lg:grid-cols-[240px_1fr]'>
         <AdminSidebar />
 
-        <main className='p-8'>{children}</main>
+        <main className='min-w-0 p-4 sm:p-6 lg:p-8'>{children}</main>
       </div>
     </div>
   )

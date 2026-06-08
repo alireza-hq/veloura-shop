@@ -1,9 +1,16 @@
 'use client'
 
-import { HeartIcon, ShoppingCartIcon, Sparkles } from 'lucide-react'
+import {
+  HeartIcon,
+  Menu,
+  ShoppingCartIcon,
+  Sparkles,
+  X,
+} from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
-import { useActive } from '@/components/layout/navbar/useActive'
 import { useCartStore } from '@/features/cart/store/useCartStore'
 import { ThemeButton } from '@/features/theme/components/ThemeButton'
 import { routes } from '@/lib/routes'
@@ -12,113 +19,143 @@ import { cn } from '@/lib/utils/cn'
 import { NavbarSearch } from './NavbarSearch'
 import { UserDropdown } from './UserDropdown'
 
+const navigation = [
+  { label: 'Makeup', href: routes.products.root },
+  { label: 'Collections', href: routes.categories.root },
+  { label: 'About', href: routes.about },
+  { label: 'Contact', href: routes.contact },
+]
+
 export const Navbar = () => {
-  const items = useCartStore((s) => s.items)
+  const items = useCartStore((state) => state.items)
+  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const solid = pathname !== routes.home || scrolled
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 120)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const controlClass = cn(
+    'rounded-full text-white transition duration-200',
+    solid ? 'bg-transparent' : 'bg-black/18 shadow-sm backdrop-blur-md',
+  )
 
   return (
-    <header className='absolute z-50 w-full'>
-      <nav className='my-2 flex w-full items-center justify-between gap-4 px-12 py-4 text-gray-50 md:gap-16 md:px-8 lg:px-12 dark:text-white'>
-        <div className='flex w-fit min-w-0 items-center gap-4 md:gap-8'>
+    <header className='pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4'>
+      <nav
+        className={cn(
+          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-2 py-2 text-white transition duration-200 sm:px-3',
+          solid && 'bg-zinc-950/92 shadow-xl shadow-black/20 backdrop-blur-xl',
+        )}
+      >
+        <div className='flex min-w-0 items-center gap-4 md:gap-6'>
           <Link
             href={routes.home}
-            className='flex items-center gap-1 rounded-full bg-zinc-50/15 px-8 py-2 dark:bg-zinc-800/50'
+            aria-label='Veloura home'
+            className={cn(
+              controlClass,
+              'flex shrink-0 items-center gap-2 px-3 py-2 sm:px-4',
+            )}
           >
-            <span>
-              <Sparkles strokeWidth='1.5px' className='h-5 w-5 md:h-6' />
+            <Sparkles className='h-5 w-5' />
+            <span className='hidden text-lg font-semibold sm:block'>
+              Veloura
             </span>
-            <span className='hidden text-xl font-bold sm:block'>Veloura</span>
           </Link>
 
-          <div className='hidden items-center gap-4 rounded-full bg-zinc-50/15 px-4 py-2 md:flex md:gap-7 md:px-6 lg:px-10 dark:bg-zinc-800/50'>
-            <Link
-              className={cn(
-                'text-sm hover:opacity-85 md:text-[17px]',
-                useActive(routes.products.root) && 'font-semibold',
-              )}
-              href={routes.products.root}
-            >
-              Makeup
-            </Link>
-            <Link
-              className={cn(
-                'text-sm hover:opacity-85 md:text-[17px]',
-                useActive(routes.categories.root) &&
-                  'font-semibold hover:opacity-100',
-              )}
-              href={routes.categories.root}
-            >
-              Collections
-            </Link>
-            <Link
-              className={cn(
-                'hidden text-sm hover:opacity-85 md:text-[17px] lg:block',
-                useActive(routes.about) && 'font-semibold hover:opacity-100',
-              )}
-              href={routes.about}
-            >
-              About
-            </Link>
-            <Link
-              className={cn(
-                'hidden text-sm hover:opacity-85 md:text-[17px] lg:block',
-                useActive(routes.contact) && 'font-semibold hover:opacity-100',
-              )}
-              href={routes.contact}
-            >
-              Contact
-            </Link>
+          <div
+            className={cn(
+              controlClass,
+              'hidden items-center gap-5 px-5 py-2 text-sm md:flex lg:gap-7 lg:px-7',
+            )}
+          >
+            {navigation.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  'transition hover:opacity-70',
+                  pathname === href && 'font-semibold',
+                )}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className='flex w-auto items-center justify-end gap-3 md:w-1/3 md:gap-10'>
+        <div className='flex min-w-0 items-center justify-end gap-2 sm:gap-3'>
           <NavbarSearch />
 
-          <div className='flex items-center gap-2 rounded-full bg-zinc-50/15 px-2 py-2.5 md:gap-4 md:px-3 md:py-3 dark:bg-zinc-800/50'>
+          <div
+            className={cn(
+              controlClass,
+              'flex items-center gap-3 px-3 py-2.5 sm:gap-4',
+            )}
+          >
             <Link
               href={routes.wishlist}
-              className='relative flex items-center text-white/90'
+              aria-label='Wishlist'
+              className='relative flex items-center'
             >
-              <HeartIcon
-                className={cn(
-                  'h-5 fill-transparent duration-300 hover:fill-white hover:opacity-90',
-                  useActive(routes.wishlist) && 'fill-white',
-                )}
-              />
+              <HeartIcon className='h-5 w-5 transition duration-150 hover:fill-current' />
             </Link>
-            <Link href={routes.cart} className='relative text-white/90'>
-              <ShoppingCartIcon
-                className={cn(
-                  'h-5 fill-transparent duration-300 hover:fill-white hover:opacity-90',
-                  useActive(routes.cart) && 'fill-white',
-                )}
-              />
+            <Link
+              href={routes.cart}
+              aria-label='Shopping cart'
+              className='relative flex items-center'
+            >
+              <ShoppingCartIcon className='h-5 w-5 transition duration-150 hover:fill-current' />
               {items.length > 0 && (
-                <span className='absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-xs text-white'>
+                <span className='absolute -top-2.5 -right-2.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black'>
                   {items.length}
                 </span>
               )}
             </Link>
-            {/* <Link
-              href={isAuthenticated ? routes.auth.me : routes.auth.login}
-              className='h-5 fill-transparent duration-300 hover:fill-white hover:opacity-90'
-            >
-              <UserIcon
-                className={cn(
-                  'h-5 fill-transparent duration-300 hover:fill-white',
-                  useActive([...Object.values(routes.auth)]) && 'fill-white',
-                )}
-              />
-            </Link> */}
-            <div className='h-5'>
-              <UserDropdown />
-            </div>
+            <UserDropdown />
           </div>
 
-          <div className='flex rounded-full bg-zinc-50/15 px-2 py-2 dark:bg-zinc-800/50'>
+          <div className={cn(controlClass, 'hidden p-2.5 sm:flex')}>
             <ThemeButton />
           </div>
+
+          <button
+            type='button'
+            aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
+            onClick={() => setMobileOpen((current) => !current)}
+            className={cn(
+              controlClass,
+              'flex items-center justify-center p-2.5 md:hidden',
+            )}
+          >
+            {mobileOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
+          </button>
         </div>
       </nav>
+
+      {mobileOpen && (
+        <div className='pointer-events-auto mx-auto mt-2 w-full max-w-7xl rounded-3xl bg-zinc-950/96 p-2 text-white shadow-xl backdrop-blur-xl md:hidden'>
+          {navigation.map(({ label, href }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              className='block rounded-2xl px-4 py-3 text-sm font-medium transition hover:bg-white/10'
+            >
+              {label}
+            </Link>
+          ))}
+          <div className='mt-1 flex items-center gap-3 border-t border-white/10 px-4 py-3 sm:hidden'>
+            <ThemeButton />
+            <span className='text-sm text-white/60'>Change appearance</span>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

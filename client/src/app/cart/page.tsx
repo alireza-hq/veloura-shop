@@ -5,6 +5,7 @@ import { MdShoppingCart } from 'react-icons/md';
 
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { CartFooter } from '@/features/cart/components/CartFooter';
 import { CartItemList } from '@/features/cart/components/CartItemList';
 import { useCartStore } from '@/features/cart/store/useCartStore';
@@ -29,6 +30,11 @@ export default function CartPage() {
   return (
     <ScreenLayout>
       <div className='mx-auto max-w-4xl px-4 py-12'>
+        <PageHeader
+          eyebrow='Your selection'
+          title='Beauty bag'
+          description='Review your picks, adjust quantities, and continue when everything feels right.'
+        />
         <CartItemList />
         <CartFooter />
       </div>

@@ -86,7 +86,7 @@ export const ProductList = ({
   return (
     <div>
       {/* Filters & Search */}
-      <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='mb-8 flex flex-col gap-4 rounded-2xl border border-black/8 bg-white/60 p-3 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-white/4'>
         {/* Search */}
         <input
           type='text'
@@ -96,11 +96,11 @@ export const ProductList = ({
             setSearch(e.target.value)
             setPage(1)
           }}
-          className='w-full rounded-full border border-black/10 bg-white px-4 py-2 text-sm text-black placeholder:text-black/30 focus:border-black focus:outline-none sm:w-64 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:placeholder:text-white/30 dark:focus:border-white'
+          className='w-full rounded-xl border border-black/10 bg-white/80 px-4 py-2.5 text-sm text-black placeholder:text-black/30 focus:border-black/30 focus:outline-none sm:w-64 dark:border-white/10 dark:bg-zinc-950/70 dark:text-white dark:placeholder:text-white/30 dark:focus:border-white/30'
         />
 
         {/* Category & Sort */}
-        <div className='flex flex-wrap gap-2'>
+        <div className='grid grid-cols-1 gap-2 sm:flex sm:flex-wrap'>
           <CustomSelect
             value={category}
             onChange={(value) => {

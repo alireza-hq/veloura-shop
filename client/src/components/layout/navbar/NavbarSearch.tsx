@@ -43,20 +43,24 @@ export const NavbarSearch = () => {
   }
 
   return (
-    <div className='relative hidden w-full max-w-50 drop-shadow-lg md:block md:max-w-none'>
+    <div className='relative hidden w-48 drop-shadow-lg lg:block lg:w-60 xl:w-72'>
       <input
         value={search}
         onChange={inputChangeHandler}
         type='text'
         placeholder='Search makeup...'
-        className='w-full rounded-full bg-zinc-50/15 px-6 py-2 placeholder:text-gray-50/90 focus:outline-none dark:bg-zinc-800/50 dark:placeholder:text-white/90'
+        className='w-full rounded-full border border-white/10 bg-white/10 px-5 py-2 text-sm text-white backdrop-blur-md placeholder:text-white/60 focus:border-white/30 focus:outline-none'
       />
-      <button className='absolute top-1/2 right-3 -translate-y-1/2 text-gray-200 hover:opacity-85 active:opacity-75 dark:text-gray-400/90'>
-        <SearchIcon />
+      <button
+        type='button'
+        aria-label='Search products'
+        className='absolute top-1/2 right-3 -translate-y-1/2 text-gray-200 transition hover:opacity-80 active:opacity-70'
+      >
+        <SearchIcon className='h-4 w-4' />
       </button>
       <div
         className={cn(
-          'absolute top-full right-0 left-0 z-50 mt-2 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50/80 shadow-lg transition-all dark:border-zinc-800 dark:bg-zinc-800/60',
+          'absolute top-full right-0 left-0 z-50 mt-2 overflow-hidden rounded-2xl border border-black/8 bg-white/95 shadow-xl backdrop-blur-xl transition-all dark:border-white/10 dark:bg-zinc-950/95',
           !search.length && 'hidden',
         )}
       >
