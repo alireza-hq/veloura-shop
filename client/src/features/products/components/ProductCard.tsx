@@ -29,9 +29,9 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
   return (
     <Link
       href={routes.products.product(id)}
-      className='group cursor-pointer overflow-hidden rounded-xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-zinc-900'
+      className='group cursor-pointer overflow-hidden rounded-3xl border border-black/8 bg-white/75 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/5'
     >
-      <div className='overflow-hidden'>
+      <div className='overflow-hidden bg-black/3 dark:bg-white/3'>
         <img
           src={image ?? '/lol.jpg'}
           alt={name}
@@ -48,7 +48,7 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
           {name}
         </h3>
 
-        <div className='mt-3 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between'>
+        <div className='mt-3 flex items-center justify-between gap-3'>
           <p className='text-sm font-semibold text-black sm:text-base dark:text-white'>
             ${price.toFixed(2)}
           </p>
@@ -56,7 +56,7 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
           {cartItem ? (
             <div
               onClick={handleCartClick}
-              className='flex cursor-default items-center gap-3 rounded-full border border-black/10 bg-white px-2 py-1 dark:border-white/10 dark:bg-zinc-900'
+              className='flex cursor-default items-center gap-2 rounded-full border border-black/10 bg-white/80 px-1.5 py-1 dark:border-white/10 dark:bg-white/5'
             >
               <button
                 type='button'
@@ -89,7 +89,8 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
           ) : (
             <button
               type='button'
-              className='rounded-full border border-black/20 p-2 transition-all duration-300 hover:border-black hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-black'
+              aria-label={`Add ${name} to cart`}
+              className='rounded-full border border-black/15 p-2 transition-all duration-200 hover:border-black hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-black'
               onClick={(e) => {
                 handleCartClick(e)
 

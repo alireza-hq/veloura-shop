@@ -20,7 +20,7 @@ export const Hero = () => {
   ]
 
   return (
-    <section className='relative flex min-h-screen flex-col justify-center overflow-hidden px-8 py-20 lg:px-20'>
+    <section className='relative flex min-h-[92svh] flex-col justify-end overflow-hidden px-4 pt-28 pb-20 sm:px-8 sm:pb-24 lg:min-h-screen lg:justify-center lg:px-16'>
       <BackgroundSlideshow
         className={'bg-left bg-no-repeat'}
         // -rotate-y-180
@@ -29,21 +29,24 @@ export const Hero = () => {
         fadeDuration={1}
       ></BackgroundSlideshow>
 
-      <div className='absolute inset-0 bg-black/30 dark:bg-black/35'></div>
+      <div className='absolute inset-0 bg-linear-to-r from-black/70 via-black/35 to-black/10'></div>
 
-      <div className='relative z-10 mx-auto flex w-full max-w-3xl flex-col gap-5 lg:mx-0 lg:gap-8'>
-        <h1 className='text-4xl font-bold text-white sm:text-5xl lg:text-6xl'>
+      <div className='relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-5 lg:gap-7'>
+        <p className='text-xs font-semibold tracking-[0.24em] text-white/65 uppercase'>
+          The modern makeup edit
+        </p>
+        <h1 className='max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl'>
           Beauty that feels like you
         </h1>
 
-        <h3 className='max-w-lg text-lg text-white/75 sm:text-xl'>
+        <p className='max-w-xl text-base leading-7 text-white/70 sm:text-lg'>
           Build your ritual with high-performance makeup, expressive color, and
           effortless essentials.
-        </h3>
+        </p>
 
         <Link
           href={routes.products.root}
-          className='group w-fit rounded-full border border-white/20 bg-white/15 px-8 py-3 font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black'
+          className='group w-fit rounded-full bg-white px-7 py-3 text-sm font-semibold text-black transition duration-200 hover:bg-white/85'
         >
           <span className='flex items-center gap-2'>
             Explore Makeup

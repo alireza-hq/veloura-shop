@@ -40,10 +40,10 @@ export const HomeProductList = () => {
   const [filter, setFilter] = useState('All')
 
   const filters = useMemo(() => {
-    const categoryTitles = products
-      .sort((product) => product.category?.id)
+    const categoryTitles = [...products]
+      .sort((a, b) => (a.category?.id ?? 0) - (b.category?.id ?? 0))
       .map((product) => product.category?.title)
-      .filter(Boolean)
+      .filter((title): title is string => Boolean(title))
 
     return ['All', ...Array.from(new Set(categoryTitles))]
   }, [products])
@@ -93,7 +93,7 @@ export const HomeProductList = () => {
 
       {filteredProducts.length === 0 ? (
         <div className='py-10 text-center text-sm text-black/40 dark:text-white/40'>
-          No products found.
+          No makeup found.
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
