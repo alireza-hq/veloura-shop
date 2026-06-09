@@ -34,7 +34,7 @@ export const SubscribeForm = () => {
             type='email'
             placeholder='Enter your email'
             className={cn(
-              'peer w-full rounded-full border border-black/8 bg-white/80 px-5 py-3.5 text-sm text-black shadow-sm placeholder:text-black/30 transition focus:border-black/20 focus:bg-white focus:outline-none dark:border-white/10 dark:bg-black/15 dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/25 dark:focus:bg-black/25',
+              'peer w-full rounded-full border border-black/15 bg-transparent px-5 py-3.5 text-sm text-black placeholder:text-black/30 transition focus:border-black/35 focus:outline-none dark:border-white/15 dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/35',
               errors.email && 'border-red-600 focus:border-red-600',
             )}
           />

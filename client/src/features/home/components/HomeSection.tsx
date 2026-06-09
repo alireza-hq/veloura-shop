@@ -1,7 +1,4 @@
- 'use client'
-
-import React, { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import React from 'react';
 
 import { cn } from '@/lib/utils/cn';
 
@@ -20,21 +17,8 @@ export const HomeSection = ({
   children,
   className,
 }: Props) => {
-  const ref = useRef<HTMLElement>(null)
-  const reduceMotion = useReducedMotion()
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-  const y = useTransform(scrollYProgress, [0, 0.45, 1], [45, 0, -22])
-  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.82, 1], [0.55, 1, 1, 0.82])
-
   return (
-    <motion.section
-      ref={ref}
-      style={reduceMotion ? undefined : { y, opacity }}
-      className={cn('px-4 py-14 will-change-transform sm:px-8 sm:py-18 lg:px-12 lg:py-20', className)}
-    >
+    <section className={cn('px-4 py-14 sm:px-8 sm:py-18 lg:px-12 lg:py-20', className)}>
       <div className='mx-auto max-w-7xl'>
       {title && (
         <div className='mb-8 grid items-end gap-5 sm:mb-10 lg:grid-cols-[minmax(0,1fr)_minmax(12rem,0.55fr)]'>
@@ -53,18 +37,12 @@ export const HomeSection = ({
             </p>
           )}
           </div>
-          <motion.div
-            initial={reduceMotion ? false : { scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className='hidden h-px origin-left bg-linear-to-r from-black/25 to-transparent lg:block dark:from-white/25'
-          />
+          <div className='hidden h-px bg-linear-to-r from-black/20 to-transparent lg:block dark:from-white/20' />
         </div>
       )}
 
       {children}
       </div>
-    </motion.section>
+    </section>
   )
 }
