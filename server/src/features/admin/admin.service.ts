@@ -1,6 +1,9 @@
 import { db } from '@/config/db'
+import { expirePendingOrders } from '../orders/orders.service'
 
 export const getAdminStats = async () => {
+  await expirePendingOrders()
+
   const [
     productsResult,
     categoriesResult,
@@ -58,6 +61,8 @@ export const getAdminStats = async () => {
 }
 
 export const getAdminOrders = async () => {
+  await expirePendingOrders()
+
   const { rows } = await db.query(`
     SELECT
       o.id,
@@ -87,11 +92,9 @@ export const getAdminOrders = async () => {
 
 export const updateOrderStatus = async (id: number, status: string) => {
   const allowedFrom: Record<string, string[]> = {
-    paid: ['pending'],
     processing: ['paid'],
     shipped: ['processing'],
     delivered: ['shipped'],
-    cancelled: ['pending', 'paid', 'processing'],
   }
   const previousStatuses = allowedFrom[status] ?? []
   if (!previousStatuses.length) return null

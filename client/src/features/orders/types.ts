@@ -25,4 +25,5 @@ export type Order = {
   status: OrderStatus
   items?: OrderItem[]
   createdAt: string
+  paymentExpiresAt?: string
 }

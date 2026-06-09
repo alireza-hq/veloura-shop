@@ -32,7 +32,7 @@ export const useCheckout = (
     mutationFn: createOrderService,
 
     onSuccess: () => {
-      setCheckoutMessage('Order placed successfully!')
+      setCheckoutMessage('Order reserved for one hour')
 
       reset()
       clearCart()

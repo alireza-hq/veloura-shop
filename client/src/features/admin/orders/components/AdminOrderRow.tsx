@@ -14,9 +14,9 @@ type Props = {
 }
 
 const transitions: Record<AdminOrderStatus, AdminOrderStatus[]> = {
-  pending: ['paid', 'cancelled'],
-  paid: ['processing', 'cancelled'],
-  processing: ['shipped', 'cancelled'],
+  pending: [],
+  paid: ['processing'],
+  processing: ['shipped'],
   shipped: ['delivered'],
   delivered: [],
   cancelled: [],

@@ -22,7 +22,7 @@ export const CheckoutModal = ({ checkoutMessage }: Props) => {
           {checkoutMessage}
         </h2>
         <p className='mt-2 text-sm text-black/60 dark:text-white/60'>
-          Redirecting you to order tracking...
+          Redirecting you to payment and order tracking...
         </p>
       </motion.div>
     </div>

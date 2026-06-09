@@ -19,3 +19,9 @@ export const getOrderService = async (id: number) => {
 
   return data
 }
+
+export const payOrderService = async (id: number) => {
+  const { data } = await api.post<Order>(endpoints.orders.payOrder(id))
+
+  return data
+}

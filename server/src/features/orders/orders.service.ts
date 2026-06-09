@@ -1,4 +1,61 @@
 import { db } from '@/config/db'
+import { AppError } from '@/middlewares/error.middleware'
+
+export const expirePendingOrders = async () => {
+  const client = await db.connect()
+
+  try {
+    await client.query('BEGIN')
+
+    const { rows: expiredOrders } = await client.query<{ id: number }>(`
+      SELECT id
+      FROM orders
+      WHERE status = 'pending'
+        AND created_at <= NOW() - INTERVAL '1 hour'
+      FOR UPDATE
+    `)
+
+    if (expiredOrders.length === 0) {
+      await client.query('COMMIT')
+      return
+    }
+
+    const orderIds = expiredOrders.map(({ id }) => id)
+
+    await client.query(
+      `
+        UPDATE products p
+        SET stock = p.stock + restored.quantity
+        FROM (
+          SELECT product_id, SUM(quantity)::int AS quantity
+          FROM order_items
+          WHERE order_id = ANY($1::int[])
+            AND product_id IS NOT NULL
+          GROUP BY product_id
+        ) restored
+        WHERE p.id = restored.product_id
+      `,
+      [orderIds],
+    )
+
+    await client.query(
+      `
+        UPDATE orders
+        SET status = 'cancelled'
+        WHERE id = ANY($1::int[])
+          AND status = 'pending'
+      `,
+      [orderIds],
+    )
+
+    await client.query('COMMIT')
+  } catch (error) {
+    await client.query('ROLLBACK')
+    throw error
+  } finally {
+    client.release()
+  }
+}
 
 export const createOrder = async (userId: number) => {
   const client = await db.connect()
@@ -116,11 +173,14 @@ export const createOrder = async (userId: number) => {
 }
 
 export const getOrderList = async (userId: number) => {
+  await expirePendingOrders()
+
   const { rows } = await db.query(
     `
         SELECT
           o.id, o.subtotal, o.shipping, o.tax, o.total, o.status,
           o.created_at AS "createdAt",
+          o.created_at + INTERVAL '1 hour' AS "paymentExpiresAt",
           COALESCE(
             json_agg(
               json_build_object(
@@ -148,9 +208,14 @@ export const getOrderList = async (userId: number) => {
 }
 
 export const getOrderById = async (userId: number, orderId: number) => {
+  await expirePendingOrders()
+
   const orderQuery = await db.query(
     `
-        SELECT *
+        SELECT
+          *,
+          created_at AS "createdAt",
+          created_at + INTERVAL '1 hour' AS "paymentExpiresAt"
         FROM orders
         WHERE id = $1
         AND user_id = $2
@@ -186,4 +251,30 @@ export const getOrderById = async (userId: number, orderId: number) => {
     ...order,
     items: itemsQuery.rows,
   }
+}
+
+export const payOrder = async (userId: number, orderId: number) => {
+  await expirePendingOrders()
+
+  const { rows } = await db.query(
+    `
+      UPDATE orders
+      SET status = 'paid'
+      WHERE id = $1
+        AND user_id = $2
+        AND status = 'pending'
+        AND created_at > NOW() - INTERVAL '1 hour'
+      RETURNING
+        *,
+        created_at AS "createdAt",
+        created_at + INTERVAL '1 hour' AS "paymentExpiresAt"
+    `,
+    [orderId, userId],
+  )
+
+  if (!rows[0]) {
+    throw new AppError(409, 'This order can no longer be paid')
+  }
+
+  return rows[0]
 }

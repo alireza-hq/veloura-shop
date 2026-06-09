@@ -39,6 +39,7 @@ export const endpoints = {
     createOrder: '/orders',
     getOrders: '/orders',
     getOrder: (id: number) => `/orders/${id}`,
+    payOrder: (id: number) => `/orders/${id}/pay`,
 
     getAdminOrders: '/admin/orders',
     getAdminOrder: (id: number) => `/admin/orders/${id}`,

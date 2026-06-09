@@ -28,3 +28,12 @@ export const getOrder = async (req: Request, res: Response) => {
 
   res.json(order)
 }
+
+export const payOrder = async (req: Request, res: Response) => {
+  const {
+    params: { id },
+  } = orderIdSchema.parse({ params: req.params })
+  const order = await service.payOrder(req.user!.userId, id)
+
+  res.json(order)
+}

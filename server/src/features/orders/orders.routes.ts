@@ -13,5 +13,6 @@ router.get('/', asyncHandler(controller.getOrders))
 router.get('/:id', asyncHandler(controller.getOrder))
 
 router.post('/', asyncHandler(controller.createOrder))
+router.post('/:id/pay', asyncHandler(controller.payOrder))
 
 export default router
