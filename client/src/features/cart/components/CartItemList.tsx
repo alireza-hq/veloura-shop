@@ -7,12 +7,11 @@ export const CartItemList = () => {
   const items = useCartStore((state) => state.items)
 
   return (
-    <>
-      <div className='hidden items-center gap-4 p-2 text-xs font-semibold tracking-wider text-black/40 uppercase sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr] sm:gap-4 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 dark:text-white/40'>
-        <div>Product</div>
-        <div className='text-center'>Price</div>
-        <div className='text-center'>Qty</div>
-        <div className='text-center'>Total</div>
+    <section>
+      <div className='mb-3 hidden items-center gap-4 border-b border-black/8 px-2 pb-3 text-xs font-semibold tracking-wider text-black/35 uppercase sm:grid sm:grid-cols-[2fr_1fr_1fr] dark:border-white/10 dark:text-white/35'>
+        <div>Your products</div>
+        <div className='text-center'>Quantity</div>
+        <div className='text-right'>Subtotal</div>
       </div>
 
       <div className='space-y-3'>
@@ -20,6 +19,6 @@ export const CartItemList = () => {
           <CartItemCard key={item.productId} item={item} />
         ))}
       </div>
-    </>
+    </section>
   )
 }

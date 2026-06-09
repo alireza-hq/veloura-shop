@@ -13,7 +13,7 @@ export const CartItemCard = ({ item }: Props) => {
   const { addItem, removeItem, clearItem, isPending } = useCart()
 
   return (
-    <div className='group rounded-2xl border border-black/8 bg-white/70 p-3 shadow-xs backdrop-blur-sm transition hover:border-black/15 hover:shadow-sm sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr] sm:items-center sm:gap-4 lg:gap-8 dark:border-white/10 dark:bg-white/4 dark:hover:border-white/15'>
+    <div className='group border-b border-black/8 py-5 sm:grid sm:grid-cols-[2fr_1fr_1fr] sm:items-center sm:gap-4 dark:border-white/10'>
       <Link
         href={routes.products.product(item.productId)}
         className='mb-3 flex items-center gap-4 font-medium text-black sm:mb-0 dark:text-white'
@@ -21,14 +21,10 @@ export const CartItemCard = ({ item }: Props) => {
         <img
           src={item.image}
           alt={item.name}
-          className='aspect-square w-18 rounded-xl object-cover'
+          className='aspect-square w-20 rounded-2xl object-cover'
         />
         <p>{item.name}</p>
       </Link>
-
-      <div className='hidden text-center text-sm text-black/60 sm:block dark:text-white/60'>
-        ${item.price.toFixed(2)}
-      </div>
 
       <div className='hidden items-center justify-center gap-2 sm:flex'>
         <button
@@ -60,9 +56,14 @@ export const CartItemCard = ({ item }: Props) => {
         </button>
       </div>
 
-      <div className='hidden items-center justify-end gap-4 sm:flex'>
-        <span className='font-semibold text-black dark:text-white'>
+      <div className='hidden items-center justify-end gap-4 text-right sm:flex'>
+        <span>
+          <span className='block font-semibold text-black dark:text-white'>
           ${(item.price * item.quantity).toFixed(2)}
+          </span>
+          <span className='mt-1 block text-xs text-black/35 dark:text-white/35'>
+            ${item.price.toFixed(2)} each
+          </span>
         </span>
         <button
           type='button'
@@ -76,7 +77,7 @@ export const CartItemCard = ({ item }: Props) => {
       </div>
 
       {/* Mobile */}
-      <div className='mt-3 flex items-center justify-between gap-2 border-t border-black/5 pt-3 sm:hidden dark:border-white/5'>
+      <div className='mt-4 flex items-center justify-between gap-2 sm:hidden'>
         <div className='flex items-center gap-2'>
           <button
             type='button'

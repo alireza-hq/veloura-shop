@@ -28,14 +28,16 @@ export default function CartPage() {
   }
   return (
     <main className='page-shell'>
-      <div className='mx-auto max-w-4xl px-4 py-12'>
+      <div className='page-content'>
         <PageHeader
           eyebrow='Your selection'
-          title='Beauty bag'
-          description='Review your picks, adjust quantities, and continue when everything feels right.'
+          title='Your beauty bag'
+          description={`${items.length} ${items.length === 1 ? 'product' : 'products'} selected. Review the details before checkout.`}
         />
-        <CartItemList />
-        <CartFooter />
+        <div className='grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start'>
+          <CartItemList />
+          <CartFooter />
+        </div>
       </div>
     </main>
   )
