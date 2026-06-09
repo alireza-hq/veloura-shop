@@ -109,14 +109,24 @@ export const Navbar = () => {
               aria-label='Wishlist'
               className='relative flex items-center'
             >
-              <HeartIcon className='h-5 w-5 transition duration-150 hover:fill-current' />
+              <HeartIcon
+                className={cn(
+                  'h-5 w-5 transition duration-150 hover:fill-current',
+                  pathname === routes.wishlist && 'fill-current',
+                )}
+              />
             </Link>
             <Link
               href={routes.cart}
               aria-label='Shopping cart'
               className='relative flex items-center'
             >
-              <ShoppingCartIcon className='h-5 w-5 transition duration-150 hover:fill-current' />
+              <ShoppingCartIcon
+                className={cn(
+                  'h-5 w-5 transition duration-150 hover:fill-current',
+                  pathname === routes.cart && 'fill-current',
+                )}
+              />
               {items.length > 0 && (
                 <span className='absolute -top-2.5 -right-2.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black'>
                   {items.length}

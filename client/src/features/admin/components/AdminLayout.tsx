@@ -37,7 +37,7 @@ export const AdminLayout = ({ children }: Props) => {
 
   return (
     <div className='min-h-screen pt-24'>
-      <div className='min-h-screen lg:grid lg:grid-cols-[240px_1fr]'>
+      <div className='min-h-screen lg:grid lg:grid-cols-[240px_1fr] lg:gap-3'>
         <AdminSidebar />
 
         <main className='min-w-0 p-4 sm:p-6 lg:p-8'>{children}</main>

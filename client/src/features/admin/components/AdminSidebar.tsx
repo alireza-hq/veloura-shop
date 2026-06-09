@@ -51,7 +51,7 @@ export const AdminSidebar = () => {
   const pathname = usePathname()
 
   return (
-    <aside className='border-b border-black/10 bg-white p-3 lg:border-r lg:border-b-0 lg:p-6 dark:border-white/10 dark:bg-zinc-950'>
+    <aside className='mx-3 rounded-3xl border border-black/8 bg-white/75 p-3 shadow-sm backdrop-blur-xl lg:sticky lg:top-24 lg:mx-0 lg:ml-3 lg:h-[calc(100vh-7rem)] lg:self-start lg:rounded-[2rem] lg:p-5 dark:border-white/8 dark:bg-white/4'>
       <h2 className='mb-3 px-2 text-lg font-bold text-black lg:mb-8 lg:px-0 lg:text-xl dark:text-white'>
         Admin
       </h2>
@@ -65,9 +65,9 @@ export const AdminSidebar = () => {
               key={link.href}
               href={link.href}
               className={cn(
-                'flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-black/60 transition hover:bg-black/5 hover:text-black lg:gap-3 dark:text-white/60 dark:hover:bg-white/10 dark:hover:text-white',
+                'flex shrink-0 items-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-medium text-black/60 transition hover:bg-black/5 hover:text-black lg:gap-3 dark:text-white/60 dark:hover:bg-white/8 dark:hover:text-white',
                 pathname === link.href &&
-                  'bg-black/5 text-black dark:bg-white/10 dark:text-white',
+                  'bg-[#2a1c23] text-white shadow-sm dark:bg-white dark:text-[#2a1c23]',
               )}
             >
               <Icon className='h-4 w-4' />

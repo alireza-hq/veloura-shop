@@ -5,6 +5,7 @@ import { DollarSign, Package, ShoppingBag, Tags, Users } from 'lucide-react'
 import { LoadingState } from '@/components/ui/LoadingState'
 
 import { useAdminStats } from '@/features/admin/hooks/useAdminStats'
+import { cn } from '@/lib/utils/cn'
 
 export default function AdminPage() {
   const { data, isLoading } = useAdminStats()
@@ -62,14 +63,19 @@ export default function AdminPage() {
                 </p>
               </div>
 
-              <div className='text-right'>
+              <div className='flex flex-col items-end gap-2 text-right'>
                 <p className='font-semibold text-black dark:text-white'>
                   ${Number(order.total).toFixed(2)}
                 </p>
 
-                <p className='text-sm text-black/50 capitalize dark:text-white/50'>
+                <span
+                  className={cn(
+                    'rounded-full px-2.5 py-1 text-xs font-semibold capitalize',
+                    getStatusClass(order.status),
+                  )}
+                >
                   {order.status}
-                </p>
+                </span>
               </div>
             </div>
           ))}
@@ -77,6 +83,23 @@ export default function AdminPage() {
       </div>
     </div>
   )
+}
+
+const getStatusClass = (status: string) => {
+  switch (status) {
+    case 'paid':
+      return 'bg-emerald-50 text-emerald-700 dark:bg-emerald-300/10 dark:text-emerald-300'
+    case 'processing':
+      return 'bg-orange-50 text-orange-700 dark:bg-orange-300/10 dark:text-orange-300'
+    case 'shipped':
+      return 'bg-blue-50 text-blue-700 dark:bg-blue-300/10 dark:text-blue-300'
+    case 'delivered':
+      return 'bg-purple-50 text-purple-700 dark:bg-purple-300/10 dark:text-purple-300'
+    case 'cancelled':
+      return 'bg-red-50 text-red-700 dark:bg-red-300/10 dark:text-red-300'
+    default:
+      return 'bg-amber-50 text-amber-800 dark:bg-amber-300/10 dark:text-amber-200'
+  }
 }
 
 type StatCardProps = {

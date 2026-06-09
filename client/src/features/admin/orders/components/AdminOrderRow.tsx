@@ -26,6 +26,7 @@ export const AdminOrderRow = ({ order }: Props) => {
   const updateStatus = useUpdateOrderStatus()
 
   const isUpdating = updateStatus.isPending
+  const nextStatuses = transitions[order.status]
 
   const handleStatusChange = (status: AdminOrderStatus) => {
     updateStatus.mutate({
@@ -72,15 +73,21 @@ export const AdminOrderRow = ({ order }: Props) => {
 
       <td className='p-4'>
         <div className='flex items-center justify-end gap-2'>
-          <CustomSelect
-            value={order.status}
-            disabled={isUpdating}
-            onChange={handleStatusChange}
-            options={[order.status, ...transitions[order.status]].map((status) => ({
-              value: status,
-              label: status.toUpperCase(),
-            }))}
-          />
+          {nextStatuses.length > 0 ? (
+            <CustomSelect
+              value={order.status}
+              disabled={isUpdating}
+              onChange={handleStatusChange}
+              options={[order.status, ...nextStatuses].map((status) => ({
+                value: status,
+                label: status.toUpperCase(),
+              }))}
+            />
+          ) : (
+            <span className='text-xs font-medium text-black/35 dark:text-white/35'>
+              No actions
+            </span>
+          )}
 
           {isUpdating && (
             <Loader2 className='h-4 w-4 animate-spin text-black/40 dark:text-white/40' />
