@@ -1,111 +1,143 @@
 'use client'
 
-import { Clock, Mail, MapPin, Phone, Send } from 'lucide-react'
-import { FormEvent, useState } from 'react'
+import { Check, Clock, Mail, MessageCircle, Send, X } from 'lucide-react'
+import { useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 
 import { CustomSelect } from '@/components/ui/CustomSelect'
 import { cn } from '@/lib/utils/cn'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import {
+  contactSchema,
+  type ContactFormValues,
+} from '../schemas/contactSchema'
+
+const subjects = [
+  { value: 'order', label: 'Order inquiry' },
+  { value: 'shade', label: 'Shade guidance' },
+  { value: 'partnership', label: 'Partnership' },
+  { value: 'other', label: 'Something else' },
+] as const
 
 const contactItems = [
   {
     icon: Mail,
-    label: 'Email',
+    label: 'Email us',
     value: 'care@velourabeauty.com',
     href: 'mailto:care@velourabeauty.com',
   },
   {
-    icon: Phone,
-    label: 'Call',
+    icon: MessageCircle,
+    label: 'Customer care',
     value: '+1 (555) 123-4567',
     href: 'tel:+15551234567',
   },
   {
     icon: Clock,
-    label: 'Hours',
-    value: 'Mon-Fri, 9am-6pm',
-    href: undefined,
+    label: 'Response time',
+    value: 'Usually within one business day',
   },
 ]
 
 export const Contact = () => {
-  const [sent, setSent] = useState(false)
-  const [subject, setSubject] = useState('order')
+  const [showSuccess, setShowSuccess] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: '', email: '', subject: 'order', message: '' },
+  })
+  const subject = useWatch({ control, name: 'subject' })
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    event.currentTarget.reset()
-    setSubject('order')
-    setSent(true)
+  const onSubmit = async (values: ContactFormValues) => {
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    void values
+    reset()
+    setShowSuccess(true)
   }
 
   return (
-    <div className='space-y-10 sm:space-y-14'>
-      <section className='relative overflow-hidden rounded-[2rem] bg-zinc-950 px-6 py-14 text-white sm:px-10 sm:py-20 lg:px-16'>
-        <div className='pointer-events-none absolute -top-28 right-0 h-80 w-80 rounded-full bg-rose-300/15 blur-3xl' />
-        <div className='relative max-w-3xl'>
-          <p className='text-xs font-semibold tracking-[0.24em] text-white/45 uppercase'>
+    <>
+      <div className='grid gap-14 py-8 pb-16 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20 lg:py-16'>
+        <section>
+          <p className='text-xs font-semibold tracking-[0.24em] text-rose-900/55 uppercase dark:text-rose-100/50'>
             Veloura care
           </p>
-          <h1 className='mt-5 text-4xl font-semibold tracking-tight sm:text-6xl'>
-            Let&apos;s find your answer.
+          <h1 className='mt-6 text-5xl leading-[0.98] font-semibold tracking-[-0.055em] text-black sm:text-7xl dark:text-white'>
+            Tell us what you need.
           </h1>
-          <p className='mt-5 max-w-xl text-base leading-7 text-white/55 sm:text-lg'>
-            Need shade guidance, delivery help, or a second opinion? Tell us
-            what is on your mind.
+          <p className='mt-7 max-w-lg text-base leading-8 text-black/52 dark:text-white/52'>
+            From shade questions to order updates, our care team is here to
+            make the next step clear.
           </p>
-        </div>
-      </section>
 
-      <div className='grid gap-6 lg:grid-cols-[0.75fr_1.25fr]'>
-        <aside className='space-y-4'>
-          {contactItems.map(({ icon: Icon, label, value, href }) => {
-            const Wrapper = href ? 'a' : 'div'
-            return (
-              <Wrapper
-                key={label}
-                {...(href ? { href } : {})}
-                className='flex items-center gap-4 rounded-3xl border border-black/8 bg-white/70 p-5 shadow-sm backdrop-blur-sm transition hover:border-black/15 dark:border-white/10 dark:bg-white/4 dark:hover:border-white/20'
-              >
-                <span className='rounded-full bg-black p-3 text-white dark:bg-white dark:text-black'>
-                  <Icon className='h-4 w-4' />
-                </span>
-                <div>
-                  <p className='text-xs tracking-wide text-black/40 uppercase dark:text-white/40'>
-                    {label}
-                  </p>
-                  <p className='mt-1 text-sm font-medium text-black dark:text-white'>
-                    {value}
-                  </p>
+          <div className='mt-12 divide-y divide-black/8 border-y border-black/8 dark:divide-white/10 dark:border-white/10'>
+            {contactItems.map(({ icon: Icon, label, value, href }) => {
+              const content = (
+                <>
+                  <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black'>
+                    <Icon className='h-4 w-4' />
+                  </span>
+                  <span>
+                    <span className='block text-xs font-semibold tracking-wide text-black/38 uppercase dark:text-white/38'>
+                      {label}
+                    </span>
+                    <span className='mt-1 block text-sm font-medium text-black dark:text-white'>
+                      {value}
+                    </span>
+                  </span>
+                </>
+              )
+
+              return href ? (
+                <a
+                  key={label}
+                  href={href}
+                  className='flex items-center gap-4 py-5 transition hover:opacity-65'
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={label} className='flex items-center gap-4 py-5'>
+                  {content}
                 </div>
-              </Wrapper>
-            )
-          })}
-
-          <div className='rounded-3xl bg-rose-100/70 p-6 dark:bg-rose-950/20'>
-            <MapPin className='h-5 w-5 text-black/40 dark:text-white/40' />
-            <p className='mt-4 text-sm font-semibold text-black dark:text-white'>
-              Veloura studio
-            </p>
-            <p className='mt-2 text-sm leading-6 text-black/50 dark:text-white/50'>
-              18 Rosewood Avenue
-              <br />
-              Beauty District
-              <br />
-              San Francisco, CA 94105
-            </p>
+              )
+            })}
           </div>
-        </aside>
+        </section>
 
         <form
-          onSubmit={handleSubmit}
-          className='rounded-[2rem] border border-black/8 bg-white/75 p-6 shadow-sm backdrop-blur-sm sm:p-9 dark:border-white/10 dark:bg-white/4'
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className='rounded-[2rem] border border-black/8 bg-white/55 p-6 shadow-sm backdrop-blur-sm sm:p-9 dark:border-white/10 dark:bg-white/4'
         >
+          <div className='mb-8'>
+            <h2 className='text-2xl font-semibold tracking-tight text-black dark:text-white'>
+              Send a message
+            </h2>
+            <p className='mt-2 text-sm text-black/45 dark:text-white/45'>
+              A few details help us send you the right answer faster.
+            </p>
+          </div>
+
           <div className='grid gap-5 sm:grid-cols-2'>
-            <Field label='Name' id='name' placeholder='Your name' />
+            <Field
+              label='Name'
+              error={errors.name?.message}
+              inputProps={register('name')}
+              placeholder='Your name'
+            />
             <Field
               label='Email'
-              id='email'
               type='email'
+              error={errors.email?.message}
+              inputProps={register('email')}
               placeholder='you@example.com'
             />
           </div>
@@ -114,15 +146,13 @@ export const Contact = () => {
             <label className={labelClass}>Subject</label>
             <CustomSelect
               value={subject}
-              onChange={setSubject}
+              onChange={(value) =>
+                setValue('subject', value, { shouldValidate: true })
+              }
               className='w-full'
-              options={[
-                { value: 'order', label: 'Order inquiry' },
-                { value: 'shade', label: 'Shade guidance' },
-                { value: 'partnership', label: 'Partnership' },
-                { value: 'other', label: 'Other' },
-              ]}
+              options={[...subjects]}
             />
+            <ErrorText message={errors.subject?.message} />
           </div>
 
           <div className='mt-5'>
@@ -130,60 +160,81 @@ export const Contact = () => {
               Message
             </label>
             <textarea
+              {...register('message')}
               id='message'
               rows={6}
-              required
-              placeholder='How can we help you?'
+              placeholder='How can we help?'
               className={cn(inputClass, 'resize-none')}
             />
+            <ErrorText message={errors.message?.message} />
           </div>
 
           <button
             type='submit'
-            className='mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-black/80 sm:w-auto dark:bg-white dark:text-black dark:hover:bg-white/80'
+            disabled={isSubmitting}
+            className='mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3.5 text-sm font-semibold text-white transition hover:opacity-75 disabled:cursor-wait disabled:opacity-45 sm:w-auto dark:bg-white dark:text-black'
           >
-            Send message
+            {isSubmitting ? 'Sending...' : 'Send message'}
             <Send className='h-4 w-4' />
           </button>
-
-          {sent && (
-            <p className='mt-4 text-sm text-emerald-600 dark:text-emerald-400'>
-              Message received. Veloura care will be in touch soon.
-            </p>
-          )}
         </form>
       </div>
-    </div>
+
+      {showSuccess && (
+        <div className='fixed inset-x-4 bottom-5 z-80 mx-auto flex max-w-md items-start gap-4 rounded-2xl border border-black/8 bg-white/95 p-4 text-black shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/95 dark:text-white'>
+          <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'>
+            <Check className='h-4 w-4' />
+          </span>
+          <div className='min-w-0 flex-1'>
+            <p className='text-sm font-semibold'>Message sent</p>
+            <p className='mt-1 text-xs leading-5 text-black/50 dark:text-white/50'>
+              Thanks for reaching out. Veloura care will reply soon.
+            </p>
+          </div>
+          <button
+            type='button'
+            aria-label='Dismiss success message'
+            onClick={() => setShowSuccess(false)}
+            className='rounded-full p-1 text-black/35 transition hover:text-black dark:text-white/35 dark:hover:text-white'
+          >
+            <X className='h-4 w-4' />
+          </button>
+        </div>
+      )}
+    </>
   )
 }
 
 const Field = ({
   label,
-  id,
   type = 'text',
   placeholder,
+  error,
+  inputProps,
 }: {
   label: string
-  id: string
   type?: string
   placeholder: string
+  error?: string
+  inputProps: React.InputHTMLAttributes<HTMLInputElement>
 }) => (
   <div>
-    <label htmlFor={id} className={labelClass}>
-      {label}
-    </label>
+    <label className={labelClass}>{label}</label>
     <input
-      id={id}
+      {...inputProps}
       type={type}
-      required
       placeholder={placeholder}
-      className={inputClass}
+      className={cn(inputClass, error && 'border-red-400 dark:border-red-500')}
     />
+    <ErrorText message={error} />
   </div>
 )
 
+const ErrorText = ({ message }: { message?: string }) =>
+  message ? <p className='mt-1.5 text-xs text-red-600 dark:text-red-400'>{message}</p> : null
+
 const labelClass =
-  'mb-2 block text-xs font-semibold tracking-wide text-black/55 uppercase dark:text-white/55'
+  'mb-2 block text-xs font-semibold tracking-wide text-black/50 uppercase dark:text-white/50'
 
 const inputClass =
-  'w-full rounded-xl border border-black/10 bg-white/60 px-4 py-3 text-sm text-black placeholder:text-black/30 transition focus:border-black/30 focus:outline-none dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus:border-white/30'
+  'w-full rounded-xl border border-black/10 bg-white/65 px-4 py-3 text-sm text-black placeholder:text-black/28 transition focus:border-black/30 focus:outline-none dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/28 dark:focus:border-white/30'
