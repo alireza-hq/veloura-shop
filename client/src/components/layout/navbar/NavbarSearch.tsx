@@ -30,8 +30,19 @@ export const NavbarSearch = () => {
     setSearch('')
   }
 
+  const submitSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const query = search.trim()
+    if (query.length < 2) return
+    router.push(routes.search(query))
+    setSearch('')
+  }
+
   return (
-    <div className='relative hidden w-48 drop-shadow-lg lg:block lg:w-60 xl:w-72'>
+    <form
+      onSubmit={submitSearch}
+      className='relative hidden w-48 drop-shadow-lg lg:block lg:w-60 xl:w-72'
+    >
       <input
         value={search}
         onChange={inputChangeHandler}
@@ -40,7 +51,7 @@ export const NavbarSearch = () => {
         className='w-full rounded-full border border-white/10 bg-white/10 px-5 py-2 text-sm text-white backdrop-blur-md placeholder:text-white/60 focus:border-white/30 focus:outline-none'
       />
       <button
-        type='button'
+        type='submit'
         aria-label='Search products'
         className='absolute top-1/2 right-3 -translate-y-1/2 text-gray-200 transition hover:opacity-80 active:opacity-70'
       >
@@ -102,6 +113,6 @@ export const NavbarSearch = () => {
           </div>
         )}
       </div>
-    </div>
+    </form>
   )
 }

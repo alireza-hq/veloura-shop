@@ -9,6 +9,7 @@ export const routes = {
   wishlist: '/wishlist',
   about: '/about',
   contact: '/contact',
+  search: (query: string) => `/search?q=${encodeURIComponent(query)}`,
   orders: '/orders',
 
   products: {
