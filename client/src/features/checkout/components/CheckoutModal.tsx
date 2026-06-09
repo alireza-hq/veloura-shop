@@ -9,16 +9,16 @@ export const CheckoutModal = ({ checkoutMessage }: Props) => {
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className='rounded-2xl bg-white p-8 text-center shadow-2xl dark:bg-zinc-900'
+        className='mx-4 max-w-sm rounded-[2rem] border border-black/7 bg-white p-8 text-center shadow-2xl dark:border-white/8 dark:bg-[#281c22]'
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <CheckCircle className='mx-auto mb-4 h-16 w-16 text-green-500' />
+          <CheckCircle className='mx-auto mb-5 h-12 w-12 text-emerald-600 dark:text-emerald-300' />
         </motion.div>
-        <h2 className='text-2xl font-bold text-black dark:text-white'>
+        <h2 className='text-2xl font-semibold tracking-tight text-black dark:text-white'>
           {checkoutMessage}
         </h2>
         <p className='mt-2 text-sm text-black/60 dark:text-white/60'>

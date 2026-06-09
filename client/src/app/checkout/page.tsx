@@ -1,6 +1,6 @@
 'use client'
 
-import { MdShoppingCart } from 'react-icons/md';
+import { MdCheck, MdShoppingCart } from 'react-icons/md';
 
 import { EmptyState } from '@/components/ui/EmptyState';
 import { PageHeader } from '@/components/ui/PageHeader';
@@ -26,18 +26,35 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className='page-shell'><div className='page-content'>
-      <div className='mx-auto max-w-6xl px-4 py-10 sm:px-6'>
-        <PageHeader
-          eyebrow='Almost yours'
-          title='Checkout'
-          description='Review your beauty bag and choose where we should send it.'
-        />
-        <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
+    <main className='page-shell'>
+      <div className='page-content'>
+        <div className='mx-auto max-w-6xl py-6 sm:py-10'>
+          <PageHeader
+            eyebrow='Secure checkout'
+            title='Complete your order'
+            description='Add your delivery details, review your order, then reserve it for payment.'
+          />
+
+          <div className='mb-8 grid grid-cols-3 gap-2 border-y border-black/8 py-4 dark:border-white/8'>
+            {['Bag reviewed', 'Delivery details', 'Payment'].map((step, index) => (
+              <div
+                key={step}
+                className='flex items-center gap-2 text-xs font-semibold text-black/40 sm:text-sm dark:text-white/40'
+              >
+                <span className='flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#2a1c23] text-[11px] text-white dark:bg-white dark:text-[#2a1c23]'>
+                  {index === 0 ? <MdCheck className='h-3.5 w-3.5' /> : index + 1}
+                </span>
+                <span className='hidden sm:inline'>{step}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className='grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-8'>
           <CheckoutForm />
           <CheckoutSummary />
+          </div>
         </div>
       </div>
-    </div></main>
+    </main>
   )
 }

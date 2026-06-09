@@ -1,8 +1,7 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
+import { Clock3, Loader2, LockKeyhole, MapPin, Phone, UserRound } from 'lucide-react'
 import { useState } from 'react'
-import { BiCreditCard } from 'react-icons/bi'
 
 import { cn } from '@/lib/utils/cn'
 
@@ -23,28 +22,44 @@ export const CheckoutForm = () => {
     return <CheckoutModal checkoutMessage={checkoutMessage} />
 
   return (
-    <div className='lg:col-span-2'>
+    <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-8 dark:border-white/5 dark:bg-zinc-900'
+        className='rounded-[2rem] border border-black/7 bg-white/75 p-5 shadow-sm backdrop-blur-sm sm:p-8 dark:border-white/8 dark:bg-white/4'
         noValidate
       >
-        <h2 className='mb-6 text-xl font-semibold text-black dark:text-white'>
-          Shipping Information
-        </h2>
-
-        <div className='space-y-5'>
-          {/* Name */}
+        <div className='mb-8 flex items-start justify-between gap-4'>
           <div>
+            <p className='text-xs font-semibold tracking-[0.18em] text-black/35 uppercase dark:text-white/35'>
+              Step 2 of 3
+            </p>
+            <h2 className='mt-2 text-2xl font-semibold tracking-tight text-black dark:text-white'>
+              Delivery details
+            </h2>
+            <p className='mt-2 text-sm text-black/45 dark:text-white/45'>
+              Where should we send your Veloura order?
+            </p>
+          </div>
+          <div className='rounded-full bg-black/5 p-3 dark:bg-white/7'>
+            <MapPin className='h-5 w-5 text-black/55 dark:text-white/55' />
+          </div>
+        </div>
+
+        <div className='grid gap-5 sm:grid-cols-2'>
+          {/* Name */}
+          <div className='sm:col-span-2'>
             <label
               htmlFor='name'
               className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'
             >
-              Full Name
+              <span className='flex items-center gap-2'>
+                <UserRound className='h-4 w-4 opacity-45' />
+                Full name
+              </span>
             </label>
             <input
               className={cn(
-                'w-full rounded-xl border border-black/10 bg-zinc-50 px-4 py-3 text-sm text-black placeholder:text-black/30 focus:border-black focus:outline-none dark:border-white/10 dark:bg-black dark:text-white dark:placeholder:text-white/30 dark:focus:border-white',
+                'w-full rounded-2xl border border-black/10 bg-black/2 px-4 py-3.5 text-sm text-black placeholder:text-black/25 transition focus:border-black/30 focus:bg-white focus:outline-none dark:border-white/10 dark:bg-white/3 dark:text-white dark:placeholder:text-white/25 dark:focus:border-white/30 dark:focus:bg-white/5',
                 errors.name && 'border-red-600',
               )}
               type='text'
@@ -58,16 +73,19 @@ export const CheckoutForm = () => {
           </div>
 
           {/* Address */}
-          <div>
+          <div className='sm:col-span-2'>
             <label
               htmlFor='address'
               className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'
             >
-              Address
+              <span className='flex items-center gap-2'>
+                <MapPin className='h-4 w-4 opacity-45' />
+                Delivery address
+              </span>
             </label>
             <input
               className={cn(
-                'w-full rounded-xl border border-black/10 bg-zinc-50 px-4 py-3 text-sm text-black placeholder:text-black/30 focus:border-black focus:outline-none dark:border-white/10 dark:bg-black dark:text-white dark:placeholder:text-white/30 dark:focus:border-white',
+                'w-full rounded-2xl border border-black/10 bg-black/2 px-4 py-3.5 text-sm text-black placeholder:text-black/25 transition focus:border-black/30 focus:bg-white focus:outline-none dark:border-white/10 dark:bg-white/3 dark:text-white dark:placeholder:text-white/25 dark:focus:border-white/30 dark:focus:bg-white/5',
                 errors.address && 'border-red-600',
               )}
               type='text'
@@ -88,11 +106,14 @@ export const CheckoutForm = () => {
               htmlFor='phone'
               className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'
             >
-              Phone Number
+              <span className='flex items-center gap-2'>
+                <Phone className='h-4 w-4 opacity-45' />
+                Phone number
+              </span>
             </label>
             <input
               className={cn(
-                'w-full rounded-xl border border-black/10 bg-zinc-50 px-4 py-3 text-sm text-black placeholder:text-black/30 focus:border-black focus:outline-none dark:border-white/10 dark:bg-black dark:text-white dark:placeholder:text-white/30 dark:focus:border-white',
+                'w-full rounded-2xl border border-black/10 bg-black/2 px-4 py-3.5 text-sm text-black placeholder:text-black/25 transition focus:border-black/30 focus:bg-white focus:outline-none dark:border-white/10 dark:bg-white/3 dark:text-white dark:placeholder:text-white/25 dark:focus:border-white/30 dark:focus:bg-white/5',
                 errors.phone && 'border-red-600',
               )}
               type='tel'
@@ -108,10 +129,16 @@ export const CheckoutForm = () => {
           </div>
         </div>
 
+        <div className='mt-8 flex gap-3 rounded-2xl bg-black/3 p-4 text-xs leading-5 text-black/50 dark:bg-white/5 dark:text-white/50'>
+          <Clock3 className='mt-0.5 h-4 w-4 shrink-0' />
+          Your order will be reserved for one hour. Complete payment from your
+          orders page to confirm it.
+        </div>
+
         <button
           type='submit'
           disabled={isSubmitting}
-          className='mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-6 py-4 text-sm font-semibold text-white transition-all hover:opacity-90 active:opacity-85 disabled:opacity-70 dark:bg-white dark:text-black'
+          className='mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#2a1c23] px-6 py-4 text-sm font-semibold text-white transition hover:opacity-85 disabled:opacity-60 dark:bg-white dark:text-[#2a1c23]'
         >
           {isSubmitting ? (
             <>
@@ -120,8 +147,8 @@ export const CheckoutForm = () => {
             </>
           ) : (
             <>
-              <BiCreditCard className='h-4 w-4' />
-              Pay ${total.toFixed(2)}
+              <LockKeyhole className='h-4 w-4' />
+              Reserve order · ${total.toFixed(2)}
             </>
           )}
         </button>
