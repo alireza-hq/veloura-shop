@@ -75,7 +75,10 @@ export const ProductDetails = ({ product }: Props) => {
             <div className='flex items-center gap-1 text-yellow-500'>
               <Star className='h-5 w-5 fill-current' />
               <span className='text-sm font-semibold text-zinc-700 dark:text-zinc-300'>
-                {product.rating}
+                {Number(product.rating).toFixed(1)}
+              </span>
+              <span className='text-xs text-zinc-400'>
+                ({product.reviewCount ?? 0})
               </span>
             </div>
             <div className='h-4 w-px bg-zinc-200 dark:bg-zinc-700' />

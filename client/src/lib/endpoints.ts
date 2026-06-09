@@ -28,6 +28,7 @@ export const endpoints = {
     createProduct: '/products',
     updateProduct: (id: number) => `/products/${id}`,
     deleteProduct: (id: number) => `/products/${id}`,
+    reviews: (id: number) => `/products/${id}/reviews`,
   },
 
   checkout: {

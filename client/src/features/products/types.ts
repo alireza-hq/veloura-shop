@@ -8,5 +8,6 @@ export type Product = {
   price: number
   stock: number
   rating: number
+  reviewCount?: number
   category: Category
 }

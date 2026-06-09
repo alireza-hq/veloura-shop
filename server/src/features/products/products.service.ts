@@ -1,4 +1,5 @@
 import { db } from '../../config/db'
+import { ensureReviewsTable } from '../reviews/reviews.service'
 
 type ProductListQuery = {
   q?: string
@@ -9,6 +10,7 @@ export const getProductList = async ({
   q,
   limit = 50,
 }: ProductListQuery = {}) => {
+  await ensureReviewsTable()
   const search = q?.trim()
   const { rows } = await db.query(
     `
@@ -19,7 +21,8 @@ export const getProductList = async ({
     p.description,
     p.price,
     p.stock,
-    p.rating,
+    COALESCE(review_stats.rating, p.rating)::float AS rating,
+    COALESCE(review_stats.review_count, 0)::int AS "reviewCount",
     
     json_build_object(
       'id', c.id,
@@ -32,6 +35,11 @@ export const getProductList = async ({
     
     LEFT JOIN categories c
       ON p.category_id = c.id
+    LEFT JOIN LATERAL (
+      SELECT AVG(r.rating) AS rating, COUNT(*) AS review_count
+      FROM product_reviews r
+      WHERE r.product_id = p.id
+    ) review_stats ON TRUE
 
     WHERE (
       $1::text IS NULL
@@ -51,6 +59,7 @@ export const getProductList = async ({
 }
 
 export const getProductById = async (id: number) => {
+  await ensureReviewsTable()
   const { rows } = await db.query(
     `
     SELECT
@@ -60,7 +69,8 @@ export const getProductById = async (id: number) => {
     p.description,
     p.price,
     p.stock,
-    p.rating,
+    COALESCE(review_stats.rating, p.rating)::float AS rating,
+    COALESCE(review_stats.review_count, 0)::int AS "reviewCount",
     
     json_build_object(
       'id', c.id,
@@ -73,6 +83,11 @@ export const getProductById = async (id: number) => {
     
     LEFT JOIN categories c
       ON p.category_id = c.id
+    LEFT JOIN LATERAL (
+      SELECT AVG(r.rating) AS rating, COUNT(*) AS review_count
+      FROM product_reviews r
+      WHERE r.product_id = p.id
+    ) review_stats ON TRUE
     
     WHERE p.id = $1
     `,
