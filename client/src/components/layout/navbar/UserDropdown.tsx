@@ -28,16 +28,16 @@ export const UserDropdown = () => {
   }
 
   return (
-    <div className='relative inline-block text-left opacity-99'>
-      <Menu as='div' className='relative inline-block text-left'>
+    <div className='relative flex h-5 items-center text-left opacity-99'>
+      <Menu as='div' className='relative flex h-5 items-center text-left'>
         {/* Trigger Button */}
         <Menu.Button
           aria-label='Open account menu'
-          className='h-5 fill-transparent transition duration-100 hover:opacity-70'
+          className='flex h-5 w-5 items-center justify-center p-0 leading-none fill-transparent transition duration-100 hover:opacity-70'
         >
           <UserIcon
             className={cn(
-              'h-5 fill-transparent transition duration-100 hover:fill-current',
+              'block h-5 w-5 fill-transparent transition duration-100 hover:fill-current',
               useActive([...Object.values(routes.auth), routes.orders]) &&
                 'fill-current',
             )}
