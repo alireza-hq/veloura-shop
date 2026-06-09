@@ -1,6 +1,7 @@
 'use client'
 
 import { Heart, Minus, Plus, ShoppingCart, Star } from 'lucide-react'
+import Image from 'next/image'
 
 import { useCart } from '@/features/cart/hooks/useCart'
 import { cn } from '@/lib/utils/cn'
@@ -26,7 +27,7 @@ export const ProductDetails = ({ product }: Props) => {
       name: product.name,
       price: product.price,
       quantity: 1,
-      image: product.image || '/lol.jpg',
+      image: product.image || '/logo/logo.png',
     })
   }
 
@@ -51,9 +52,12 @@ export const ProductDetails = ({ product }: Props) => {
       <div className='grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16'>
         {/* Image Section */}
         <div className='group relative aspect-4/5 w-full overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-800/50'>
-          <img
-            src={product.image || '/lol.jpg'}
+          <Image
+            src={product.image || '/logo/logo.png'}
             alt={product.name}
+            fill
+            priority
+            sizes='(min-width: 1024px) 50vw, 100vw'
             className='h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105'
           />
         </div>

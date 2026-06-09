@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { Category } from '../types'
 import { routes } from '@/lib/routes'
@@ -11,9 +12,11 @@ export const CategoryCard = ({ image, title, description }: Props) => {
       href={`${routes.products.root}?category=${encodeURIComponent(title)}`}
       className='group relative block w-full overflow-hidden rounded-3xl bg-black shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl'
     >
-      <img
-        src={image}
+      <Image
+        src={image || '/logo/logo.png'}
         alt={title}
+        width={640}
+        height={800}
         className='aspect-4/5 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105'
       />
       <div className='absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t from-black/90 via-black/35 to-transparent transition-all duration-300 group-hover:h-2/3 dark:from-black' />

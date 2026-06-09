@@ -137,7 +137,11 @@ export const UserProfile = () => {
           <div className='mt-5 divide-y divide-black/8 border-y border-black/8 dark:divide-white/10 dark:border-white/10'>
             <Detail icon={User} label='Username' value={user.username} />
             <Detail icon={Mail} label='Email' value={user.email} />
-            <Detail icon={isAdmin ? Crown : ShieldCheck} label='Access' value={isAdmin ? 'Administrator' : 'Customer'} />
+            <Detail
+              icon={ReceiptText}
+              label='Order history'
+              value={`${orders.length} ${orders.length === 1 ? 'order' : 'orders'}`}
+            />
           </div>
         </section>
 

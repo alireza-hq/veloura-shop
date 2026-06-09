@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Minus, Plus, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { routes } from '@/lib/routes'
 
@@ -18,9 +19,11 @@ export const CartItemCard = ({ item }: Props) => {
         href={routes.products.product(item.productId)}
         className='mb-3 flex items-center gap-4 font-medium text-black sm:mb-0 dark:text-white'
       >
-        <img
-          src={item.image}
+        <Image
+          src={item.image || '/logo/logo.png'}
           alt={item.name}
+          width={80}
+          height={80}
           className='aspect-square w-20 rounded-2xl object-cover'
         />
         <p>{item.name}</p>

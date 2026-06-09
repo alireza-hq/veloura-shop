@@ -1,4 +1,5 @@
-import { ArrowUpRight, Mail, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Mail } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { SiFacebook, SiInstagram, SiX } from 'react-icons/si'
 
@@ -48,7 +49,13 @@ export const Footer = () => {
               href={routes.home}
               className='flex w-fit items-center gap-2 text-lg font-semibold'
             >
-              <Sparkles className='h-5 w-5' strokeWidth={1.5} />
+              <Image
+                src='/logo/logo.png'
+                alt=''
+                width={27}
+                height={30}
+                className='h-7 w-auto'
+              />
               Veloura Beauty
             </Link>
             <p className='mt-4 max-w-sm text-sm leading-6 text-white/45'>

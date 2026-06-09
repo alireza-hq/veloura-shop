@@ -4,9 +4,9 @@ import {
   HeartIcon,
   Menu,
   ShoppingCartIcon,
-  Sparkles,
   X,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -49,6 +49,7 @@ export const Navbar = () => {
         ? 'text-white'
         : 'text-[#2a1c23] dark:text-white',
   )
+  const brandClass = solid || isHome ? 'text-white' : 'text-[#2a1c23] dark:text-white'
 
   return (
     <header className='pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4'>
@@ -64,11 +65,18 @@ export const Navbar = () => {
             href={routes.home}
             aria-label='Veloura home'
             className={cn(
-              controlClass,
-              'flex shrink-0 items-center gap-2 px-3 py-2 sm:px-4',
+              'flex shrink-0 items-center gap-2 px-2 py-2 transition-opacity duration-150 hover:opacity-70',
+              brandClass,
             )}
           >
-            <Sparkles className='h-5 w-5' />
+            <Image
+              src='/logo/logo.png'
+              alt=''
+              width={24}
+              height={26}
+              priority
+              className='h-6 w-auto'
+            />
             <span className='hidden text-lg font-semibold sm:block'>
               Veloura
             </span>

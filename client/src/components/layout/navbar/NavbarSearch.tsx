@@ -2,6 +2,7 @@
 
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 
@@ -84,9 +85,11 @@ export const NavbarSearch = ({ light = true }: { light?: boolean }) => {
                 className='group flex cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50'
               >
                 <div className='flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800'>
-                  <img
-                    src={product.image || '/placeholder.jpg'}
+                  <Image
+                    src={product.image || '/logo/logo.png'}
                     alt={product.name}
+                    width={48}
+                    height={48}
                     className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
                   />
                 </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Edit, ExternalLink, Loader2, Trash2 } from 'lucide-react'
 
 import { Product } from '@/features/products/types'
@@ -31,9 +32,11 @@ export const AdminProductRow = ({ product }: Props) => {
           href={routes.products.product(product.id)}
           className='group flex items-center gap-3'
         >
-          <img
-            src={product.image}
+          <Image
+            src={product.image || '/logo/logo.png'}
             alt={product.name}
+            width={40}
+            height={40}
             className='h-10 w-10 rounded-lg object-cover'
           />
 

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Edit, Loader2, Trash2 } from 'lucide-react'
 
 import { Category } from '@/features/categories/types'
@@ -28,9 +29,11 @@ export const AdminCategoryRow = ({ category }: Props) => {
     <tr className='border-b border-black/5 last:border-0 dark:border-white/5'>
       <td className='p-4'>
         <div className='flex items-center gap-3'>
-          <img
-            src={category.image}
+          <Image
+            src={category.image || '/logo/logo.png'}
             alt={category.title}
+            width={40}
+            height={40}
             className='h-10 w-10 rounded-lg object-cover'
           />
 

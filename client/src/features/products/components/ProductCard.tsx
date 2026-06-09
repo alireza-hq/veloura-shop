@@ -2,6 +2,7 @@
 
 import { Minus, Plus } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MdAddShoppingCart } from 'react-icons/md'
 
 import { useCart } from '@/features/cart/hooks/useCart'
@@ -32,9 +33,11 @@ export const ProductCard = ({ id, image, name, category, price }: Props) => {
       className='group cursor-pointer overflow-hidden rounded-3xl border border-black/8 bg-white/75 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/5'
     >
       <div className='overflow-hidden bg-black/3 dark:bg-white/3'>
-        <img
-          src={image ?? '/lol.jpg'}
+        <Image
+          src={image || '/logo/logo.png'}
           alt={name}
+          width={640}
+          height={800}
           className='aspect-4/5 w-full object-cover transition-transform duration-500 group-hover:scale-105'
         />
       </div>

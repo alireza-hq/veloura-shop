@@ -2,6 +2,7 @@
 
 import { ArrowRight, Heart, Leaf, ShieldCheck, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { routes } from '@/lib/routes'
 
@@ -51,9 +52,11 @@ export const About = () => {
         </div>
 
         <div className='relative min-h-96 overflow-hidden rounded-[2rem] bg-rose-100 lg:min-h-140 dark:bg-rose-950/25'>
-          <img
-            src='store.jpg'
+          <Image
+            src='/store.jpg'
             alt='Inside the Veloura studio'
+            fill
+            sizes='(min-width: 1024px) 40vw, 100vw'
             className='absolute inset-0 h-full w-full object-cover'
           />
           <div className='absolute inset-x-0 bottom-0 bg-linear-to-t from-black/70 to-transparent p-7 pt-24 text-white'>
