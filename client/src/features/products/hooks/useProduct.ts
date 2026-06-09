@@ -10,4 +10,6 @@ export const useProduct = (id: number) =>
     queryKey: ['product', id],
     queryFn: () => getProductService(id),
     enabled: !!id,
+    staleTime: 0,
+    refetchOnMount: 'always',
   })
