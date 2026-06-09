@@ -5,4 +5,5 @@ types.setTypeParser(1700, (val) => parseFloat(val))
 
 export const db = new Pool({
   connectionString: env.DATABASE_URL,
+  ssl: env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 })
