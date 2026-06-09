@@ -28,8 +28,8 @@ export const UserDropdown = () => {
   }
 
   return (
-    <div className='relative flex h-5 items-center text-left opacity-99'>
-      <Menu as='div' className='relative flex h-5 items-center text-left'>
+    <div className='relative inline-block h-5 align-middle text-left opacity-99'>
+      <Menu as='div' className='relative inline-block h-5 text-left'>
         {/* Trigger Button */}
         <Menu.Button
           aria-label='Open account menu'
