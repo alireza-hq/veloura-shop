@@ -47,3 +47,9 @@ export const removeCartItem = async (req: Request, res: Response) => {
 
   res.json(cart)
 }
+
+export const clearCart = async (req: Request, res: Response) => {
+  const cart = await service.clearCart(req.user!.userId)
+
+  res.json(cart)
+}

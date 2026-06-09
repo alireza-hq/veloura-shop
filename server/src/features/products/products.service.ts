@@ -1,7 +1,17 @@
 import { db } from '../../config/db'
 
-export const getProductList = async () => {
-  const { rows } = await db.query(`
+type ProductListQuery = {
+  q?: string
+  limit?: number
+}
+
+export const getProductList = async ({
+  q,
+  limit = 50,
+}: ProductListQuery = {}) => {
+  const search = q?.trim()
+  const { rows } = await db.query(
+    `
     SELECT
     p.id,
     p.image,
@@ -22,9 +32,21 @@ export const getProductList = async () => {
     
     LEFT JOIN categories c
       ON p.category_id = c.id
-    
-    ORDER BY id DESC
-    `)
+
+    WHERE (
+      $1::text IS NULL
+      OR p.name ILIKE '%' || $1 || '%'
+      OR p.description ILIKE '%' || $1 || '%'
+      OR c.title ILIKE '%' || $1 || '%'
+    )
+
+    ORDER BY
+      CASE WHEN $1::text IS NOT NULL AND p.name ILIKE $1 || '%' THEN 0 ELSE 1 END,
+      p.id DESC
+    LIMIT $2
+    `,
+    [search || null, limit],
+  )
   return rows
 }
 

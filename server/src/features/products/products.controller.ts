@@ -1,9 +1,10 @@
 import type { Request, Response } from 'express'
-import { createProductSchema, productParamsSchema, updateProductSchema } from './products.schema';
+import { createProductSchema, productListQuerySchema, productParamsSchema, updateProductSchema } from './products.schema';
 import * as service from './products.service';
 
-export const getProducts = async (_req: Request, res: Response) => {
-  const products = await service.getProductList()
+export const getProducts = async (req: Request, res: Response) => {
+  const query = productListQuerySchema.parse(req.query)
+  const products = await service.getProductList(query)
   res.json(products)
 }
 

@@ -15,6 +15,8 @@ router.post('/items', asyncHandler(controller.addCartItem))
 
 router.patch('/items/:productId', asyncHandler(controller.updateCartItem))
 
+router.delete('/items', asyncHandler(controller.clearCart))
+
 router.delete('/items/:productId', asyncHandler(controller.removeCartItem))
 
 export default router

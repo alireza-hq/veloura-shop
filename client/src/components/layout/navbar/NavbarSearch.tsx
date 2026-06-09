@@ -2,39 +2,27 @@
 
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 
-import { useProducts } from '@/features/products/hooks/useProducts'
-import { Product } from '@/features/products/types'
+import { useProductSearch } from '@/features/products/hooks/useProductSearch'
 import { routes } from '@/lib/routes'
 import { cn } from '@/lib/utils/cn'
 
 export const NavbarSearch = () => {
   const [search, setSearch] = useState('')
-  const [result, setResult] = useState<Product[]>([])
+  const [debouncedSearch, setDebouncedSearch] = useState('')
 
-  const { data: products } = useProducts()
+  const { data: result = [], isFetching } = useProductSearch(debouncedSearch)
   const router = useRouter()
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedSearch(search), 250)
+    return () => window.clearTimeout(timer)
+  }, [search])
+
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearch(value)
-
-    if (!value.trim()) {
-      setResult([])
-      return
-    }
-
-    if (products) {
-      setResult(
-        products
-          .filter((product) =>
-            product.name.toLowerCase().includes(value.toLowerCase()),
-          )
-          .slice(0, 4),
-      )
-    }
+    setSearch(e.target.value)
   }
 
   const itemClickHandler = (id: number) => {
@@ -64,7 +52,11 @@ export const NavbarSearch = () => {
           !search.length && 'hidden',
         )}
       >
-        {result.length ? (
+        {isFetching ? (
+          <p className='px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400'>
+            Searching...
+          </p>
+        ) : result.length ? (
           <div className='max-h-80 overflow-y-auto p-2'>
             {result.map((product) => (
               <div
@@ -98,12 +90,14 @@ export const NavbarSearch = () => {
             ))}
           </div>
         ) : (
-          <div className='flex flex-col items-center justify-center py-8 text-center'>
+          <div className='flex flex-col items-center justify-center px-4 py-8 text-center'>
             <div className='mb-2 rounded-full bg-zinc-100 p-2 dark:bg-zinc-800'>
               <SearchIcon className='h-5 w-5 text-zinc-400 dark:text-zinc-500' />
             </div>
             <p className='text-sm text-zinc-500 dark:text-zinc-400'>
-              No makeup found for &quot;{search}&quot;
+              {search.trim().length < 2
+                ? 'Type at least two characters'
+                : `No makeup found for "${search}"`}
             </p>
           </div>
         )}

@@ -20,6 +20,13 @@ export const getProductsService = async () => {
   return data
 }
 
+export const searchProductsService = async (query: string) => {
+  const { data } = await api.get<Product[]>(endpoints.products.getProducts, {
+    params: { q: query, limit: 5 },
+  })
+  return data
+}
+
 export const getProductService = async (id: number) => {
   const { data } = await api.get<Product>(endpoints.products.getProduct(id))
   return data

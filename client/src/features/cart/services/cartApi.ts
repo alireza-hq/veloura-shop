@@ -33,3 +33,8 @@ export const removeCartItemService = async (productId: number) => {
   )
   return data
 }
+
+export const clearCartService = async () => {
+  const { data } = await api.delete<ApiCart>(endpoints.cart.clearCart)
+  return data
+}

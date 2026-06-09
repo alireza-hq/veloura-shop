@@ -17,3 +17,8 @@ export const updateProductSchema = productBaseSchema.partial()
 export const productParamsSchema = z.object({
   id: z.string().regex(/^\d+$/).transform(Number),
 })
+
+export const productListQuerySchema = z.object({
+  q: z.string().trim().max(80).optional(),
+  limit: z.coerce.number().int().min(1).max(50).default(50),
+})

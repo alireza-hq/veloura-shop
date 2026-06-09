@@ -9,6 +9,7 @@ export const endpoints = {
   cart: {
     getCart: '/cart',
     addCartItem: '/cart/items',
+    clearCart: '/cart/items',
     updateCartItem: (productId: number) => `/cart/items/${productId}`,
     removeCartItem: (productId: number) => `/cart/items/${productId}`,
   },

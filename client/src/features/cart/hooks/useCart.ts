@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 import {
   addCartItemService,
+  clearCartService,
   getCartService,
   removeCartItemService,
   updateCartItemService,
@@ -21,7 +22,7 @@ export const useCart = () => {
   const addGuestItem = useCartStore((state) => state.addGuestItem)
   const removeGuestItem = useCartStore((state) => state.removeGuestItem)
   const clearGuestItem = useCartStore((state) => state.clearGuestItem)
-  const clearCart = useCartStore((state) => state.clearCart)
+  const clearGuestCart = useCartStore((state) => state.clearCart)
 
   const cartQuery = useQuery({
     queryKey: ['cart'],
@@ -58,6 +59,11 @@ export const useCart = () => {
 
   const removeMutation = useMutation({
     mutationFn: removeCartItemService,
+    onSuccess: syncCart,
+  })
+
+  const clearMutation = useMutation({
+    mutationFn: clearCartService,
     onSuccess: syncCart,
   })
 
@@ -100,6 +106,15 @@ export const useCart = () => {
     removeMutation.mutate(productId)
   }
 
+  const clearCart = () => {
+    if (!isAuthenticated) {
+      clearGuestCart()
+      return
+    }
+
+    clearMutation.mutate()
+  }
+
   return {
     items,
     addItem,
@@ -111,6 +126,7 @@ export const useCart = () => {
     isPending:
       addMutation.isPending ||
       updateMutation.isPending ||
-      removeMutation.isPending,
+      removeMutation.isPending ||
+      clearMutation.isPending,
   }
 }

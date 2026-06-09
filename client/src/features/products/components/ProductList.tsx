@@ -10,6 +10,7 @@ type ProductListProps = {
   products: Product[]
   isLoading?: boolean
   emptyMessage?: string
+  initialCategory?: string
 }
 
 type SortOption = 'price-asc' | 'price-desc' | 'name'
@@ -20,9 +21,10 @@ export const ProductList = ({
   products,
   isLoading = false,
   emptyMessage = 'No makeup found',
+  initialCategory = 'All',
 }: ProductListProps) => {
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('All')
+  const [category, setCategory] = useState(initialCategory)
   const [sortBy, setSortBy] = useState<SortOption>('name')
   const [page, setPage] = useState(1)
 
