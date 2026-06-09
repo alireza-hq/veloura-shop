@@ -1,4 +1,7 @@
+ 'use client'
+
 import { ArrowRightIcon } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link';
 
 import { routes } from '@/lib/routes';
@@ -6,6 +9,10 @@ import { routes } from '@/lib/routes';
 import { BackgroundSlideshow } from './BackgroundSlideshow';
 
 export const Hero = () => {
+  const reduceMotion = useReducedMotion()
+  const { scrollY } = useScroll()
+  const contentY = useTransform(scrollY, [0, 700], [0, 130])
+  const contentOpacity = useTransform(scrollY, [0, 620], [1, 0.18])
   const images = [
     // 'https://vimana-clothing.com/upload/banner/1770633926-banner-socks-2.png',
     // 'https://vimana-clothing.com/upload/banner/1773836142-pants-beneli.png',
@@ -31,7 +38,10 @@ export const Hero = () => {
 
       <div className='absolute inset-0 bg-linear-to-r from-black/70 via-black/35 to-black/10'></div>
 
-      <div className='relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-5 lg:gap-7'>
+      <motion.div
+        style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity }}
+        className='relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-5 will-change-transform lg:gap-7'
+      >
         <p className='text-xs font-semibold tracking-[0.24em] text-white/65 uppercase'>
           The modern makeup edit
         </p>
@@ -53,7 +63,7 @@ export const Hero = () => {
             <ArrowRightIcon className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
           </span>
         </Link>
-      </div>
+      </motion.div>
       <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/30 to-transparent dark:from-black/40' />
     </section>
   )
