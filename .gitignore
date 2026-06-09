@@ -1,5 +1,11 @@
 node_modules/
+.dist/
+dist/
 client/.next/
 client/node_modules/
+server/dist/
 server/node_modules/
 *.log
+.env
+.env.*
+!.env.example

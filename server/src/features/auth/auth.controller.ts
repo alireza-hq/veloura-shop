@@ -3,6 +3,14 @@ import { comparePassword, hashPassword } from '../../lib/hash'
 import { signToken } from '../../lib/jwt'
 import { loginSchema, signupSchema } from './auth.schema'
 import * as service from './auth.service'
+import { env } from '../../config/env'
+
+const authCookieOptions = {
+  httpOnly: true,
+  secure: env.NODE_ENV === 'production',
+  sameSite: 'lax' as const,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+}
 
 export const signup = async (req: Request, res: Response) => {
   const data = signupSchema.parse(req.body)
@@ -27,12 +35,7 @@ export const signup = async (req: Request, res: Response) => {
 
   res
     .status(201)
-    .cookie('token', token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    })
+    .cookie('token', token, authCookieOptions)
     .json({
       user,
     })
@@ -60,19 +63,18 @@ export const login = async (req: Request, res: Response) => {
   const token = signToken({ userId: user.id, role: user.role })
 
   res
-    .cookie('token', token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    })
+    .cookie('token', token, authCookieOptions)
     .json({
       user,
     })
 }
 
 export const logout = async (_req: Request, res: Response) => {
-  res.clearCookie('token')
+  res.clearCookie('token', {
+    httpOnly: authCookieOptions.httpOnly,
+    secure: authCookieOptions.secure,
+    sameSite: authCookieOptions.sameSite,
+  })
 
   res.json({
     message: 'Logged out',

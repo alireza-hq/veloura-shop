@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: veloura-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci && npm run build
+    preDeployCommand: npm run db:init
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: veloura-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+
+databases:
+  - name: veloura-db
+    databaseName: veloura
+    user: veloura

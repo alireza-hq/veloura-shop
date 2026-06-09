@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "module": "commonjs",
+    "module": "CommonJS",
     "rootDir": "./src",
-    "baseUrl": "./src",
     "outDir": "./dist",
 
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]
     },
 
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "noEmitOnError": true
   },
 
   "include": ["src"],

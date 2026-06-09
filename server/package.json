@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "server.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
+    "build": "tsc",
+    "db:init": "node init-db.js",
+    "typecheck": "tsc --noEmit",
+    "start": "node start.js"
   },
   "keywords": [],
   "author": "",
