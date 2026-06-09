@@ -5,7 +5,7 @@ import { routes } from '@/lib/routes'
 import { useCart } from '../hooks/useCart'
 
 export const CartFooter = () => {
-  const { items, clearCart } = useCart()
+  const { items, clearCart, isPending } = useCart()
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
@@ -21,10 +21,11 @@ export const CartFooter = () => {
       <div className='grid w-full grid-cols-2 gap-3 sm:w-auto'>
         <button
           type='button'
+          disabled={isPending}
           onClick={() => clearCart()}
-          className='rounded-full border border-black/10 bg-white px-6 py-2.5 text-sm font-medium text-black shadow-xs transition hover:opacity-80 hover:shadow-sm active:opacity-75 dark:border-white/15 dark:bg-black dark:text-white'
+          className='rounded-full border border-black/10 bg-white px-6 py-2.5 text-sm font-medium text-black shadow-xs transition hover:opacity-80 hover:shadow-sm active:opacity-75 disabled:cursor-wait disabled:opacity-45 dark:border-white/15 dark:bg-black dark:text-white'
         >
-          Clear Cart
+          {isPending ? 'Syncing...' : 'Clear cart'}
         </button>
         <Link
           href={routes.checkout}

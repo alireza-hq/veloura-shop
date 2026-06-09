@@ -41,7 +41,7 @@ export const Navbar = () => {
   }, [])
 
   const controlClass = cn(
-    'rounded-full text-white transition duration-200',
+    'rounded-full text-white transition-[background-color,box-shadow,opacity] duration-300 ease-out',
     solid ? 'bg-transparent' : 'bg-black/18 shadow-sm backdrop-blur-md',
   )
 
@@ -49,8 +49,9 @@ export const Navbar = () => {
     <header className='pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4'>
       <nav
         className={cn(
-          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-2 py-2 text-white transition duration-200 sm:px-3',
-          solid && 'bg-zinc-950/92 shadow-xl shadow-black/20 backdrop-blur-xl',
+          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl border border-transparent px-2 py-2 text-white transition-[background-color,border-color,box-shadow,transform] duration-500 ease-out sm:px-3',
+          solid &&
+            'border-white/8 bg-zinc-950/88 shadow-xl shadow-black/15 backdrop-blur-2xl',
         )}
       >
         <div className='flex min-w-0 items-center gap-4 md:gap-6'>

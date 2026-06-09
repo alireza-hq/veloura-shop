@@ -37,6 +37,22 @@ export default function CategoriesPage() {
         title='Beauty collections'
         description='Start with the feature, finish, or tool that inspires your next look.'
       />
+      <div className='mb-8 grid gap-6 border-y border-black/8 py-6 sm:grid-cols-3 dark:border-white/10'>
+        {[
+          ['Curated by routine', 'Find the right products without the noise.'],
+          ['Made to mix', 'Every collection works beautifully together.'],
+          ['Easy to explore', 'Open a collection to see its products instantly.'],
+        ].map(([title, description]) => (
+          <div key={title}>
+            <p className='text-sm font-semibold text-black dark:text-white'>
+              {title}
+            </p>
+            <p className='mt-1 text-sm leading-6 text-black/45 dark:text-white/45'>
+              {description}
+            </p>
+          </div>
+        ))}
+      </div>
       <CategoryList categories={categories} />
     </ScreenLayout>
   )
