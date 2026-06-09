@@ -8,6 +8,7 @@ import {
   LogOut,
   Mail,
   Package,
+  ReceiptText,
   ShieldCheck,
   ShoppingBag,
   Sparkles,
@@ -77,14 +78,14 @@ export const UserProfile = () => {
       <div className='grid items-end gap-8 lg:grid-cols-[1fr_auto]'>
         <div>
           <p className='text-xs font-semibold tracking-[0.22em] text-rose-900/55 uppercase dark:text-rose-100/50'>
-            Your Veloura
+            Personal beauty space
           </p>
           <h1 className='mt-5 text-5xl font-semibold tracking-[-0.055em] text-black sm:text-7xl dark:text-white'>
-            Welcome, {user.username}.
+            Made personal for {user.username}.
           </h1>
           <p className='mt-5 max-w-xl text-base leading-7 text-black/48 dark:text-white/48'>
-            Keep an eye on your orders, saved beauty, and the essentials waiting
-            in your bag.
+            Your saved beauty, recent orders, and next discoveries in one calm
+            place.
           </p>
         </div>
 
@@ -149,36 +150,72 @@ export const UserProfile = () => {
           </div>
         </section>
 
-        <aside className='flex flex-col justify-between rounded-[2rem] bg-[#2a1c23] p-7 text-white sm:p-8'>
+        <aside className='flex flex-col rounded-[2rem] bg-[#2a1c23] p-7 text-white sm:p-8'>
           <div>
             <p className='text-xs font-semibold tracking-[0.2em] text-white/40 uppercase'>
-              Explore next
+              Recent activity
             </p>
             <h2 className='mt-4 text-3xl font-semibold tracking-tight'>
-              Find something made for your routine.
+              Your latest orders
             </h2>
-            <Link
-              href={routes.products.root}
-              className='mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-white'
-            >
-              Browse the makeup edit
-              <ArrowRight className='h-4 w-4' />
-            </Link>
           </div>
 
-          <button
-            type='button'
-            onClick={() => logout()}
-            disabled={isPending}
-            className='mt-12 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white/10 px-5 py-2.5 text-sm font-medium text-white/70 transition hover:bg-white/16 hover:text-white disabled:cursor-wait disabled:opacity-50'
-          >
-            {isPending ? (
-              <Loader2 className='h-4 w-4 animate-spin' />
+          <div className='mt-7 flex-1 divide-y divide-white/10 border-y border-white/10'>
+            {orders.length ? (
+              orders.slice(0, 3).map((order) => (
+                <Link
+                  key={order.id}
+                  href={routes.orders}
+                  className='group flex items-center gap-4 py-4'
+                >
+                  <span className='flex h-10 w-10 items-center justify-center rounded-full bg-white/8'>
+                    <ReceiptText className='h-4 w-4 text-white/65' />
+                  </span>
+                  <span className='min-w-0 flex-1'>
+                    <span className='block text-sm font-medium'>
+                      Order #{order.id}
+                    </span>
+                    <span className='mt-1 block text-xs capitalize text-white/38'>
+                      {order.status} · ${Number(order.total).toFixed(2)}
+                    </span>
+                  </span>
+                  <ArrowRight className='h-4 w-4 text-white/25 transition group-hover:translate-x-1 group-hover:text-white' />
+                </Link>
+              ))
             ) : (
-              <LogOut className='h-4 w-4' />
+              <div className='py-8'>
+                <p className='text-sm text-white/48'>No orders yet.</p>
+                <Link
+                  href={routes.products.root}
+                  className='mt-3 inline-flex items-center gap-2 text-sm font-semibold text-white/75 hover:text-white'
+                >
+                  Start exploring <ArrowRight className='h-4 w-4' />
+                </Link>
+              </div>
             )}
-            {isPending ? 'Signing out...' : 'Sign out'}
-          </button>
+          </div>
+
+          <div className='mt-7 flex flex-wrap items-center justify-between gap-4'>
+            <Link
+              href={routes.orders}
+              className='text-sm font-semibold text-white/65 transition hover:text-white'
+            >
+              View all orders
+            </Link>
+            <button
+              type='button'
+              onClick={() => logout()}
+              disabled={isPending}
+              className='inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-medium text-white/70 transition hover:bg-white/16 hover:text-white disabled:cursor-wait disabled:opacity-50'
+            >
+              {isPending ? (
+                <Loader2 className='h-4 w-4 animate-spin' />
+              ) : (
+                <LogOut className='h-4 w-4' />
+              )}
+              {isPending ? 'Signing out...' : 'Sign out'}
+            </button>
+          </div>
         </aside>
       </div>
     </section>
