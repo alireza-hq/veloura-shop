@@ -15,7 +15,7 @@ export default function Home() {
   const bottomCats = categories?.slice(3, 6)
 
   return (
-    <main className='bg-dot-pattern relative min-h-screen dark:bg-black'>
+    <main className='bg-dot-pattern relative min-h-screen'>
       <Hero />
 
       <HomeSection className='relative z-10 -mt-12 pt-0'>

@@ -42,16 +42,16 @@ export const Navbar = () => {
 
   const controlClass = cn(
     'rounded-full text-white transition-[background-color,box-shadow,opacity] duration-300 ease-out',
-    solid ? 'bg-transparent' : 'bg-black/18 shadow-sm backdrop-blur-md',
+    solid ? 'bg-white/6' : 'bg-black/16 shadow-sm backdrop-blur-md',
   )
 
   return (
     <header className='pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4'>
       <nav
         className={cn(
-          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl border border-transparent px-2 py-2 text-white transition-[background-color,border-color,box-shadow,transform] duration-500 ease-out sm:px-3',
+          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-2 py-2 text-white transition-[background-color,box-shadow,transform] duration-500 ease-out sm:px-3',
           solid &&
-            'border-white/8 bg-zinc-950/88 shadow-xl shadow-black/15 backdrop-blur-2xl',
+            'bg-[#2a1c23]/72 shadow-xl shadow-[#1a1015]/20 backdrop-blur-2xl',
         )}
       >
         <div className='flex min-w-0 items-center gap-4 md:gap-6'>
@@ -140,7 +140,7 @@ export const Navbar = () => {
       </nav>
 
       {mobileOpen && (
-        <div className='pointer-events-auto mx-auto mt-2 w-full max-w-7xl rounded-3xl bg-zinc-950/96 p-2 text-white shadow-xl backdrop-blur-xl md:hidden'>
+        <div className='pointer-events-auto mx-auto mt-2 w-full max-w-7xl rounded-3xl bg-[#2a1c23]/88 p-2 text-white shadow-xl backdrop-blur-2xl md:hidden'>
           {navigation.map(({ label, href }) => (
             <Link
               key={href}

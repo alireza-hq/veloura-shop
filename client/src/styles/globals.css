@@ -12,11 +12,15 @@
 :root {
   --background: #fbf7f5;
   --foreground: #211a1c;
+  --surface: #fffaf8;
+  --surface-muted: #f4e9e7;
 }
 
 .dark {
-  --foreground: #fff8fa;
-  --background: #171113;
+  --foreground: #f9eef1;
+  --background: #1c1418;
+  --surface: #281c22;
+  --surface-muted: #34242c;
 }
 
 button:is(:not(:disabled)) {
@@ -29,12 +33,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  background-image: radial-gradient(
-    circle at 50% -10rem,
-    rgba(238, 214, 220, 0.38),
-    transparent 42rem
-  );
+  background-image:
+    radial-gradient(circle at 8% 12%, rgba(217, 163, 177, 0.22), transparent 30rem),
+    radial-gradient(circle at 88% 36%, rgba(239, 205, 190, 0.28), transparent 34rem),
+    linear-gradient(145deg, transparent 30%, rgba(255, 255, 255, 0.35));
+  background-attachment: fixed;
   background-repeat: no-repeat;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(circle at 8% 12%, rgba(145, 74, 101, 0.2), transparent 30rem),
+    radial-gradient(circle at 88% 36%, rgba(112, 67, 91, 0.18), transparent 34rem),
+    linear-gradient(145deg, transparent 30%, rgba(255, 225, 235, 0.02));
 }
 
 ::selection {
@@ -42,16 +53,28 @@ body {
 }
 
 .bg-dot-pattern {
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.48),
-    transparent 42rem
-  );
+  background-color: transparent;
+  background-image:
+    radial-gradient(circle at 18% 18%, rgba(231, 190, 199, 0.18), transparent 25rem),
+    radial-gradient(circle at 82% 65%, rgba(237, 210, 195, 0.2), transparent 30rem);
+  background-attachment: fixed;
 }
 .dark .bg-dot-pattern {
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.025),
-    transparent 42rem
-  );
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(circle at 18% 18%, rgba(139, 72, 99, 0.13), transparent 25rem),
+    radial-gradient(circle at 82% 65%, rgba(104, 61, 82, 0.16), transparent 30rem);
+}
+
+.dark .dark\:bg-black {
+  background-color: var(--surface) !important;
+}
+
+.dark .dark\:bg-zinc-950,
+.dark .dark\:bg-zinc-900 {
+  background-color: var(--surface) !important;
+}
+
+.dark .dark\:bg-zinc-800 {
+  background-color: var(--surface-muted) !important;
 }

@@ -36,8 +36,8 @@ export const AdminLayout = ({ children }: Props) => {
   }
 
   return (
-    <div className='bg-dot-pattern min-h-screen dark:bg-black'>
-      <div className='bg-black/90 py-12' />
+    <div className='bg-dot-pattern min-h-screen'>
+      <div className='bg-[#24191e] py-12' />
       <div className='min-h-screen lg:grid lg:grid-cols-[240px_1fr]'>
         <AdminSidebar />
 

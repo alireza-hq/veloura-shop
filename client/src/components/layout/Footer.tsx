@@ -6,7 +6,7 @@ import { routes } from '@/lib/routes';
 
 export const Footer = () => {
   return (
-    <footer className='border-t border-white/10 bg-black pt-16 text-white/60'>
+    <footer className='border-t border-white/8 bg-[#24191e] pt-16 text-white/60'>
       <div className='mx-auto max-w-7xl px-6 lg:px-24'>
         <div className='grid grid-cols-2 gap-10 md:grid-cols-4'>
           {/* Brand */}
