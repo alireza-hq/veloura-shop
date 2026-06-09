@@ -38,7 +38,7 @@ export const endpoints = {
   orders: {
     createOrder: '/orders',
     getOrders: '/orders',
-    getOrder: (id: number) => `orders/${id}`,
+    getOrder: (id: number) => `/orders/${id}`,
 
     getAdminOrders: '/admin/orders',
     getAdminOrder: (id: number) => `/admin/orders/${id}`,

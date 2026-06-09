@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 
 import * as adminService from './admin.service'
+import { orderStatusSchema } from '../orders/orders.schema'
 
 export const getAdminStats = async (req: Request, res: Response) => {
   const stats = await adminService.getAdminStats()
@@ -16,13 +17,13 @@ export const getAdminOrders = async (req: Request, res: Response) => {
 
 export const updateOrderStatus = async (req: Request, res: Response) => {
   const { id } = req.params
-  const { status } = req.body
+  const status = orderStatusSchema.parse(req.body.status)
 
   const order = await adminService.updateOrderStatus(Number(id), status)
 
   if (!order) {
-    return res.status(404).json({
-      message: 'Order not found',
+    return res.status(400).json({
+      message: 'Order status transition is not allowed',
     })
   }
 

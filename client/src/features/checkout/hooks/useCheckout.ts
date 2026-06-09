@@ -42,7 +42,7 @@ export const useCheckout = (
       queryClient.invalidateQueries({ queryKey: ['orders'] })
 
       setTimeout(() => {
-        router.push(routes.products.root)
+        router.push(routes.orders)
       }, 2500)
     },
 

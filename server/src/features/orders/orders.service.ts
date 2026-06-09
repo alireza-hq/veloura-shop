@@ -96,22 +96,16 @@ export const createOrder = async (userId: number) => {
         [item.quantity, item.id],
       )
 
-      // clear cart
-      await client.query(
-        `
-        DELETE FROM cart_items
-        WHERE cart_id IN (
-            SELECT id FROM carts
-            WHERE user_id = $1
-        )
-        `,
-        [userId],
-      )
-
-      await client.query('COMMIT')
-
-      return order
     }
+
+    await client.query(
+      `DELETE FROM cart_items
+       WHERE cart_id IN (SELECT id FROM carts WHERE user_id = $1)`,
+      [userId],
+    )
+
+    await client.query('COMMIT')
+    return order
   } catch (err) {
     await client.query('ROLLBACK')
 
@@ -124,17 +118,28 @@ export const createOrder = async (userId: number) => {
 export const getOrderList = async (userId: number) => {
   const { rows } = await db.query(
     `
-        SELECT 
-          id,
-          subtotal,
-          shipping,
-          tax,
-          total,
-          status,
-          created_at AS "createdAt"
-        FROM orders
-        WHERE user_id = $1
-        ORDER BY created_at DESC
+        SELECT
+          o.id, o.subtotal, o.shipping, o.tax, o.total, o.status,
+          o.created_at AS "createdAt",
+          COALESCE(
+            json_agg(
+              json_build_object(
+                'quantity', oi.quantity,
+                'price', oi.price,
+                'product', json_build_object(
+                  'id', oi.product_id,
+                  'name', oi.product_name,
+                  'image', oi.product_image
+                )
+              )
+            ) FILTER (WHERE oi.id IS NOT NULL),
+            '[]'
+          ) AS items
+        FROM orders o
+        LEFT JOIN order_items oi ON oi.order_id = o.id
+        WHERE o.user_id = $1
+        GROUP BY o.id
+        ORDER BY o.created_at DESC
         `,
     [userId],
   )
@@ -168,7 +173,7 @@ export const getOrderById = async (userId: number, orderId: number) => {
         json_build_object(
             'id', product_id,
             'name', product_name,
-            'image', product_image,
+            'image', product_image
         ) AS product
 
     FROM order_items

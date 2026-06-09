@@ -20,7 +20,7 @@ export const getAdminStats = async () => {
     db.query(`
       SELECT COALESCE(SUM(total), 0)::float AS revenue
       FROM orders
-      WHERE status = 'paid'
+      WHERE status IN ('paid', 'processing', 'shipped', 'delivered')
     `),
 
     db.query(`
@@ -86,14 +86,25 @@ export const getAdminOrders = async () => {
 }
 
 export const updateOrderStatus = async (id: number, status: string) => {
+  const allowedFrom: Record<string, string[]> = {
+    paid: ['pending'],
+    processing: ['paid'],
+    shipped: ['processing'],
+    delivered: ['shipped'],
+    cancelled: ['pending', 'paid', 'processing'],
+  }
+  const previousStatuses = allowedFrom[status] ?? []
+  if (!previousStatuses.length) return null
+
   const { rows } = await db.query(
     `
     UPDATE orders
     SET status = $1
     WHERE id = $2
+      AND status = ANY($3::text[])
     RETURNING *
     `,
-    [status, id],
+    [status, id, previousStatuses],
   )
 
   return rows[0]

@@ -1,4 +1,10 @@
-export type OrderStatus = 'pending' | 'paid' | 'cancelled'
+export type OrderStatus =
+  | 'pending'
+  | 'paid'
+  | 'processing'
+  | 'shipped'
+  | 'delivered'
+  | 'cancelled'
 
 export type OrderItem = {
   quantity: number

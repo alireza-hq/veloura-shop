@@ -13,13 +13,14 @@ type Props = {
   order: AdminOrder
 }
 
-const statuses: AdminOrderStatus[] = [
-  'pending',
-  'paid',
-  'shipped',
-  'delivered',
-  'cancelled',
-]
+const transitions: Record<AdminOrderStatus, AdminOrderStatus[]> = {
+  pending: ['paid', 'cancelled'],
+  paid: ['processing', 'cancelled'],
+  processing: ['shipped', 'cancelled'],
+  shipped: ['delivered'],
+  delivered: [],
+  cancelled: [],
+}
 
 export const AdminOrderRow = ({ order }: Props) => {
   const updateStatus = useUpdateOrderStatus()
@@ -75,7 +76,7 @@ export const AdminOrderRow = ({ order }: Props) => {
             value={order.status}
             disabled={isUpdating}
             onChange={handleStatusChange}
-            options={statuses.map((status) => ({
+            options={[order.status, ...transitions[order.status]].map((status) => ({
               value: status,
               label: status.toUpperCase(),
             }))}
@@ -96,6 +97,8 @@ const getStatusClass = (status: AdminOrderStatus) => {
       return 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400'
     case 'shipped':
       return 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+    case 'processing':
+      return 'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
     case 'delivered':
       return 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400'
     case 'cancelled':

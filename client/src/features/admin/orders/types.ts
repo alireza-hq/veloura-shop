@@ -1,6 +1,7 @@
 export type AdminOrderStatus =
   | 'pending'
   | 'paid'
+  | 'processing'
   | 'shipped'
   | 'delivered'
   | 'cancelled'

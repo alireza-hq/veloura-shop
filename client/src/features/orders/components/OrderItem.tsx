@@ -1,7 +1,7 @@
 'use client'
 
 import { format } from 'date-fns'
-import { CheckCircle, Clock, ShoppingBag, XCircle } from 'lucide-react'
+import { CheckCircle, Clock, PackageCheck, ShoppingBag, Truck, XCircle } from 'lucide-react'
 
 import { cn } from '@/lib/utils/cn'
 
@@ -10,10 +10,18 @@ import { Order } from '../types'
 type Props = Order
 
 export const OrderItem = ({ id, status, total, items, createdAt }: Props) => {
+  const progressSteps = ['pending', 'paid', 'processing', 'shipped', 'delivered']
+  const currentStep = progressSteps.indexOf(status)
   const getStatusIcon = () => {
     switch (status) {
       case 'paid':
         return <CheckCircle className='h-4 w-4 text-green-500' />
+      case 'processing':
+        return <PackageCheck className='h-4 w-4 text-orange-500' />
+      case 'shipped':
+        return <Truck className='h-4 w-4 text-blue-500' />
+      case 'delivered':
+        return <CheckCircle className='h-4 w-4 text-purple-500' />
       case 'cancelled':
         return <XCircle className='h-4 w-4 text-red-500' />
       case 'pending':
@@ -26,6 +34,12 @@ export const OrderItem = ({ id, status, total, items, createdAt }: Props) => {
     switch (status) {
       case 'paid':
         return 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+      case 'processing':
+        return 'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+      case 'shipped':
+        return 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+      case 'delivered':
+        return 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400'
       case 'cancelled':
         return 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
       case 'pending':
@@ -58,6 +72,33 @@ export const OrderItem = ({ id, status, total, items, createdAt }: Props) => {
           </span>
         </div>
       </div>
+
+      {status !== 'cancelled' && (
+        <div className='mb-5 grid grid-cols-5 gap-1 border-t border-black/5 pt-4 dark:border-white/5'>
+          {progressSteps.map((step, index) => (
+            <div key={step}>
+              <div
+                className={cn(
+                  'h-1 rounded-full',
+                  index <= currentStep
+                    ? 'bg-rose-700 dark:bg-rose-300'
+                    : 'bg-black/8 dark:bg-white/10',
+                )}
+              />
+              <p
+                className={cn(
+                  'mt-2 hidden text-[10px] capitalize sm:block',
+                  index <= currentStep
+                    ? 'text-black/65 dark:text-white/65'
+                    : 'text-black/25 dark:text-white/25',
+                )}
+              >
+                {step}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Items Summary */}
       <div className='mb-4 border-t border-black/5 pt-4 dark:border-white/5'>
