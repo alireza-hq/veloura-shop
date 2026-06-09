@@ -20,7 +20,7 @@ const ITEMS_PER_PAGE = 8
 export const ProductList = ({
   products,
   isLoading = false,
-  emptyMessage = 'No makeup found',
+  emptyMessage = 'No products found',
   initialCategory = 'All',
 }: ProductListProps) => {
   const [search, setSearch] = useState('')
@@ -88,7 +88,7 @@ export const ProductList = ({
   return (
     <div>
       {/* Filters & Search */}
-      <div className='mb-8 flex flex-col gap-4 rounded-2xl border border-black/8 bg-white/60 p-3 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-white/4'>
+      <div className='mb-10 flex flex-col gap-4 border-b border-black/8 pb-6 sm:flex-row sm:items-center sm:justify-between dark:border-white/10'>
         {/* Search */}
         <input
           type='text'
@@ -98,7 +98,7 @@ export const ProductList = ({
             setSearch(e.target.value)
             setPage(1)
           }}
-          className='w-full rounded-xl border border-black/10 bg-white/80 px-4 py-2.5 text-sm text-black placeholder:text-black/30 focus:border-black/30 focus:outline-none sm:w-64 dark:border-white/10 dark:bg-zinc-950/70 dark:text-white dark:placeholder:text-white/30 dark:focus:border-white/30'
+          className='w-full border-b border-black/15 bg-transparent px-1 py-2.5 text-sm text-black placeholder:text-black/30 focus:border-black focus:outline-none sm:w-64 dark:border-white/15 dark:text-white dark:placeholder:text-white/30 dark:focus:border-white'
         />
 
         {/* Category & Sort */}
@@ -127,7 +127,7 @@ export const ProductList = ({
       {/* Product Grid */}
       {paginated.length === 0 ? (
         <div className='py-20 text-center text-sm text-black/40 dark:text-white/40'>
-          No makeup found
+          No products found
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4'>

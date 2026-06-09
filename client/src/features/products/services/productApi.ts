@@ -10,7 +10,7 @@ export type CreateProductData = {
   price: number
   categoryId: number
   stock: number
-  rating: number
+  rating?: number
 }
 
 export type UpdateProductData = Partial<CreateProductData>

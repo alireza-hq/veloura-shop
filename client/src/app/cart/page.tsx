@@ -19,7 +19,7 @@ export default function CartPage() {
       <EmptyState
         icon={MdShoppingCart}
         title='Your cart is empty'
-        buttonText='Explore Makeup'
+        buttonText='Explore products'
         route={routes.products.root}
       >
         Your beauty bag is ready whenever inspiration strikes.

@@ -20,8 +20,8 @@ import { NavbarSearch } from './NavbarSearch'
 import { UserDropdown } from './UserDropdown'
 
 const navigation = [
-  { label: 'Makeup', href: routes.products.root },
-  { label: 'Collections', href: routes.categories.root },
+  { label: 'Products', href: routes.products.root },
+  { label: 'Collections', href: routes.collections.root },
   { label: 'About', href: routes.about },
   { label: 'Contact', href: routes.contact },
 ]

@@ -15,7 +15,6 @@ export const productFormSchema = z.object({
   stock: z.coerce.number().int().nonnegative({
     message: 'Stock cannot be negative',
   }),
-  rating: z.coerce.number().min(0).max(5),
 })
 
 export type ProductFormInput = z.input<typeof productFormSchema>

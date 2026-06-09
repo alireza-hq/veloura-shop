@@ -107,7 +107,7 @@ type ProductInput = {
 }
 
 export const createProduct = async (data: ProductInput) => {
-  const { image, name, description, price, categoryId, stock, rating } = data
+  const { image, name, description, price, categoryId, stock, rating = 0 } = data
 
   const { rows } = await db.query(
     `INSERT INTO products (image, name, description, price, category_id, stock, rating)

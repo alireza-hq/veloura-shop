@@ -2,9 +2,8 @@ export const routes = {
   home: '/',
   cart: '/cart',
   checkout: '/checkout',
-  categories: {
-    root: '/categories',
-    category: (id: number) => `/categories/${id}`,
+  collections: {
+    root: '/collections',
   },
   wishlist: '/wishlist',
   about: '/about',

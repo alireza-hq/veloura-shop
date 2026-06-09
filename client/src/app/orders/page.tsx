@@ -21,7 +21,7 @@ export default function OrdersPage() {
       <EmptyState
         icon={BiShoppingBag}
         title='No orders yet'
-        buttonText='Browse Makeup'
+        buttonText='Browse products'
         route={routes.products.root}
       >
         Your first Veloura order will appear here.

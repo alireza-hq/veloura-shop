@@ -28,7 +28,6 @@ export const useAdminCreateProductForm = () => {
       price: 0,
       categoryId: 0,
       stock: 0,
-      rating: 0,
     },
   })
 

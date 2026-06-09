@@ -49,7 +49,7 @@ export const Hero = () => {
           className='group w-fit rounded-full bg-white px-7 py-3 text-sm font-semibold text-black transition duration-200 hover:bg-white/85'
         >
           <span className='flex items-center gap-2'>
-            Explore Makeup
+            Explore products
             <ArrowRightIcon className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
           </span>
         </Link>

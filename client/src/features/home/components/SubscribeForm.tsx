@@ -34,17 +34,17 @@ export const SubscribeForm = () => {
             type='email'
             placeholder='Enter your email'
             className={cn(
-              'peer w-full rounded-full border border-white/12 bg-white/8 px-5 py-3.5 text-sm text-white placeholder:text-white/35 transition focus:border-white/30 focus:bg-white/12 focus:outline-none',
+              'peer w-full rounded-full border border-black/10 bg-white/65 px-5 py-3.5 text-sm text-black placeholder:text-black/30 transition focus:border-black/25 focus:bg-white focus:outline-none dark:border-white/12 dark:bg-white/6 dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/30 dark:focus:bg-white/10',
               errors.email && 'border-red-600 focus:border-red-600',
             )}
           />
           {errors.email && (
-            <span className='mt-1.5 block pl-5 text-xs text-red-300'>
+            <span className='mt-1.5 block pl-5 text-xs text-red-600 dark:text-red-300'>
               {errors.email?.message}
             </span>
           )}
           {isSubmitSuccessful && (
-            <span className='mt-1.5 block pl-5 text-xs text-emerald-300'>
+            <span className='mt-1.5 block pl-5 text-xs text-emerald-700 dark:text-emerald-300'>
               Welcome to the Veloura edit
             </span>
           )}
@@ -52,7 +52,7 @@ export const SubscribeForm = () => {
 
         <button
           disabled={isSubmitting}
-          className='shrink-0 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition duration-200 hover:bg-white/85 disabled:opacity-50'
+          className='shrink-0 rounded-full bg-black px-6 py-3.5 text-sm font-semibold text-white transition duration-200 hover:opacity-75 disabled:opacity-50 dark:bg-white dark:text-[#24191e]'
         >
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
         </button>

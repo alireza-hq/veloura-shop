@@ -32,7 +32,6 @@ export const useAdminEditProductForm = (id: number) => {
       price: 0,
       categoryId: 0,
       stock: 0,
-      rating: 0,
     },
   })
 
@@ -46,7 +45,6 @@ export const useAdminEditProductForm = (id: number) => {
       price: product.price,
       categoryId: product.category.id,
       stock: product.stock,
-      rating: product.rating,
     })
   }, [product, form])
 

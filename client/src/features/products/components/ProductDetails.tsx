@@ -72,16 +72,20 @@ export const ProductDetails = ({ product }: Props) => {
 
           {/* Rating & Stock */}
           <div className='mb-6 flex items-center gap-4'>
-            <div className='flex items-center gap-1 text-yellow-500'>
-              <Star className='h-5 w-5 fill-current' />
-              <span className='text-sm font-semibold text-zinc-700 dark:text-zinc-300'>
-                {Number(product.rating).toFixed(1)}
-              </span>
-              <span className='text-xs text-zinc-400'>
-                ({product.reviewCount ?? 0})
-              </span>
-            </div>
-            <div className='h-4 w-px bg-zinc-200 dark:bg-zinc-700' />
+            {!!product.reviewCount && (
+              <>
+                <div className='flex items-center gap-1 text-yellow-500'>
+                  <Star className='h-5 w-5 fill-current' />
+                  <span className='text-sm font-semibold text-zinc-700 dark:text-zinc-300'>
+                    {Number(product.rating).toFixed(1)}
+                  </span>
+                  <span className='text-xs text-zinc-400'>
+                    ({product.reviewCount})
+                  </span>
+                </div>
+                <div className='h-4 w-px bg-zinc-200 dark:bg-zinc-700' />
+              </>
+            )}
             <span
               className={cn(
                 'flex items-center gap-1.5 text-sm font-medium',

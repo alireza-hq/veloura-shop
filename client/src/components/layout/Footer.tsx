@@ -34,7 +34,7 @@ export const Footer = () => {
                   href={routes.products.root}
                   className='transition hover:text-white'
                 >
-                  All Makeup
+                  All Products
                 </a>
               </li>
               <li>

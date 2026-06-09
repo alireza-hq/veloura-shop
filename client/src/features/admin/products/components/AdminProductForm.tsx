@@ -123,22 +123,6 @@ export const AdminProductForm = ({
           {errors.stock && <ErrorMessage message={errors.stock.message} />}
         </div>
 
-        <div>
-          <label className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'>
-            Rating
-          </label>
-          <input
-            type='number'
-            step='0.1'
-            min='0'
-            max='5'
-            placeholder='4.5'
-            className={cn(inputClass, errors.rating && 'border-red-600')}
-            {...register('rating')}
-          />
-          {errors.rating && <ErrorMessage message={errors.rating.message} />}
-        </div>
-
         <div className='md:col-span-2'>
           <label className='mb-1 block text-sm font-medium text-black/70 dark:text-white/70'>
             Description

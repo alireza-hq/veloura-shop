@@ -17,7 +17,7 @@ export default function CheckoutPage() {
       <EmptyState
         icon={MdShoppingCart}
         title='Your cart is empty'
-        buttonText='Explore Makeup'
+        buttonText='Explore products'
         route={routes.products.root}
       >
         Add a few beauty essentials before heading to checkout.

@@ -21,7 +21,7 @@ export default function Wishlist() {
       <EmptyState
         icon={Heart}
         title='Your wishlist is empty'
-        buttonText='Explore Makeup'
+        buttonText='Explore products'
         buttonIcon={ShoppingCart}
         route={routes.products.root}
       >

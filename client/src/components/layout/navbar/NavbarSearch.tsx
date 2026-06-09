@@ -116,7 +116,7 @@ export const NavbarSearch = ({ light = true }: { light?: boolean }) => {
             <p className='text-sm text-zinc-500 dark:text-zinc-400'>
               {search.trim().length < 2
                 ? 'Type at least two characters'
-                : `No makeup found for "${search}"`}
+                : `No products found for "${search}"`}
             </p>
           </div>
         )}

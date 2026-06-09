@@ -50,7 +50,7 @@ export const HomeProductList = () => {
 
   const filteredProducts = useMemo(() => {
     return [...products]
-      .sort((a, b) => b.rating - a.rating)
+      .sort((a, b) => b.id - a.id)
       .filter((product) => {
         return filter === 'All' || product.category?.title === filter
       })
@@ -93,7 +93,7 @@ export const HomeProductList = () => {
 
       {filteredProducts.length === 0 ? (
         <div className='py-10 text-center text-sm text-black/40 dark:text-white/40'>
-          No makeup found.
+          No products found.
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4'>

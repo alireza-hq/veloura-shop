@@ -7,7 +7,7 @@ export const productBaseSchema = z.object({
   price: z.number().positive(),
   categoryId: z.number().int(),
   stock: z.number().int().nonnegative(),
-  rating: z.number().min(0).max(5),
+  rating: z.number().min(0).max(5).default(0),
 })
 
 export const createProductSchema = productBaseSchema
