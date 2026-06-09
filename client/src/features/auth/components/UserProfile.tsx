@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  ArrowRight,
+  ArrowUpRight,
   Crown,
   Heart,
   Loader2,
@@ -11,7 +11,6 @@ import {
   ReceiptText,
   ShieldCheck,
   ShoppingBag,
-  Sparkles,
   User,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -20,6 +19,7 @@ import { useCartStore } from '@/features/cart/store/useCartStore'
 import { useOrders } from '@/features/orders/hooks/useOrders'
 import { useWishlist } from '@/features/wishlist/hooks/useWishlist'
 import { routes } from '@/lib/routes'
+import { cn } from '@/lib/utils/cn'
 
 import { useLogout } from '../hooks/useLogout'
 import { useAuthStore } from '../store/useAuthStore'
@@ -57,189 +57,153 @@ export const UserProfile = () => {
 
   const initials = user.username.slice(0, 2).toUpperCase()
   const isAdmin = user.role === 'admin'
-  const stats = [
-    { label: 'Orders', value: orders.length, icon: Package, href: routes.orders },
+  const quickLinks = [
     {
-      label: 'Saved items',
-      value: wishlist.length,
+      label: 'Orders',
+      detail: `${orders.length} total`,
+      icon: Package,
+      href: routes.orders,
+    },
+    {
+      label: 'Wishlist',
+      detail: `${wishlist.length} saved`,
       icon: Heart,
       href: routes.wishlist,
     },
     {
-      label: 'In your bag',
-      value: cartItems.reduce((total, item) => total + item.quantity, 0),
+      label: 'Beauty bag',
+      detail: `${cartItems.reduce((sum, item) => sum + item.quantity, 0)} items`,
       icon: ShoppingBag,
       href: routes.cart,
     },
   ]
 
   return (
-    <section className='mx-auto w-full max-w-6xl space-y-12 py-4 sm:py-8'>
-      <div className='grid items-end gap-8 lg:grid-cols-[1fr_auto]'>
-        <div>
-          <p className='text-xs font-semibold tracking-[0.22em] text-rose-900/55 uppercase dark:text-rose-100/50'>
-            Personal beauty space
-          </p>
-          <h1 className='mt-5 text-5xl font-semibold tracking-[-0.055em] text-black sm:text-7xl dark:text-white'>
-            Made personal for {user.username}.
-          </h1>
-          <p className='mt-5 max-w-xl text-base leading-7 text-black/48 dark:text-white/48'>
-            Your saved beauty, recent orders, and next discoveries in one calm
-            place.
-          </p>
-        </div>
-
-        <div className='flex items-center gap-4'>
-          <div className='flex h-18 w-18 items-center justify-center rounded-full bg-rose-200 text-lg font-semibold text-rose-950 shadow-lg shadow-rose-900/10 dark:bg-rose-900/45 dark:text-rose-50'>
+    <section className='mx-auto w-full max-w-6xl py-4 sm:py-8'>
+      <header className='flex flex-col gap-8 border-b border-black/8 pb-10 sm:flex-row sm:items-end sm:justify-between dark:border-white/10'>
+        <div className='flex items-center gap-5'>
+          <div className='flex h-20 w-20 items-center justify-center rounded-full bg-rose-200 text-xl font-semibold text-rose-950 dark:bg-rose-900/45 dark:text-rose-50'>
             {initials}
           </div>
           <div>
-            <p className='font-semibold text-black dark:text-white'>
-              {user.username}
+            <p className='text-xs font-semibold tracking-[0.2em] text-rose-900/48 uppercase dark:text-rose-100/48'>
+              Your account
             </p>
-            <span className='mt-1 inline-flex items-center gap-1 text-xs capitalize text-black/45 dark:text-white/45'>
-              {isAdmin ? (
-                <Crown className='h-3.5 w-3.5' />
-              ) : (
-                <ShieldCheck className='h-3.5 w-3.5' />
-              )}
+            <h1 className='mt-2 text-3xl font-semibold tracking-tight text-black sm:text-5xl dark:text-white'>
+              {user.username}
+            </h1>
+            <p className='mt-2 flex items-center gap-1.5 text-sm capitalize text-black/42 dark:text-white/42'>
+              {isAdmin ? <Crown className='h-3.5 w-3.5' /> : <ShieldCheck className='h-3.5 w-3.5' />}
               {user.role} account
-            </span>
+            </p>
           </div>
         </div>
-      </div>
 
-      <div className='grid gap-px overflow-hidden rounded-3xl bg-black/8 sm:grid-cols-3 dark:bg-white/10'>
-        {stats.map(({ label, value, icon: Icon, href }) => (
+        <button
+          type='button'
+          onClick={() => logout()}
+          disabled={isPending}
+          className='inline-flex items-center justify-center gap-2 self-start rounded-full border border-black/10 px-5 py-2.5 text-sm font-medium text-black/55 transition hover:border-red-200 hover:text-red-600 disabled:opacity-50 sm:self-auto dark:border-white/12 dark:text-white/55 dark:hover:border-red-500/30 dark:hover:text-red-400'
+        >
+          {isPending ? <Loader2 className='h-4 w-4 animate-spin' /> : <LogOut className='h-4 w-4' />}
+          {isPending ? 'Signing out...' : 'Sign out'}
+        </button>
+      </header>
+
+      <div className='grid gap-px overflow-hidden rounded-3xl bg-black/8 mt-10 sm:grid-cols-3 dark:bg-white/10'>
+        {quickLinks.map(({ label, detail, icon: Icon, href }) => (
           <Link
             key={label}
             href={href}
-            className='group bg-white/65 p-6 backdrop-blur-sm transition hover:bg-white sm:p-8 dark:bg-[#2b1e24]/82 dark:hover:bg-[#34242c]'
+            className='group flex items-center gap-4 bg-white/55 p-5 backdrop-blur-sm transition hover:bg-white sm:p-6 dark:bg-white/4 dark:hover:bg-white/7'
           >
-            <div className='flex items-center justify-between'>
-              <Icon className='h-5 w-5 text-rose-900/45 dark:text-rose-100/45' />
-              <ArrowRight className='h-4 w-4 text-black/20 transition group-hover:translate-x-1 group-hover:text-black dark:text-white/20 dark:group-hover:text-white' />
-            </div>
-            <p className='mt-8 text-4xl font-semibold tracking-tight text-black dark:text-white'>
-              {value}
-            </p>
-            <p className='mt-1 text-sm text-black/45 dark:text-white/45'>
-              {label}
-            </p>
+            <span className='flex h-11 w-11 items-center justify-center rounded-full bg-rose-100 text-rose-900 dark:bg-rose-950/35 dark:text-rose-100'>
+              <Icon className='h-4 w-4' />
+            </span>
+            <span className='min-w-0 flex-1'>
+              <span className='block text-sm font-semibold text-black dark:text-white'>{label}</span>
+              <span className='mt-1 block text-xs text-black/38 dark:text-white/38'>{detail}</span>
+            </span>
+            <ArrowUpRight className='h-4 w-4 text-black/20 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black dark:text-white/20 dark:group-hover:text-white' />
           </Link>
         ))}
       </div>
 
-      <div className='grid gap-8 lg:grid-cols-[1.15fr_0.85fr]'>
-        <section className='rounded-[2rem] border border-black/8 bg-white/55 p-6 backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-[#2b1e24]/72'>
-          <div className='flex items-center gap-3'>
-            <Sparkles className='h-5 w-5 text-rose-900/45 dark:text-rose-100/45' />
-            <h2 className='text-xl font-semibold text-black dark:text-white'>
-              Account details
-            </h2>
-          </div>
-
-          <div className='mt-8 divide-y divide-black/8 border-y border-black/8 dark:divide-white/10 dark:border-white/10'>
+      <div className='mt-10 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]'>
+        <section>
+          <p className='text-xs font-semibold tracking-[0.2em] text-black/35 uppercase dark:text-white/35'>
+            Account details
+          </p>
+          <div className='mt-5 divide-y divide-black/8 border-y border-black/8 dark:divide-white/10 dark:border-white/10'>
             <Detail icon={User} label='Username' value={user.username} />
-            <Detail icon={Mail} label='Email address' value={user.email} />
-            <Detail
-              icon={isAdmin ? Crown : ShieldCheck}
-              label='Account access'
-              value={isAdmin ? 'Administrator' : 'Customer'}
-            />
+            <Detail icon={Mail} label='Email' value={user.email} />
+            <Detail icon={isAdmin ? Crown : ShieldCheck} label='Access' value={isAdmin ? 'Administrator' : 'Customer'} />
           </div>
         </section>
 
-        <aside className='flex flex-col rounded-[2rem] bg-[#2a1c23] p-7 text-white sm:p-8'>
-          <div>
-            <p className='text-xs font-semibold tracking-[0.2em] text-white/40 uppercase'>
-              Recent activity
-            </p>
-            <h2 className='mt-4 text-3xl font-semibold tracking-tight'>
-              Your latest orders
-            </h2>
+        <section>
+          <div className='flex items-end justify-between gap-4'>
+            <div>
+              <p className='text-xs font-semibold tracking-[0.2em] text-black/35 uppercase dark:text-white/35'>
+                Recent activity
+              </p>
+              <h2 className='mt-3 text-2xl font-semibold tracking-tight text-black dark:text-white'>
+                Latest orders
+              </h2>
+            </div>
+            <Link href={routes.orders} className='text-xs font-semibold text-black/45 hover:text-black dark:text-white/45 dark:hover:text-white'>
+              View all
+            </Link>
           </div>
 
-          <div className='mt-7 flex-1 divide-y divide-white/10 border-y border-white/10'>
+          <div className='mt-5 divide-y divide-black/8 border-y border-black/8 dark:divide-white/10 dark:border-white/10'>
             {orders.length ? (
-              orders.slice(0, 3).map((order) => (
-                <Link
-                  key={order.id}
-                  href={routes.orders}
-                  className='group flex items-center gap-4 py-4'
-                >
-                  <span className='flex h-10 w-10 items-center justify-center rounded-full bg-white/8'>
-                    <ReceiptText className='h-4 w-4 text-white/65' />
+              orders.slice(0, 4).map((order) => (
+                <Link key={order.id} href={routes.orders} className='group flex items-center gap-4 py-5'>
+                  <span className='flex h-10 w-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/7'>
+                    <ReceiptText className='h-4 w-4 text-black/45 dark:text-white/45' />
                   </span>
                   <span className='min-w-0 flex-1'>
-                    <span className='block text-sm font-medium'>
-                      Order #{order.id}
-                    </span>
-                    <span className='mt-1 block text-xs capitalize text-white/38'>
-                      {order.status} · ${Number(order.total).toFixed(2)}
+                    <span className='block text-sm font-semibold text-black dark:text-white'>Order #{order.id}</span>
+                    <span className='mt-1 block text-xs text-black/35 dark:text-white/35'>
+                      {new Date(order.createdAt).toLocaleDateString()} · ${Number(order.total).toFixed(2)}
                     </span>
                   </span>
-                  <ArrowRight className='h-4 w-4 text-white/25 transition group-hover:translate-x-1 group-hover:text-white' />
+                  <span className={cn('rounded-full px-2.5 py-1 text-[10px] font-semibold capitalize', statusClass[order.status])}>
+                    {order.status}
+                  </span>
                 </Link>
               ))
             ) : (
-              <div className='py-8'>
-                <p className='text-sm text-white/48'>No orders yet.</p>
-                <Link
-                  href={routes.products.root}
-                  className='mt-3 inline-flex items-center gap-2 text-sm font-semibold text-white/75 hover:text-white'
-                >
-                  Start exploring <ArrowRight className='h-4 w-4' />
+              <div className='py-10'>
+                <p className='text-sm text-black/42 dark:text-white/42'>No orders yet.</p>
+                <Link href={routes.products.root} className='mt-3 inline-flex text-sm font-semibold text-black dark:text-white'>
+                  Explore products
                 </Link>
               </div>
             )}
           </div>
-
-          <div className='mt-7 flex flex-wrap items-center justify-between gap-4'>
-            <Link
-              href={routes.orders}
-              className='text-sm font-semibold text-white/65 transition hover:text-white'
-            >
-              View all orders
-            </Link>
-            <button
-              type='button'
-              onClick={() => logout()}
-              disabled={isPending}
-              className='inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-medium text-white/70 transition hover:bg-white/16 hover:text-white disabled:cursor-wait disabled:opacity-50'
-            >
-              {isPending ? (
-                <Loader2 className='h-4 w-4 animate-spin' />
-              ) : (
-                <LogOut className='h-4 w-4' />
-              )}
-              {isPending ? 'Signing out...' : 'Sign out'}
-            </button>
-          </div>
-        </aside>
+        </section>
       </div>
     </section>
   )
 }
 
-const Detail = ({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof User
-  label: string
-  value: string
-}) => (
+const statusClass = {
+  pending: 'bg-amber-100 text-amber-800 dark:bg-amber-900/25 dark:text-amber-300',
+  paid: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/25 dark:text-emerald-300',
+  processing: 'bg-orange-100 text-orange-800 dark:bg-orange-900/25 dark:text-orange-300',
+  shipped: 'bg-blue-100 text-blue-800 dark:bg-blue-900/25 dark:text-blue-300',
+  delivered: 'bg-purple-100 text-purple-800 dark:bg-purple-900/25 dark:text-purple-300',
+  cancelled: 'bg-red-100 text-red-800 dark:bg-red-900/25 dark:text-red-300',
+}
+
+const Detail = ({ icon: Icon, label, value }: { icon: typeof User; label: string; value: string }) => (
   <div className='flex items-center gap-4 py-5'>
-    <span className='flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-rose-900 dark:bg-rose-950/35 dark:text-rose-100'>
-      <Icon className='h-4 w-4' />
-    </span>
-    <div className='min-w-0'>
-      <p className='text-xs text-black/38 dark:text-white/38'>{label}</p>
-      <p className='mt-1 truncate text-sm font-medium text-black dark:text-white'>
-        {value}
-      </p>
+    <Icon className='h-4 w-4 text-rose-900/45 dark:text-rose-100/45' />
+    <div className='min-w-0 flex-1'>
+      <p className='text-xs text-black/35 dark:text-white/35'>{label}</p>
+      <p className='mt-1 truncate text-sm font-medium text-black dark:text-white'>{value}</p>
     </div>
   </div>
 )
