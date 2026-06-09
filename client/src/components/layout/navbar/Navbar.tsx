@@ -29,9 +29,10 @@ const navigation = [
 export const Navbar = () => {
   const items = useCartStore((state) => state.items)
   const pathname = usePathname()
+  const isHome = pathname === routes.home
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const solid = pathname !== routes.home || scrolled
+  const solid = scrolled
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 120)
@@ -41,15 +42,19 @@ export const Navbar = () => {
   }, [])
 
   const controlClass = cn(
-    'rounded-full text-white transition-[background-color,box-shadow,opacity] duration-300 ease-out',
-    solid ? 'bg-white/6' : 'bg-black/16 shadow-sm backdrop-blur-md',
+    'rounded-full transition-[color,background-color,box-shadow,opacity] duration-300 ease-out',
+    solid
+      ? 'bg-white/6 text-white'
+      : isHome
+        ? 'text-white'
+        : 'text-[#2a1c23] dark:text-white',
   )
 
   return (
     <header className='pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4'>
       <nav
         className={cn(
-          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-2 py-2 text-white transition-[background-color,box-shadow,transform] duration-500 ease-out sm:px-3',
+          'pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-2xl px-2 py-2 transition-[background-color,box-shadow,transform] duration-500 ease-out sm:px-3',
           solid &&
             'bg-[#2a1c23]/72 shadow-xl shadow-[#1a1015]/20 backdrop-blur-2xl',
         )}
@@ -91,7 +96,7 @@ export const Navbar = () => {
         </div>
 
         <div className='flex min-w-0 items-center justify-end gap-2 sm:gap-3'>
-          <NavbarSearch />
+          <NavbarSearch light={isHome || solid} />
 
           <div
             className={cn(

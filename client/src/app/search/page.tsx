@@ -4,7 +4,6 @@ import { Search } from 'lucide-react'
 import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { ProductCard } from '@/features/products/components/ProductCard'
 import { useProductSearch } from '@/features/products/hooks/useProductSearch'
@@ -14,7 +13,7 @@ const SearchResults = () => {
   const { data: products = [], isLoading, error } = useProductSearch(query, 50)
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <PageHeader
         eyebrow='Search results'
         title={query ? `Results for "${query}"` : 'Find your next essential'}
@@ -57,13 +56,13 @@ const SearchResults = () => {
           </p>
         </div>
       )}
-    </ScreenLayout>
+    </div></main>
   )
 }
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<ScreenLayout><div className='min-h-96' /></ScreenLayout>}>
+    <Suspense fallback={<main className='page-shell'><div className='page-content min-h-96' /></main>}>
       <SearchResults />
     </Suspense>
   )

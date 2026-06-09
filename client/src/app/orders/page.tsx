@@ -2,7 +2,6 @@
 
 import { BiShoppingBag } from 'react-icons/bi'
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
@@ -31,13 +30,13 @@ export default function OrdersPage() {
   }
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <PageHeader
         eyebrow='Account'
         title='Your orders'
         description='Track every Veloura delivery and revisit your past beauty picks.'
       />
       <OrderList orders={orders} />
-    </ScreenLayout>
+    </div></main>
   )
 }

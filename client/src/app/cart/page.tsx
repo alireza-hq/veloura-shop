@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 import { MdShoppingCart } from 'react-icons/md';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { CartFooter } from '@/features/cart/components/CartFooter';
@@ -28,7 +27,7 @@ export default function CartPage() {
     )
   }
   return (
-    <ScreenLayout>
+    <main className='page-shell'>
       <div className='mx-auto max-w-4xl px-4 py-12'>
         <PageHeader
           eyebrow='Your selection'
@@ -38,6 +37,6 @@ export default function CartPage() {
         <CartItemList />
         <CartFooter />
       </div>
-    </ScreenLayout>
+    </main>
   )
 }

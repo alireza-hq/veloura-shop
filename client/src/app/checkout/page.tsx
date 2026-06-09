@@ -2,7 +2,6 @@
 
 import { MdShoppingCart } from 'react-icons/md';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { useCartStore } from '@/features/cart/store/useCartStore';
@@ -27,7 +26,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <div className='mx-auto max-w-6xl px-4 py-10 sm:px-6'>
         <PageHeader
           eyebrow='Almost yours'
@@ -39,6 +38,6 @@ export default function CheckoutPage() {
           <CheckoutSummary />
         </div>
       </div>
-    </ScreenLayout>
+    </div></main>
   )
 }

@@ -1,5 +1,3 @@
-import { ScreenLayout } from '../layout/ScreenLayout'
-
 type Props = {
   error: Error
 }
@@ -8,8 +6,8 @@ export const ErrorState = ({ error }: Props) => {
   const buttonClickHandler = () => window.location.reload()
 
   return (
-    <ScreenLayout>
-      <div className='text-center sm:mt-32 md:mt-48'>
+    <main className='page-shell'>
+      <div className='page-content text-center sm:mt-32 md:mt-48'>
         <h2 className='mb-2 text-xl font-bold text-black dark:text-white'>
           Something went wrong
         </h2>
@@ -25,6 +23,6 @@ export const ErrorState = ({ error }: Props) => {
           Try Again
         </button>
       </div>
-    </ScreenLayout>
+    </main>
   )
 }

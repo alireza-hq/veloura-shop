@@ -1,12 +1,11 @@
 'use client'
 
-import { FitLayout } from '@/components/layout/FitLayout';
 import { SignupCard } from '@/features/auth/components/signup/SignupCard';
 
 export default function SignupPage() {
   return (
-    <FitLayout>
+    <main className='auth-shell'>
       <SignupCard />
-    </FitLayout>
+    </main>
   )
 }

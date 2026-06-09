@@ -78,3 +78,35 @@ body {
 .dark .dark\:bg-zinc-800 {
   background-color: var(--surface-muted) !important;
 }
+
+.page-shell {
+  min-height: 100vh;
+  padding: 7.5rem 1rem 3rem;
+}
+
+.page-content {
+  margin-inline: auto;
+  max-width: 80rem;
+}
+
+.auth-shell {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 7.5rem 1rem 3rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell,
+  .auth-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell,
+  .auth-shell {
+    padding-inline: 2rem;
+  }
+}

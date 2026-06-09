@@ -3,12 +3,11 @@
 import { ArrowLeft, Home } from 'lucide-react';
 import Link from 'next/link';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { routes } from '@/lib/routes';
 
 export default function NotFound() {
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <div className='flex min-h-[60vh] flex-col items-center justify-center px-4 text-center'>
         <h1 className='text-8xl font-extrabold tracking-tighter text-zinc-200 dark:text-zinc-800'>
           404
@@ -43,6 +42,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </ScreenLayout>
+    </div></main>
   )
 }

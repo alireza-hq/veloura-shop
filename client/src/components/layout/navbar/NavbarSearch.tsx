@@ -9,7 +9,7 @@ import { useProductSearch } from '@/features/products/hooks/useProductSearch'
 import { routes } from '@/lib/routes'
 import { cn } from '@/lib/utils/cn'
 
-export const NavbarSearch = () => {
+export const NavbarSearch = ({ light = true }: { light?: boolean }) => {
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
 
@@ -48,12 +48,20 @@ export const NavbarSearch = () => {
         onChange={inputChangeHandler}
         type='text'
         placeholder='Search makeup...'
-        className='w-full rounded-full border border-white/10 bg-white/10 px-5 py-2 text-sm text-white backdrop-blur-md placeholder:text-white/60 focus:border-white/30 focus:outline-none'
+        className={cn(
+          'w-full rounded-full border bg-transparent px-5 py-2 text-sm backdrop-blur-sm transition focus:outline-none',
+          light
+            ? 'border-white/12 text-white placeholder:text-white/55 focus:border-white/30'
+            : 'border-black/10 text-[#2a1c23] placeholder:text-black/40 focus:border-black/25 dark:border-white/12 dark:text-white dark:placeholder:text-white/50',
+        )}
       />
       <button
         type='submit'
         aria-label='Search products'
-        className='absolute top-1/2 right-3 -translate-y-1/2 text-gray-200 transition hover:opacity-80 active:opacity-70'
+        className={cn(
+          'absolute top-1/2 right-3 -translate-y-1/2 transition hover:opacity-70',
+          light ? 'text-white/75' : 'text-black/55 dark:text-white/70',
+        )}
       >
         <SearchIcon className='h-4 w-4' />
       </button>

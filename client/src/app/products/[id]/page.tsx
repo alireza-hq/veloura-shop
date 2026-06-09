@@ -2,7 +2,6 @@
 
 import { notFound, useParams } from 'next/navigation';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { LoadingState } from '@/components/ui/LoadingState';
 import { ProductDetails } from '@/features/products/components/ProductDetails';
@@ -17,8 +16,8 @@ export default function ProductPage() {
   if (!product) return notFound()
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'>
       <ProductDetails product={product} />
-    </ScreenLayout>
+    </main>
   )
 }

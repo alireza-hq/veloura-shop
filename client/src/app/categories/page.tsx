@@ -2,7 +2,6 @@
 
 import { FaShoppingCart } from 'react-icons/fa';
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { LoadingState } from '@/components/ui/LoadingState';
@@ -31,7 +30,7 @@ export default function CategoriesPage() {
   }
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <PageHeader
         eyebrow='Shop your ritual'
         title='Beauty collections'
@@ -54,6 +53,6 @@ export default function CategoriesPage() {
         ))}
       </div>
       <CategoryList categories={categories} />
-    </ScreenLayout>
+    </div></main>
   )
 }

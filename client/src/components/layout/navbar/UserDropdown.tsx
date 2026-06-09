@@ -33,13 +33,13 @@ export const UserDropdown = () => {
         {/* Trigger Button */}
         <Menu.Button
           aria-label='Open account menu'
-          className='h-5 fill-transparent transition duration-100 hover:fill-white hover:opacity-90'
+          className='h-5 fill-transparent transition duration-100 hover:opacity-70'
         >
           <UserIcon
             className={cn(
-              'h-5 fill-transparent transition duration-100 hover:fill-white',
+              'h-5 fill-transparent transition duration-100 hover:fill-current',
               useActive([...Object.values(routes.auth), routes.orders]) &&
-                'fill-white',
+                'fill-current',
             )}
           />
         </Menu.Button>

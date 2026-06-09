@@ -2,7 +2,6 @@
 
 import { Heart, ShoppingCart } from 'lucide-react'
 
-import { ScreenLayout } from '@/components/layout/ScreenLayout'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
@@ -33,13 +32,13 @@ export default function Wishlist() {
   }
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <PageHeader
         eyebrow='Saved for later'
         title='Your wishlist'
         description='A personal edit of shades and essentials worth another look.'
       />
       <WishlistItems products={wishlistProducts} />
-    </ScreenLayout>
+    </div></main>
   )
 }

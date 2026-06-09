@@ -1,7 +1,6 @@
 'use client'
 
 import { Suspense } from 'react';
-import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { ProductList } from '@/features/products/components/ProductList';
@@ -14,23 +13,23 @@ const ProductsContent = () => {
 
   if (isLoading) {
     return (
-      <ScreenLayout>
+      <main className='page-shell'><div className='page-content'>
         <ProductList products={[]} isLoading />
-      </ScreenLayout>
+      </div></main>
     )
   }
 
   if (error) return <ErrorState error={error} />
 
   return (
-    <ScreenLayout>
+    <main className='page-shell'><div className='page-content'>
       <PageHeader
         eyebrow='The makeup edit'
         title='Explore Veloura'
         description='Discover expressive color, reliable formulas, and effortless essentials for every routine.'
       />
       <ProductList products={products ?? []} initialCategory={category} />
-    </ScreenLayout>
+    </div></main>
   )
 }
 
@@ -38,9 +37,9 @@ export default function Products() {
   return (
     <Suspense
       fallback={
-        <ScreenLayout>
+        <main className='page-shell'><div className='page-content'>
           <ProductList products={[]} isLoading />
-        </ScreenLayout>
+        </div></main>
       }
     >
       <ProductsContent />

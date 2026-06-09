@@ -2,8 +2,6 @@ import Link from 'next/link';
 import React from 'react';
 import { IconBaseProps } from 'react-icons/lib';
 
-import { ScreenLayout } from '../layout/ScreenLayout';
-
 type Props = {
   icon: React.ComponentType<IconBaseProps>
   title: string
@@ -22,8 +20,8 @@ export const EmptyState = ({
   route,
 }: Props) => {
   return (
-    <ScreenLayout>
-      <div className='flex min-h-[50vh] flex-col items-center justify-center gap-6 text-center'>
+    <main className='page-shell'>
+      <div className='page-content flex min-h-[50vh] flex-col items-center justify-center gap-6 text-center'>
         <div className='rounded-full bg-black/7 p-6 dark:bg-white/7'>
           <Icon className='h-10 w-10 text-black/30 dark:text-white/30' />
         </div>
@@ -41,6 +39,6 @@ export const EmptyState = ({
           {buttonText}
         </Link>
       </div>
-    </ScreenLayout>
+    </main>
   )
 }
