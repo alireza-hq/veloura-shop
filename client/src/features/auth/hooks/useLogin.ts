@@ -18,6 +18,20 @@ type LoginResponse = {
   }
 }
 
+const getPostLoginDestination = () => {
+  const destination = new URLSearchParams(window.location.search).get('next')
+
+  if (
+    !destination ||
+    !destination.startsWith('/') ||
+    destination.startsWith('//')
+  ) {
+    return routes.auth.me
+  }
+
+  return destination
+}
+
 export const useLogin = () => {
   const router = useRouter()
 
@@ -37,16 +51,21 @@ export const useLogin = () => {
 
       const guestItems = useCartStore.getState().items
 
-      for (const item of guestItems) {
-        await addCartItemService({
-          productId: item.productId,
-          quantity: item.quantity,
-        })
+      try {
+        for (const item of guestItems) {
+          await addCartItemService({
+            productId: item.productId,
+            quantity: item.quantity,
+          })
+        }
+
+        useCartStore.getState().clearCart()
+      } catch (error) {
+        console.error('Could not sync the guest cart after login.', error)
+      } finally {
+        router.replace(getPostLoginDestination())
+        router.refresh()
       }
-
-      useCartStore.getState().clearCart()
-
-      router.push(routes.auth.me)
     },
 
     onError: (error) => {

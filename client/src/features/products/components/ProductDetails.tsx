@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils/cn'
 import { Product } from '../types'
 import { useWishlist } from '@/features/wishlist/hooks/useWishlist'
 import { useWishlistActions } from '@/features/wishlist/hooks/useWishlistActions'
+import { useAuthStore } from '@/features/auth/store/useAuthStore'
 
 type Props = {
   product: Product
@@ -16,6 +17,7 @@ type Props = {
 
 export const ProductDetails = ({ product }: Props) => {
   const { items, addItem, removeItem } = useCart()
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
   const cartItem = items.find((i) => i.productId === product.id)
 
@@ -152,29 +154,32 @@ export const ProductDetails = ({ product }: Props) => {
               </button>
             )}
 
-            {/* Wishlist Button */}
-            <button
-              disabled={wishlistPending}
-              className={cn(
-                'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-500 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-white',
-              )}
-              aria-label='Add to wishlist'
-              onClick={() => {
-                if (isInWishlist) {
-                  removeFromWishlist(product.id)
-                } else {
-                  addToWishlist(product.id)
-                }
-              }}
-            >
-              <Heart
+            {isAuthenticated && (
+              <button
+                disabled={wishlistPending}
                 className={cn(
-                  'h-5 w-5',
-                  isInWishlist &&
-                    'fill-black text-black dark:fill-white dark:text-white',
+                  'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-500 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-white',
                 )}
-              />
-            </button>
+                aria-label={
+                  isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'
+                }
+                onClick={() => {
+                  if (isInWishlist) {
+                    removeFromWishlist(product.id)
+                  } else {
+                    addToWishlist(product.id)
+                  }
+                }}
+              >
+                <Heart
+                  className={cn(
+                    'h-5 w-5',
+                    isInWishlist &&
+                      'fill-black text-black dark:fill-white dark:text-white',
+                  )}
+                />
+              </button>
+            )}
           </div>
         </div>
       </div>
