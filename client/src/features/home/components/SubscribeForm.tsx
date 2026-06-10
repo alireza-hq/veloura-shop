@@ -52,7 +52,7 @@ export const SubscribeForm = () => {
 
         <button
           disabled={isSubmitting}
-          className='shrink-0 rounded-full bg-black px-6 py-3.5 text-sm font-semibold text-white transition duration-200 hover:opacity-75 disabled:opacity-50 dark:bg-white dark:text-[#24191e]'
+          className='flex h-12 shrink-0 items-center justify-center self-start rounded-full bg-black px-6 text-sm font-semibold text-white transition duration-200 hover:opacity-75 disabled:opacity-50 dark:bg-white dark:text-[#24191e]'
         >
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
         </button>
